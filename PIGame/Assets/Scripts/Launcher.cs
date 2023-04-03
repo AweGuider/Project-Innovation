@@ -7,9 +7,13 @@ public class Launcher : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
 
-    public PhotonView playerPrefab;
+    [SerializeField] private PhotonView playerPrefab;
+    [SerializeField] private float spawnRadius;
+    [SerializeField] private bool adjustSpawnRadius;
     void Start()
     {
+        if (!adjustSpawnRadius) spawnRadius = 5;
+
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -25,6 +29,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         Debug.Log($"Joined the room: {PhotonNetwork.CurrentRoom.Name}");
-        PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10)), Quaternion.identity);
+        PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(0, spawnRadius), 0, Random.Range(0, spawnRadius)), Quaternion.identity);
     }
 }

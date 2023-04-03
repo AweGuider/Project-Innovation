@@ -23,7 +23,7 @@ public class InputController : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        speed = 4f;
+        speed = 10f;
         maxVelocityChange = 10f;
 
         oldAcceleration = Input.acceleration;
@@ -49,6 +49,7 @@ public class InputController : MonoBehaviourPunCallbacks
     {
         if (view.IsMine)
         {
+
 #if PC
             UpdateKeyboard();
 #elif PHONE
@@ -57,25 +58,28 @@ public class InputController : MonoBehaviourPunCallbacks
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (view.IsMine)
-        {
-#if PC
-            rb.AddForce(CalculateMovement(speed), ForceMode.VelocityChange);
-#endif
+//    private void FixedUpdate()
+//    {
+//        if (view.IsMine)
+//        {
+//#if PC
+//            rb.AddForce(CalculateMovement(speed), ForceMode.VelocityChange);
+//#endif
 
-#if PHONE
-            UpdateSensors();
-#endif
-        }
-    }
+//#if PHONE
+//            UpdateSensors();
+//#endif
+//        }
+//    }
 
 
     private void UpdateKeyboard()
     {
-        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        input.Normalize();
+        float x = Input.GetAxis("Horizontal") * 10f * Time.deltaTime;
+        float z = Input.GetAxis("Vertical") * 10f * Time.deltaTime;
+        transform.Translate(x, 0, z);
+        //input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        //input.Normalize();
         //move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         //cc.Move(5 * Time.deltaTime * move);
     }
@@ -84,13 +88,18 @@ public class InputController : MonoBehaviourPunCallbacks
     {
         Vector3 acceleration = Input.acceleration;
         Vector3 gyroscope = Input.gyro.rotationRate;
-        if (acceleration != oldAcceleration || gyroscope != oldGyroscope)
-        {
-            oldAcceleration = acceleration;
-            oldGyroscope = gyroscope;
-            cc.Move(5 * Time.deltaTime * acceleration);
-            //SendInput(acceleration, gyroscope);
-        }
+        acceleration.x *= speed * Time.deltaTime;
+        acceleration.y *= speed * Time.deltaTime;
+        transform.Translate(new Vector3(acceleration.x, 0, acceleration.y));
+
+        //if (acceleration != oldAcceleration || gyroscope != oldGyroscope)
+        //{
+        //    oldAcceleration = acceleration;
+        //    oldGyroscope = gyroscope;
+        //    transform.Translate()
+        //    //cc.Move(5 * Time.deltaTime * acceleration);
+        //    //SendInput(acceleration, gyroscope);
+        //}
     }
     private Vector3 CalculateMovement(float speed)
     {
