@@ -1,29 +1,28 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
+#if PHONE
+    [SerializeField]
+    private TMP_InputField nicknameInput;
+#endif
+
     private Dictionary<int, Player> _players;
 
-    private void Awake()
-    {
-        _players = new Dictionary<int, Player>();
-    }
 
     private void Start()
     {
-        if (PhotonNetwork.CurrentRoom == null)
-        {
-            Debug.LogWarning("Server has not joined a room yet!");
-            return;
-        }
-
+#if PC
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.CurrentRoom.IsVisible = true;
-        //SpawnPlayers();
+#elif PHONE
+        _players = new Dictionary<int, Player>();
+#endif
     }
 
     //public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -44,6 +43,30 @@ public class RoomManager : MonoBehaviourPunCallbacks
     //    // TODO: handle the player leaving the room
     //}
 
+#if PHONE
+    public void SetNickname()
+    {
+
+        if (nicknameInput.text.Length > 1)
+        {
+            PhotonNetwork.NickName = nicknameInput.text;
+        }
+    }
+
+    // Method to choose team, if needed
+    public void OnChooseTeam()
+    {
+
+    }
+
+    // Method to choose role, if needed
+
+    public void OnChooseRole()
+    {
+
+    }
+#endif
+
     public void SendCommandToPlayer(int playerId, string command)
     {
         if (_players.ContainsKey(playerId))
@@ -57,11 +80,5 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public void ExecuteCommand(string command)
     {
         Debug.Log("Received command: " + command);
-    }
-
-
-    private void SpawnPlayers()
-    {
-        // TODO: spawn players in the room
     }
 }

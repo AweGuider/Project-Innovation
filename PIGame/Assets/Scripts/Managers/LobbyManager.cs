@@ -4,17 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private TMP_InputField createField;
-    [SerializeField] private TMP_InputField joinField;
+
+    [SerializeField] private TMP_InputField inputField;
 
     public void Start()
     {
         PhotonNetwork.JoinLobby();
-
     }
 
     public override void OnJoinedLobby()
@@ -23,16 +23,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //PhotonNetwork.JoinOrCreateRoom("TestRoom", new RoomOptions { MaxPlayers = 4 }, null);
         //rm = GetComponent<RoomManager>();
     }
-
-    //public void CreateRoom(string s)
-    //{
-    //    PhotonNetwork.CreateRoom(s, new RoomOptions { MaxPlayers = 4 });
-    //}
-
-    //public void JoinRoom(string s)
-    //{
-    //    PhotonNetwork.JoinRoom(s);
-    //}
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
@@ -43,27 +33,37 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void OnClickCreate()
+    public void OnButtonClick()
     {
-        PhotonNetwork.CreateRoom(createField.text, new RoomOptions { MaxPlayers = 4 });
-
+#if PC
+        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 4 });
+#elif PHONE
+        PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
+#endif
     }
 
-    public void OnClickJoin()
-    {
+    //public void OnClickCreate()
+    //{
+        
+    //}
 
+    //public void OnClickJoin()
+    //{
+    //    Debug.Log("Joining room: " + joinField.text);
+    //    RoomOptions roomOptions = new RoomOptions();
+    //    TypedLobby typedLobby = new TypedLobby("default", LobbyType.Default);
 
-        Debug.Log("Joining room: " + joinField.text);
-        RoomOptions roomOptions = new RoomOptions();
-        TypedLobby typedLobby = new TypedLobby("default", LobbyType.Default);
-
-        PhotonNetwork.JoinOrCreateRoom(joinField.text, roomOptions, typedLobby);
-    }
+    //    PhotonNetwork.JoinOrCreateRoom(joinField.text, roomOptions, typedLobby);
+    //}
 
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room: " + PhotonNetwork.CurrentRoom.Name);
-        PhotonNetwork.LoadLevel("SampleScene");
+#if PC
+        SceneManager.LoadScene("Server Team Select");
+#elif PHONE
+        PhotonNetwork.LoadLevel("Player Team Select");
+#endif
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)

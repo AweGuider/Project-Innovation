@@ -6,6 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: a2497f3f8b0f9564cbfa66552d46480c
+  - enabled: 1
+    path: Assets/Scenes/Server Scenes/Server Lobby.unity
+    guid: 1ce8949cf9e37d549b7107bd220592f7
+  - enabled: 1
+    path: Assets/Scenes/Player Scenes/Player Lobby.unity
+    guid: 36584093058a7d545bdc9e8021f17d06
+  - enabled: 1
+    path: Assets/Scenes/Server Scenes/Server Team Select.unity
+    guid: 0c4b69715c7ff1846b1fffd925f255ff
+  - enabled: 1
+    path: Assets/Scenes/Player Scenes/Player Team Select.unity
+    guid: ecef634a59fe04a4ca9e374194da60ad
+  - enabled: 0
     path: Assets/Scenes/Server Scenes/Game Map.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/Scenes/Player Scenes/Kid Screen.unity
+    guid: 38e6045e4cbfdc44b8e83087b40f1373
+  - enabled: 1
+    path: Assets/Scenes/Player Scenes/Toy Screen.unity
+    guid: 1ef98805b0a5385459635d9b8f2a8e03
   m_configObjects: {}

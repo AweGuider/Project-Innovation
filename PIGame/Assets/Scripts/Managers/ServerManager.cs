@@ -40,10 +40,14 @@ public class ServerManager : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         Debug.Log("Connected To Master");
 
-        //SceneManager.LoadScene("LobbyTest");
 
-        PhotonNetwork.JoinOrCreateRoom("Test", null, null);
+        //PhotonNetwork.JoinOrCreateRoom("Test", null, null);
+#if PC
+        SceneManager.LoadScene("Server Lobby");
 
+#elif PHONE
+        SceneManager.LoadScene("Player Lobby");
+#endif
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -51,12 +55,12 @@ public class ServerManager : MonoBehaviourPunCallbacks
         Debug.Log("Disconnected from Photon server: " + cause.ToString());
     }
 
-    public override void OnJoinedRoom()
-    {
-        base.OnJoinedRoom();
-        Debug.Log($"Joined the room: {PhotonNetwork.CurrentRoom.Name}");
-        PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(0, spawnRadius), 0, Random.Range(0, spawnRadius)), Quaternion.identity);
-    }
+    //public override void OnJoinedRoom()
+    //{
+    //    base.OnJoinedRoom();
+    //    Debug.Log($"Joined the room: {PhotonNetwork.CurrentRoom.Name}");
+    //    PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(0, spawnRadius), 0, Random.Range(0, spawnRadius)), Quaternion.identity);
+    //}
 
     /// Decide how I want to spawn player
     //[PunRPC]
