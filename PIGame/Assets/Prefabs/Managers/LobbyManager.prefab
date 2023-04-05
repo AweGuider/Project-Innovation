@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5129233424287134478}
   - component: {fileID: 4388005037308722653}
+  - component: {fileID: 2204601267457627490}
   m_Layer: 0
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -44,5 +45,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d736ad7c98ec9cd4f873f2f0e04ce7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createField: {fileID: 0}
-  joinField: {fileID: 0}
+  inputField: {fileID: 0}
+--- !u!114 &2204601267457627490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8641691566198626412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
