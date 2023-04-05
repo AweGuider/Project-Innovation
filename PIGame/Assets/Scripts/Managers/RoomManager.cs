@@ -53,13 +53,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
     //    //base.OnPlayerLeftRoom(otherPlayer);
     //    // TODO: handle the player leaving the room
     //}
-#if PC
+
     [PunRPC]
     public void LoadGame()
     {
+#if PC
         PhotonNetwork.LoadLevel("Game Map");
-    }
+#elif PHONE
+        SceneManager.LoadLevel("Game Map");
 #endif
+    }
+
 
 #if PHONE
     public void SetNickname()
