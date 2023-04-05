@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Loading.unity
     guid: a2497f3f8b0f9564cbfa66552d46480c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Server Scenes/Server Lobby.unity
     guid: 1ce8949cf9e37d549b7107bd220592f7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Player Scenes/Player Lobby.unity
     guid: 36584093058a7d545bdc9e8021f17d06
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Server Scenes/Server Team Select.unity
     guid: 0c4b69715c7ff1846b1fffd925f255ff
   - enabled: 1

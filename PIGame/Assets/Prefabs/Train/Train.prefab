@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   speed: -5
+  rb: {fileID: 3214120410753054395}
 --- !u!1 &3214120411638996380
 GameObject:
   m_ObjectHideFlags: 0
