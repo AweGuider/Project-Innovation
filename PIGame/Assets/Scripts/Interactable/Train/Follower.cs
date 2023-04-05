@@ -10,6 +10,7 @@ public class Follower : MonoBehaviour
     float distanceTravelled;
 
 
+
     private void Start()
     {
         pathCreator = GameObject.FindGameObjectWithTag("Tracks").GetComponent<PathCreator>();

@@ -8,22 +8,26 @@ public class BlockFalling : MonoBehaviour
 
     public Button ButtonBlocks;
 
+    public Rigidbody rb; 
     public float BlockForce;
     private float BlockXValue;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         Button btn = ButtonBlocks.GetComponent<Button>();
         btn.onClick.AddListener(FallOver);
-
-        BlockXValue = gameObject.transform.position.x;
+        GetComponent<MeshRenderer>().enabled = false;
     }
 
   
-    void FallOver()
+    public void FallOver()
     {
-        BlockXValue += BlockForce;
-        gameObject.transform.position = new Vector2(BlockXValue, gameObject.transform.position.y);
+        //transform.Translate(new Vector3(2,0,0));
+        GetComponent<BoxCollider>().enabled = false;
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        GetComponent<MeshRenderer>().enabled= false;
     }
 }
