@@ -1,8 +1,11 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -13,14 +16,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
     private GameObject nameSelectCanvas;
     [SerializeField]
     private GameObject teamSelectCanvas;
-
-#endif
-
+    [SerializeField]
+    private Button startButton;
+    [SerializeField]
+    private TeamSelectionManager teamManager;
     private Dictionary<int, Player> _players;
+#endif
 
     [SerializeField]
     private bool testing;
-
 
     private void Start()
     {
@@ -29,9 +33,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.CurrentRoom.IsVisible = true;
 #elif PHONE
-
+        startButton.onClick.AddListener(StartGame);
         nameSelectCanvas.SetActive(true);
         teamSelectCanvas.SetActive(false);
+
+        //if (teamController == null) teamController = GameObject.Find("")
         _players = new Dictionary<int, Player>();
 #endif
     }
@@ -57,10 +63,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void LoadGame()
     {
+        // TODO: Check later if needed PhotonNetwork.LoadLevel or SceneManager.LoadScene
 #if PC
         PhotonNetwork.LoadLevel("Game Map");
 #elif PHONE
-        SceneManager.LoadLevel("Game Map");
+        if (PlayerPrefs.GetString("Role") == "Kid")
+        {
+            SceneManager.LoadScene("Kid Screen");
+        }
+        else
+        {
+            SceneManager.LoadScene("Toy Screen");
+        }
 #endif
     }
 
@@ -72,29 +86,31 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.NickName = nicknameInput.text;
             Debug.Log($"Nickname is set to: {PhotonNetwork.NickName}");
-
         }
     }
 
-    // Method to choose team, if needed
-    public void OnChooseTeam()
-    {
-
-    }
-
-    // Method to choose role, if needed
-
-    public void OnChooseRole()
-    {
-
-    }
 
     public void StartGame()
     {
-        if (testing || PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+        if (testing || AllPlayersReady())
         {
-            photonView.RPC("LoadGame", RpcTarget.MasterClient);
+            PlayerPrefs.SetInt("Team", teamManager.GetTeam());
+            PlayerPrefs.SetString("Role", teamManager.GetRole());
+            Debug.Log($"Team: {PlayerPrefs.GetInt("Team")}, Role: {PlayerPrefs.GetString("Role")}");
+            if (testing) LoadGame();
+            else
+            {
+                photonView.RPC("LoadGame", RpcTarget.All);
+            }
         }
+    }
+
+    // Make GREAT check if all players have chosen a role
+    private bool AllPlayersReady()
+    {
+        List<Photon.Realtime.Player> tempPlayers = PhotonNetwork.PlayerList.ToList();
+        if (tempPlayers.Count != PhotonNetwork.CurrentRoom.MaxPlayers) return false;
+        return true;
     }
 #endif
 

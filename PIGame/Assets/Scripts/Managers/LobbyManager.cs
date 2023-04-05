@@ -9,11 +9,12 @@ using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
-
     [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private Button inputButton;
 
     public void Start()
     {
+        inputButton.onClick.AddListener(OnButtonClick);
         PhotonNetwork.JoinLobby();
     }
 
@@ -36,25 +37,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void OnButtonClick()
     {
 #if PC
-        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 4 });
+        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5 });
 #elif PHONE
         PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
 #endif
     }
-
-    //public void OnClickCreate()
-    //{
-        
-    //}
-
-    //public void OnClickJoin()
-    //{
-    //    Debug.Log("Joining room: " + joinField.text);
-    //    RoomOptions roomOptions = new RoomOptions();
-    //    TypedLobby typedLobby = new TypedLobby("default", LobbyType.Default);
-
-    //    PhotonNetwork.JoinOrCreateRoom(joinField.text, roomOptions, typedLobby);
-    //}
 
     public override void OnJoinedRoom()
     {
