@@ -339,8 +339,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57889872fa7cad489d4218c03a044de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxTiltAngle: 0
   speed: 0
   maxVelocityChange: 0
+  accText: {fileID: 6103070200232083255, guid: 0b1b3db54462cf648841a1fc2408cdb8, type: 3}
+  angleText: {fileID: 4015114045877256385, guid: 87fad5c9a5a5a9e44b2c8e28b134ad83, type: 3}
 --- !u!54 &-6754759916711699964
 Rigidbody:
   m_ObjectHideFlags: 0

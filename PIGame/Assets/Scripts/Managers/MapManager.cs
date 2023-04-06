@@ -18,7 +18,12 @@ public class MapManager : MonoBehaviourPunCallbacks
 #elif PHONE
     [SerializeField]
     private string _role;
+    [SerializeField]
     private int _team;
+    [SerializeField]
+    private GameObject _team1SpawnPoint;
+    [SerializeField]
+    private GameObject _team2SpawnPoint;
 #endif
     // Check later how to use
     //private bool isGameStarted = false;
@@ -39,8 +44,18 @@ public class MapManager : MonoBehaviourPunCallbacks
 
         if (_role == "Toy")
         {
-            PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
-            //Instantiate(playerPrefab, playerPrefab.transform.position, Quaternion.identity);
+            Vector3 pos = new();
+            if (_team == 1)
+            {
+                pos = _team1SpawnPoint.transform.position;
+            }
+            else if (_team == 2)
+            {
+                pos = _team2SpawnPoint.transform.position;
+
+            }
+            PhotonNetwork.Instantiate(playerPrefab.name, pos, Quaternion.identity);
+            // Instantiate(playerPrefab, playerPrefab.transform.position, Quaternion.identity);
         }
 #endif
     }

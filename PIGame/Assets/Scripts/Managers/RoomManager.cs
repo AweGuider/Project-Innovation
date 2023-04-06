@@ -65,6 +65,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         // TODO: Check later if needed PhotonNetwork.LoadLevel or SceneManager.LoadScene
 #if PC
+        Debug.Log($"Loading Game Map");
         PhotonNetwork.LoadLevel("Game Map");
 #elif PHONE
         if (PlayerPrefs.GetString("Role") == "Kid")
@@ -76,6 +77,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
             SceneManager.LoadScene("Toy Screen");
         }
 #endif
+    }
+
+    private void LoadOfflineGame()
+    {
+        if (PlayerPrefs.GetString("Role") == "Kid")
+        {
+            SceneManager.LoadScene("Kid Screen");
+        }
+        else
+        {
+            SceneManager.LoadScene("Toy Screen");
+        }
     }
 
 
@@ -97,7 +110,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             PlayerPrefs.SetInt("Team", teamManager.GetTeam());
             PlayerPrefs.SetString("Role", teamManager.GetRole());
             Debug.Log($"Team: {PlayerPrefs.GetInt("Team")}, Role: {PlayerPrefs.GetString("Role")}");
-
+            if (testing) LoadOfflineGame();
             photonView.RPC("LoadGame", RpcTarget.All);
         }
     }
@@ -114,7 +127,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public void SetTesting(bool b)
     {
         testing = b;
-        PhotonNetwork.OfflineMode = testing;
+        //PhotonNetwork.OfflineMode = testing;
 
     }
 
