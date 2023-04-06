@@ -47,8 +47,16 @@ public class InputController : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+//        Debug.Log($"UPDATE!");
+//#if PC
+//        UpdateKeyboard();
+//#elif PHONE
+//        UpdateSensors();
+//#endif
+
         if (view.IsMine)
         {
+            Debug.Log($"VIEW IS MINE!");
 
 #if PC
             UpdateKeyboard();

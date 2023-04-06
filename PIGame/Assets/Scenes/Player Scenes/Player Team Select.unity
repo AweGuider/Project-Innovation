@@ -774,6 +774,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 48
       objectReference: {fileID: 0}
+    - target: {fileID: 4261120491271580223, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396432341272797817, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4632015447097004593, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -861,6 +869,14 @@ PrefabInstance:
     - target: {fileID: 5672051205314003645, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6342015928437066849, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532863222446460842, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
+      propertyPath: sceneViewId
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7079413714170333939, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
       propertyPath: m_IsActive

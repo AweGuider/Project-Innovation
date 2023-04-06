@@ -97,11 +97,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
             PlayerPrefs.SetInt("Team", teamManager.GetTeam());
             PlayerPrefs.SetString("Role", teamManager.GetRole());
             Debug.Log($"Team: {PlayerPrefs.GetInt("Team")}, Role: {PlayerPrefs.GetString("Role")}");
-            if (testing) LoadGame();
-            else
-            {
-                photonView.RPC("LoadGame", RpcTarget.All);
-            }
+
+            photonView.RPC("LoadGame", RpcTarget.All);
         }
     }
 

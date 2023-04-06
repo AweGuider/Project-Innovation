@@ -1086,6 +1086,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: 7c309d595badf4e4888a52dc8c40313c, type: 3}
+      propertyPath: m_Depth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 963194228, guid: 7c309d595badf4e4888a52dc8c40313c, type: 3}
       propertyPath: m_RootOrder
       value: 59
@@ -1797,12 +1801,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025722905}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f011ab8a0582fa645a4ce95627896fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8973713178878322344, guid: 56351aae6f12e3047a5c7dd44ba975e4, type: 3}
+  playerPrefab: {fileID: 8973713178878322349, guid: 56351aae6f12e3047a5c7dd44ba975e4, type: 3}
   spawnRadius: 6
   adjustSpawnRadius: 1
 --- !u!1001 &3694987043251992863
