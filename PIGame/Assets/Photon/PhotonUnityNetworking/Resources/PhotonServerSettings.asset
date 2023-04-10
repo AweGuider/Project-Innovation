@@ -42,6 +42,11 @@ MonoBehaviour:
   - ExecuteCommand
   - ReceiveInput
   - LoadGame
+  - UpdatePlayerPosition
+  - AssignOwnership
+  - SpawnPlayer
+  - UpdatePosition
+  - LoadPlayerGame
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

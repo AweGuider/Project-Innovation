@@ -48,6 +48,8 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   speed: -5
   distanceBetween: 0
+  distanceBetweenLocomotive: 0
+  distanceBetweenCarriage: 0
 --- !u!1 &3046227086705503717
 GameObject:
   m_ObjectHideFlags: 0

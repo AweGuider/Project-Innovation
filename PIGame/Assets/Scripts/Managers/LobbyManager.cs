@@ -12,6 +12,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private Button inputButton;
 
+    [SerializeField] private Toggle serverToggle;
+    [SerializeField] private Toggle playerToggle;
+
     public void Start()
     {
         inputButton.onClick.AddListener(OnButtonClick);
@@ -36,26 +39,38 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnButtonClick()
     {
-#if PC
-        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5 });
-#elif PHONE
-        PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
-#endif
+        PhotonNetwork.JoinOrCreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5 }, null);
+//#if PC
+//        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5 });
+//#elif PHONE
+//        PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
+//#endif
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room: " + PhotonNetwork.CurrentRoom.Name);
+
+        if (serverToggle.isOn)
+        {
+            SceneManager.LoadScene("Server Team Select");
+        }
+        else if (playerToggle.isOn)
+        {
+            PhotonNetwork.LoadLevel("Player Team Select");
+        }
+        else
+        {
 #if PC
-        SceneManager.LoadScene("Server Team Select");
+            SceneManager.LoadScene("Server Team Select");
 #elif PHONE
         PhotonNetwork.LoadLevel("Player Team Select");
 #endif
+        }
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         Debug.LogError("Failed to join room: " + message);
     }
-
 }
