@@ -89,9 +89,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (testing || AllPlayersReady())
         {
-            PlayerPrefs.SetInt("Team", teamManager.GetTeam());
-            PlayerPrefs.SetString("Role", teamManager.GetRole());
-            Debug.Log($"Team: {PlayerPrefs.GetInt("Team")}, Role: {PlayerPrefs.GetString("Role")}");
             //if (testing)
             //{
             //    LoadOfflineGame();
@@ -126,6 +123,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void LoadPlayerGame()
     {
+        PlayerPrefs.SetInt("Team", teamManager.GetTeam());
+        PlayerPrefs.SetString("Role", teamManager.GetRole());
+        Debug.Log($"Team: {PlayerPrefs.GetInt("Team")}, Role: {PlayerPrefs.GetString("Role")}");
+
         Debug.Log($"Loading Game Map");
         if (PlayerPrefs.GetString("Role") == "Kid")
         {

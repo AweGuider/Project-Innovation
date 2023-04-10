@@ -101,26 +101,26 @@ public class MapManager : MonoBehaviourPunCallbacks
 
         // TODO: Need to test
         //p.transform.rotation = rotate;
-        photonView.RPC("UpdatePosition", player, p.transform.position);
+
+        // Don't send if dont want to update player on player side
+        //photonView.RPC("UpdatePosition", player, p.transform.position);
     }
 
     [PunRPC]
     void SpawnPlayer(Player player, string role, int team)
     {
-        Vector3 pos = new(0, 1, 0);
-
         if (role == "Toy")
         {
+            Vector3 pos = new(0, 1, 0);
+
             if (team == 1)
             {
                 pos = _team1SpawnPoint.transform.position;
             }
-            else
+            else if (team == 2)
             {
                 pos = _team2SpawnPoint.transform.position;
             }
-        }
-
             //GameObject playerObject = Instantiate(playerPrefab, pos, Quaternion.identity);
             GameObject playerObject = PhotonNetwork.Instantiate(playerPrefab.name, pos, Quaternion.identity);
             PlayerData pPlayer = playerObject.GetComponent<PlayerData>();
@@ -134,10 +134,14 @@ public class MapManager : MonoBehaviourPunCallbacks
             {
                 Debug.LogError($"Actor's {i} number: {_players.Keys.ToList()[i]}");
             }
+
             //photonView.RPC("SpawnPlayer", player, pPlayer, globalId);
             //globalId++;
-            //playerView.TransferOwnership(player);
-            photonView.RPC("AssignOwnership", player, playerView.ViewID);
+            playerView.TransferOwnership(player);
+            //photonView.RPC("AssignOwnership", player, playerView.ViewID);
+        }
+
+
 
     }
 
