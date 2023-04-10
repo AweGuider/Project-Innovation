@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -9,7 +10,6 @@ using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-#if PHONE
     [SerializeField]
     private TMP_InputField nicknameInput;
     [SerializeField]
@@ -21,25 +21,28 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private TeamSelectionManager teamManager;
     private Dictionary<int, Player> _players;
-#endif
 
     [SerializeField]
     private bool testing;
 
     private void Start()
     {
-#if PC
-        PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.CurrentRoom.IsOpen = true;
-        PhotonNetwork.CurrentRoom.IsVisible = true;
-#elif PHONE
-        startButton.onClick.AddListener(StartGame);
-        nameSelectCanvas.SetActive(true);
-        teamSelectCanvas.SetActive(false);
+        //PhotonNetwork.AutomaticallySyncScene = true;
+        //PhotonNetwork.CurrentRoom.IsOpen = true;
+        //PhotonNetwork.CurrentRoom.IsVisible = true;
+        try
+        {
+            startButton.onClick.AddListener(StartGame);
+            nameSelectCanvas.SetActive(true);
+            teamSelectCanvas.SetActive(false);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
 
         //if (teamController == null) teamController = GameObject.Find("")
         _players = new Dictionary<int, Player>();
-#endif
     }
 
     //public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -60,25 +63,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     //    // TODO: handle the player leaving the room
     //}
 
-    [PunRPC]
-    public void LoadGame()
-    {
-        // TODO: Check later if needed PhotonNetwork.LoadLevel or SceneManager.LoadScene
-#if PC
-        Debug.Log($"Loading Game Map");
-        PhotonNetwork.LoadLevel("Game Map");
-#elif PHONE
-        if (PlayerPrefs.GetString("Role") == "Kid")
-        {
-            SceneManager.LoadScene("Kid Screen");
-        }
-        else
-        {
-            SceneManager.LoadScene("Toy Screen");
-        }
-#endif
-    }
-
     private void LoadOfflineGame()
     {
         if (PlayerPrefs.GetString("Role") == "Kid")
@@ -91,8 +75,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
-
-#if PHONE
+//#if PHONE
     public void SetNickname()
     {
         if (nicknameInput.text.Length > 1)
@@ -102,7 +85,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
-
     public void StartGame()
     {
         if (testing || AllPlayersReady())
@@ -110,39 +92,48 @@ public class RoomManager : MonoBehaviourPunCallbacks
             PlayerPrefs.SetInt("Team", teamManager.GetTeam());
             PlayerPrefs.SetString("Role", teamManager.GetRole());
             Debug.Log($"Team: {PlayerPrefs.GetInt("Team")}, Role: {PlayerPrefs.GetString("Role")}");
-            if (testing) LoadOfflineGame();
-            photonView.RPC("LoadGame", RpcTarget.All);
+            //if (testing)
+            //{
+            //    LoadOfflineGame();
+            //    return;
+            //}
+            photonView.RPC("LoadGame", RpcTarget.MasterClient);
         }
     }
 
     // Make GREAT check if all players have chosen a role
     private bool AllPlayersReady()
     {
-        List<Photon.Realtime.Player> tempPlayers = PhotonNetwork.PlayerList.ToList();
+        List<Player> tempPlayers = PhotonNetwork.PlayerList.ToList();
         if (tempPlayers.Count != PhotonNetwork.CurrentRoom.MaxPlayers) return false;
         return true;
     }
-#endif
+//#endif
 
     public void SetTesting(bool b)
     {
         testing = b;
-        //PhotonNetwork.OfflineMode = testing;
-
     }
 
-    //public void SendCommandToPlayer(int playerId, string command)
-    //{
-    //    if (_players.ContainsKey(playerId))
-    //    {
-    //        //PhotonNetwork.SendAll()
-    //        //_players[playerId].Send("ExecuteCommand", command);
-    //    }
-    //}
+    [PunRPC]
+    public void LoadGame()
+    {
+        PhotonNetwork.LoadLevel("Game Map");
 
-    //[PunRPC]
-    //public void ExecuteCommand(string command)
-    //{
-    //    Debug.Log("Received command: " + command);
-    //}
+        photonView.RPC("LoadPlayerGame", RpcTarget.Others);
+    }
+
+    [PunRPC]
+    public void LoadPlayerGame()
+    {
+        Debug.Log($"Loading Game Map");
+        if (PlayerPrefs.GetString("Role") == "Kid")
+        {
+            SceneManager.LoadScene("Kid Screen");
+        }
+        else
+        {
+            SceneManager.LoadScene("Toy Screen");
+        }
+    }
 }

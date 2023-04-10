@@ -1,63 +1,84 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
-
+    private static int globalId;
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private float spawnRadius;
-    [SerializeField] private bool adjustSpawnRadius;
+    private Dictionary<int, PlayerData> _players;
 
-#if PC
-
-#elif PHONE
-    [SerializeField]
-    private string _role;
-    [SerializeField]
-    private int _team;
     [SerializeField]
     private GameObject _team1SpawnPoint;
     [SerializeField]
     private GameObject _team2SpawnPoint;
-#endif
-    // Check later how to use
-    //private bool isGameStarted = false;
-    //private int playerIndex = -1;
-    //private int[] teamIndices = new int[4];
-    //private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
+
     void Start()
     {
-        if (!adjustSpawnRadius) spawnRadius = 5;
+        _players = new();
 
-#if PC
+        //TestAngle();
+    }
 
-        //PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
+    private void TestAngle()
+    {
+        Vector3 initialOffset = new(0, Mathf.Sin(-60f * Mathf.Deg2Rad), 0);
+        Vector3 acceleration = new(0, Mathf.Sin(-130f * Mathf.Deg2Rad), 0);
 
-#elif PHONE
-        _role = PlayerPrefs.GetString("Role");
-        _team = PlayerPrefs.GetInt("Team");
+        Vector3 offset1 = Quaternion.AngleAxis(-60f, Vector3.up) * new Vector3(0, 0, 0);
+        Vector3 offset2 = Quaternion.AngleAxis(-130f, Vector3.up) * new Vector3(0, 0, 0);
 
-        if (_role == "Toy")
-        {
-            Vector3 pos = new();
-            if (_team == 1)
-            {
-                pos = _team1SpawnPoint.transform.position;
-            }
-            else if (_team == 2)
-            {
-                pos = _team2SpawnPoint.transform.position;
+        Debug.Log($"Offset 1: Y: {offset1.y}");
+        Debug.Log($"Offset 2: Y: {offset2.y}");
 
-            }
-            PhotonNetwork.Instantiate(playerPrefab.name, pos, Quaternion.identity);
-            // Instantiate(playerPrefab, playerPrefab.transform.position, Quaternion.identity);
-        }
-#endif
+        //// Calculate angle difference
+        //float angle = Mathf.Acos(Vector3.Dot(initialOffset, acceleration) / (initialOffset.magnitude * acceleration.magnitude)) * Mathf.Rad2Deg;
+        //float cross = initialOffset.x * acceleration.y - initialOffset.y * acceleration.x;
+        //if (cross > 0) angle *= -1;
+
+        //Debug.Log("Angle difference: " + angle);
+
+        //float yDiff = acceleration.y - initialOffset.y;
+        //float angle = Mathf.Asin(yDiff) * Mathf.Rad2Deg;
+        ////float angle = Vector3.Angle(initialOffset, acceleration);
+
+        //Debug.Log($"Initial offset by Y: {initialOffset.y}");
+        //Debug.Log($"Initial acceleration by Y: {acceleration.y}");
+        //Debug.Log($"Angle between offsetted and current: {angle}");
+        //Debug.Log($"Initial offset by Y normalized: {innitialOffset.normalized.y}");
+        //float tempY = 0;
+        //Vector3 acceleration = new(0, tempY, 0);
+        //Debug.Log($"Input: X: {acceleration.x}, Y: {acceleration.y}, Z: {acceleration.z}");
+
+
+        //float xDeg = Mathf.Asin(acceleration.x) * Mathf.Rad2Deg;
+        //float yDeg = Mathf.Asin(acceleration.y) * Mathf.Rad2Deg;
+
+        //Debug.Log($"Degrees: X: {xDeg}, Y: {yDeg}");
+
+        //yDeg += 90;
+
+        //Debug.Log($"Updated degrees: X: {xDeg}, Y: {yDeg}");
+
+        //float xMag = CalculateMagnitude(xDeg);
+        //float zMag = CalculateMagnitude(yDeg);
+
+        //Debug.Log($"Magnitude: X: {xMag}, Y: {zMag}");
+
+        //if (Mathf.Abs(yDeg) == 180 || Mathf.Abs(yDeg) == 360) yDeg = 0;
+
+        //float yRad = Mathf.Sin(yDeg * Mathf.Deg2Rad);
+
+        //Vector3 move = new(xMag, 0, zMag);
+        //Debug.Log($"Output: X: {move.x}, Y: {move.y}, Z: {move.z}");
+
+        //move *= 10 * Time.deltaTime;
+        //Debug.Log($"MOVE: X: {move.x}, Y: {move.y}, Z: {move.z}");
     }
 
     private void Update()
@@ -68,6 +89,56 @@ public class MapManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log("Disconnected from Photon server: " + cause.ToString());
+    }
+
+    [PunRPC]
+    void UpdatePosition(Player player, Vector3 move, Quaternion rotate)
+    {
+        Debug.LogError($"Updating position of Local Player's ActorNumber: {player.ActorNumber}");
+
+        PlayerData p = _players[player.ActorNumber];
+        p.GetComponent<Rigidbody>().AddForce(move, ForceMode.Impulse);
+
+        // TODO: Need to test
+        //p.transform.rotation = rotate;
+        photonView.RPC("UpdatePosition", player, p.transform.position);
+    }
+
+    [PunRPC]
+    void SpawnPlayer(Player player, string role, int team)
+    {
+        Vector3 pos = new(0, 1, 0);
+
+        if (role == "Toy")
+        {
+            if (team == 1)
+            {
+                pos = _team1SpawnPoint.transform.position;
+            }
+            else
+            {
+                pos = _team2SpawnPoint.transform.position;
+            }
+        }
+
+            //GameObject playerObject = Instantiate(playerPrefab, pos, Quaternion.identity);
+            GameObject playerObject = PhotonNetwork.Instantiate(playerPrefab.name, pos, Quaternion.identity);
+            PlayerData pPlayer = playerObject.GetComponent<PlayerData>();
+            PhotonView playerView = playerObject.GetPhotonView();
+            _players.Add(player.ActorNumber, pPlayer);
+            //_players.Add(globalId, pPlayer);
+
+            Debug.LogError($"Spawned player ID: {playerView.ViewID}, Player's ActorNumber: {player.ActorNumber}");
+            Debug.LogError($"Number of player's total: {_players.Count}");
+            for (int i = 0; i < _players.Count; i++)
+            {
+                Debug.LogError($"Actor's {i} number: {_players.Keys.ToList()[i]}");
+            }
+            //photonView.RPC("SpawnPlayer", player, pPlayer, globalId);
+            //globalId++;
+            //playerView.TransferOwnership(player);
+            photonView.RPC("AssignOwnership", player, playerView.ViewID);
+
     }
 
     //public override void OnJoinedRoom()
