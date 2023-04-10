@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6528543149130054807}
   - component: {fileID: 4869719630451403194}
   - component: {fileID: 8655190058647959899}
-  - component: {fileID: 4373260622089904929}
   m_Layer: 0
   m_Name: cart1
   m_TagString: Untagged
@@ -113,20 +112,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   speed: -5
---- !u!114 &4373260622089904929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4727362440224529730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05a66f6c189b3be4f8b78d7d076acb96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathCreator: {fileID: 0}
-  speed: -5
-  distanceBetween: 1
-  distanceBetweenLocomotive: 1
-  distanceBetweenCarriage: 1
