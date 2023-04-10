@@ -178,6 +178,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Train
       objectReference: {fileID: 0}
+    - target: {fileID: 3881987801349368908, guid: 956dd44785c438140935e8be46ca4744, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0951
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881987801349368908, guid: 956dd44785c438140935e8be46ca4744, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.1095
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 956dd44785c438140935e8be46ca4744, type: 3}
 --- !u!4 &1361183868790446217 stripped
