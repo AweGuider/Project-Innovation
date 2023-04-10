@@ -5,49 +5,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ServerManager : MonoBehaviourPunCallbacks
+public class MapManager : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
 
-    [SerializeField] private PhotonView playerPrefab;
+    [SerializeField] private GameObject playerPrefab;
     [SerializeField] private float spawnRadius;
     [SerializeField] private bool adjustSpawnRadius;
 
+#if PC
+
+#elif PHONE
+    [SerializeField]
+    private string _role;
+    [SerializeField]
+    private int _team;
+    [SerializeField]
+    private GameObject _team1SpawnPoint;
+    [SerializeField]
+    private GameObject _team2SpawnPoint;
+#endif
     // Check later how to use
     //private bool isGameStarted = false;
     //private int playerIndex = -1;
     //private int[] teamIndices = new int[4];
     //private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
-
-    //public GameObject toyPrefab;
-    //public GameObject kidPrefab;
-    //public Transform[] toySpawnPoints;
-    //public Transform[] kidSpawnPoints;
     void Start()
     {
         if (!adjustSpawnRadius) spawnRadius = 5;
 
-        PhotonNetwork.ConnectUsingSettings();
+#if PC
+
+        //PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
+
+#elif PHONE
+        _role = PlayerPrefs.GetString("Role");
+        _team = PlayerPrefs.GetInt("Team");
+
+        if (_role == "Toy")
+        {
+            Vector3 pos = new();
+            if (_team == 1)
+            {
+                pos = _team1SpawnPoint.transform.position;
+            }
+            else if (_team == 2)
+            {
+                pos = _team2SpawnPoint.transform.position;
+
+            }
+            PhotonNetwork.Instantiate(playerPrefab.name, pos, Quaternion.identity);
+            // Instantiate(playerPrefab, playerPrefab.transform.position, Quaternion.identity);
+        }
+#endif
     }
 
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
-    }
-
-    public override void OnConnectedToMaster()
-    {
-        base.OnConnectedToMaster();
-        Debug.Log("Connected To Master");
-
-
-        //PhotonNetwork.JoinOrCreateRoom("Test", null, null);
-#if PC
-        SceneManager.LoadScene("Server Lobby");
-
-#elif PHONE
-        SceneManager.LoadScene("Player Lobby");
-#endif
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -62,27 +77,6 @@ public class ServerManager : MonoBehaviourPunCallbacks
     //    PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(0, spawnRadius), 0, Random.Range(0, spawnRadius)), Quaternion.identity);
     //}
 
-    /// Decide how I want to spawn player
-    //[PunRPC]
-    //public void SpawnPlayer()
-    //{
-    //    SpawnPlayerForClient(PhotonNetwork.LocalPlayer);
-    //}
-
-
-    //public void SpawnPlayerForClient(Player player)
-    //{
-    //    if (PhotonNetwork.IsMasterClient)
-    //    {
-    //        Vector3 spawnPosition = new Vector3(Random.Range(0, 10), 1, Random.Range(0, 10));
-    //        PhotonNetwork.Instantiate("Player", spawnPosition, Quaternion.identity);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("Non-master client attempted to spawn player!");
-    //    }
-    //}
-
     //public void JoinTeam(int teamIndex)
     //{
     //    ExitGames.Client.Photon.Hashtable teamProp = new ExitGames.Client.Photon.Hashtable();
@@ -95,10 +89,5 @@ public class ServerManager : MonoBehaviourPunCallbacks
     //        isGameStarted = true;
     //        photonView.RPC("StartGame", RpcTarget.All);
     //    }
-    //}
-
-    //public GameObject GetPlayer(int actorNumber)
-    //{
-    //    return players[actorNumber];
     //}
 }

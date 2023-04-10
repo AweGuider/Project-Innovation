@@ -2,12 +2,15 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class InputController : MonoBehaviourPunCallbacks
 {
     private Vector3 oldAcceleration;
     private Vector3 oldGyroscope;
+    private Vector3 innitialOffset;
+    public float maxTiltAngle;
 
     private CharacterController cc;
     private Vector3 move;
@@ -21,18 +24,30 @@ public class InputController : MonoBehaviourPunCallbacks
     private Rigidbody rb;
     private Vector2 input;
 
+    [SerializeField]
+    private TextMeshProUGUI accText;
+    [SerializeField]
+    private TextMeshProUGUI angleText;
+
     private void Start()
     {
+        // General
         speed = 10f;
-        maxVelocityChange = 10f;
 
+        // Phone
         oldAcceleration = Input.acceleration;
         oldGyroscope = Input.gyro.rotationRate;
+        innitialOffset = new(0, 1, 0);
+        maxTiltAngle = 75f;
+
+        // PC
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");
+
+        // Old
+        maxVelocityChange = 10f;
         cc = GetComponent<CharacterController>();
         view = GetComponent<PhotonView>();
-
         rb = GetComponent<Rigidbody>();
 
 #if PC
@@ -45,10 +60,18 @@ public class InputController : MonoBehaviourPunCallbacks
         //        cc = Add
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+//        Debug.Log($"UPDATE!");
+//#if PC
+//        UpdateKeyboard();
+//#elif PHONE
+//        UpdateSensors();
+//#endif
+
         if (view.IsMine)
         {
+            Debug.Log($"VIEW IS MINE!");
 
 #if PC
             UpdateKeyboard();
@@ -57,20 +80,6 @@ public class InputController : MonoBehaviourPunCallbacks
 #endif
         }
     }
-
-    //    private void FixedUpdate()
-    //    {
-    //        if (view.IsMine)
-    //        {
-    //#if PC
-    //            rb.AddForce(CalculateMovement(speed), ForceMode.VelocityChange);
-    //#endif
-
-    //#if PHONE
-    //            UpdateSensors();
-    //#endif
-    //        }
-    //    }
 
 
     private void UpdateKeyboard()
@@ -86,20 +95,22 @@ public class InputController : MonoBehaviourPunCallbacks
 
     private void UpdateSensors()
     {
-        Vector3 acceleration = Input.acceleration;
+        // Receive input
+        Vector3 acceleration = Input.acceleration + innitialOffset;
         Vector3 gyroscope = Input.gyro.rotationRate;
-        acceleration.x *= speed * Time.deltaTime;
-        acceleration.y *= speed * Time.deltaTime;
-        transform.Translate(new Vector3(acceleration.x, 0, acceleration.y));
 
-        //if (acceleration != oldAcceleration || gyroscope != oldGyroscope)
-        //{
-        //    oldAcceleration = acceleration;
-        //    oldGyroscope = gyroscope;
-        //    transform.Translate()
-        //    //cc.Move(5 * Time.deltaTime * acceleration);
-        //    //SendInput(acceleration, gyroscope);
-        //}
+        // Calculate the tilt angle of the phone.
+        float tiltAngle = Vector3.Angle(Vector3.up, acceleration);
+        angleText.text = $"{tiltAngle}";
+
+        // Map the tilt angle to a range of acceleration values.
+        float accelerationMagnitude = Mathf.Clamp(tiltAngle - 15f, 0f, maxTiltAngle - 15f) / (maxTiltAngle - 15f);
+
+        // Multiply by speed, magnitude and time
+        acceleration *= speed * accelerationMagnitude * Time.deltaTime;
+        accText.text = $"({acceleration.x}, 0, {acceleration.y})";
+
+        transform.Translate(new Vector3(acceleration.x, 0, acceleration.y));
     }
     private Vector3 CalculateMovement(float speed)
     {
