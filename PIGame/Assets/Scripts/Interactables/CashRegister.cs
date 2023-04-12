@@ -20,13 +20,13 @@ public class CashRegister : MonoBehaviour
     {
         if (isPressed == false)
         {
-            rb.velocity = new Vector3(0, 0, -8);
+            rb.velocity = new Vector3(0, 0, -11);
             isPressed = true;
         }
 
         else if (isPressed == true)
         {
-            rb.velocity = new Vector3(0, 0, 8);
+            rb.velocity = new Vector3(0, 0, 11);
             isPressed = false;
         }
     }
