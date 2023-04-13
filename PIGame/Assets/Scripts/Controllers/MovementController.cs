@@ -60,8 +60,6 @@ public class MovementController : MonoBehaviourPunCallbacks
 #endif
     }
 
-
-
     private void FixedUpdate()
     {
         try
@@ -82,29 +80,29 @@ public class MovementController : MonoBehaviourPunCallbacks
         //if (photonView.IsMine)
         //{
         Debug.Log($"VIEW IS MINE!");
-            Vector3 move;
-            //move = UpdateKeyboard();
+        Vector3 move;
+        //move = UpdateKeyboard();
 
 #if PC
-            move = UpdateKeyboard();
+        move = UpdateKeyboard();
 #elif PHONE
-            move = UpdateSensors();
+        move = UpdateSensors();
 #endif
-            Vector3 moveDirection = move.normalized;
-            Quaternion rotationChange;
-            if (moveDirection.magnitude > 0f)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-                rotationChange = Quaternion.Slerp(player.transform.rotation, targetRotation, 5f * Time.deltaTime);
-                player.transform.rotation = rotationChange;
-            }
-            else
-            {
-                rotationChange = player.transform.rotation;
-            }
-            moveDirection *= speed * speedBoost * Time.deltaTime;
+        Vector3 moveDirection = move.normalized;
+        Quaternion rotationChange;
+        if (moveDirection.magnitude > 0f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            rotationChange = Quaternion.Slerp(player.transform.rotation, targetRotation, 5f * Time.deltaTime);
+            player.transform.rotation = rotationChange;
+        }
+        else
+        {
+            rotationChange = player.transform.rotation;
+        }
+        moveDirection *= speed * speedBoost * Time.deltaTime;
 
-            photonView.RPC("UpdatePosition", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, moveDirection, rotationChange);
+        photonView.RPC("UpdatePosition", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, moveDirection, rotationChange);
 
         //}
     }
@@ -140,7 +138,7 @@ public class MovementController : MonoBehaviourPunCallbacks
         float magnitude = 0;
         if (angle < minNegAngle)
         {
-            magnitude = Mathf.Clamp(angle, maxNegAngle, minNegAngle) / maxNegAngle;
+            magnitude = Mathf.Clamp(angle, maxNegAngle, minNegAngle) / maxPosAngle;
         }
         else if (angle > minPosAngle)
         {

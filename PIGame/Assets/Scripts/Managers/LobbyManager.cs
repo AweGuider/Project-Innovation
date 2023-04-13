@@ -39,12 +39,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnButtonClick()
     {
-        PhotonNetwork.JoinOrCreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5 }, null);
-//#if PC
-//        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5 });
-//#elif PHONE
-//        PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
-//#endif
+        PhotonNetwork.JoinOrCreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5, BroadcastPropsChangeToAll = true}, null);
+        //#if PC
+        //        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5, BroadcastPropsChangeToAll = true});
+        //#elif PHONE
+        //        PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
+        //#endif
     }
 
     public override void OnJoinedRoom()

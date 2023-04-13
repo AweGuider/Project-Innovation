@@ -19,11 +19,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private Button startButton;
     [SerializeField]
-    private TeamSelectionManager teamManager;
-    private Dictionary<int, Player> _players;
+    public GameObject chosenButton;
+    private Dictionary<Player, bool> _players;
 
     [SerializeField]
-    private bool testing;
+    private Toggle _testingToggle;
 
     private void Start()
     {
@@ -42,40 +42,40 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
 
         //if (teamController == null) teamController = GameObject.Find("")
-        _players = new Dictionary<int, Player>();
+        _players = new();
     }
 
-    //public override void OnPlayerEnteredRoom(Player newPlayer)
-    //{
-    //    Debug.Log("Player entered room: " + newPlayer.NickName);
-    //    _players.Add(newPlayer.ActorNumber, newPlayer);
-    //    Vector3 spawnPosition = new Vector3(Random.Range(0, 10), 1, Random.Range(0, 10));
-    //    PhotonNetwork.Instantiate("Player", spawnPosition, Quaternion.identity);
-    //    //base.OnPlayerEnteredRoom(newPlayer);
-    //    //SpawnPlayers();
-    //}
-
-    //public override void OnPlayerLeftRoom(Player otherPlayer)
-    //{
-    //    Debug.Log("Player left room: " + otherPlayer.NickName);
-    //    _players.Remove(otherPlayer.ActorNumber);
-    //    //base.OnPlayerLeftRoom(otherPlayer);
-    //    // TODO: handle the player leaving the room
-    //}
-
-    private void LoadOfflineGame()
+    public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        if (PlayerPrefs.GetString("Role") == "Kid")
-        {
-            SceneManager.LoadScene("Kid Screen");
-        }
-        else
-        {
-            SceneManager.LoadScene("Toy Screen");
-        }
+        _players.Add(newPlayer, false);
+        Debug.Log("Player entered room: " + newPlayer.NickName);
+        //base.OnPlayerEnteredRoom(newPlayer);
     }
 
-//#if PHONE
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        _players.Remove(otherPlayer);
+        Debug.Log("Player left room: " + otherPlayer.NickName);
+        //base.OnPlayerLeftRoom(otherPlayer);
+        // TODO: handle the player leaving the room
+    }
+
+    public void SetPlayerReady(Player p, bool r)
+    {
+        _players[p] = r;
+    }
+
+    private int GetReadyPlayers()
+    {
+        int ready = 0;
+        foreach (bool b in _players.Values.ToList())
+        {
+            if (b) ready++;
+        }
+        return ready;
+    }
+
+    //#if PHONE
     public void SetNickname()
     {
         if (nicknameInput.text.Length > 1)
@@ -87,35 +87,43 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        if (testing || AllPlayersReady())
+        Debug.LogWarning($"Are all players ready? {AllPlayersReady()}");
+        Debug.LogWarning($"Testing? {Testing()}");
+        if (Testing() || AllPlayersReady())
         {
-            //if (testing)
-            //{
-            //    LoadOfflineGame();
-            //    return;
-            //}
             photonView.RPC("LoadGame", RpcTarget.MasterClient);
         }
+        Debug.LogWarning($"Global ready: {GetReadyPlayers()}");
+        Debug.LogWarning($"Global - server: {PhotonNetwork.CurrentRoom.MaxPlayers - 1}");
+
     }
 
     // Make GREAT check if all players have chosen a role
     private bool AllPlayersReady()
     {
         List<Player> tempPlayers = PhotonNetwork.PlayerList.ToList();
+        Debug.LogWarning($"Amount of players: {tempPlayers.Count}");
+
         if (tempPlayers.Count != PhotonNetwork.CurrentRoom.MaxPlayers) return false;
+        Debug.LogWarning($"Amount of max players: {PhotonNetwork.CurrentRoom.MaxPlayers}");
+
+        // TODO: This check doesn't work yet for all READY players
+        if (PhotonNetwork.CurrentRoom.MaxPlayers - 1 != GetReadyPlayers()) return false;
+        Debug.LogWarning($"Global ready: {GetReadyPlayers()}");
+
         return true;
     }
 //#endif
 
-    public void SetTesting(bool b)
+    public bool Testing()
     {
-        testing = b;
+        return _testingToggle.isOn;
     }
 
     [PunRPC]
     public void LoadGame()
     {
-        PhotonNetwork.LoadLevel("Game Map");
+        SceneManager.LoadScene("Game Map");
 
         photonView.RPC("LoadPlayerGame", RpcTarget.Others);
     }
@@ -123,8 +131,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void LoadPlayerGame()
     {
-        PlayerPrefs.SetInt("Team", teamManager.GetTeam());
-        PlayerPrefs.SetString("Role", teamManager.GetRole());
         Debug.Log($"Team: {PlayerPrefs.GetInt("Team")}, Role: {PlayerPrefs.GetString("Role")}");
 
         Debug.Log($"Loading Game Map");
