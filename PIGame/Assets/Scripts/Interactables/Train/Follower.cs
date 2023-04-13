@@ -18,7 +18,7 @@ public class Follower : MonoBehaviour
     {
         distanceTravelled += speed * Time.deltaTime;
         transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled);
-        transform.position += new Vector3(0, 1.5f, 0);
+        transform.position += new Vector3(0, 1.75f, 0);
         transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled);
         transform.rotation *= Quaternion.AngleAxis(90, Vector3.up);
     }

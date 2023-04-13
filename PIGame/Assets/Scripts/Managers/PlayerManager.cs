@@ -10,8 +10,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject _player;
 
-    //private 
+    [SerializeField]
+    private MovementController _movementController;
 
+    //private 
     [SerializeField]
     private string _role;
     [SerializeField]
@@ -23,6 +25,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        try
+        {
+            if (_movementController == null) _movementController = GetComponent<MovementController>();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Couldn't find Movement Controller: {e.Message}");
+        }
+
         _role = PlayerPrefs.GetString("Role");
         _team = PlayerPrefs.GetInt("Team");
 
@@ -49,8 +60,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public void AssignOwnership(int viewID)
     {
         Debug.LogError($"Assigning Ownership to ID: {viewID}");
-        photonView.RequestOwnership();
-
+        //photonView.RequestOwnership();
         PhotonView view = PhotonView.Find(viewID);
         if (view != null)
         {

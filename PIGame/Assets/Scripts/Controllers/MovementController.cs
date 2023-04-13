@@ -5,38 +5,45 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovementController : MonoBehaviourPunCallbacks
 {
+    [Header("Player Related")]
     [SerializeField] private GameObject player;
+    [SerializeField] private Rigidbody rb;
 
+    [Header("Sensors related")]
     private Vector3 oldAcceleration;
     private Vector3 oldGyroscope;
     private Vector3 initialOffset;
-    public float minPosAngle;
-    public float maxPosAngle;
-    public float minNegAngle;
-    public float maxNegAngle;
+    [SerializeField] private float minPosAngle;
+    [SerializeField] private float maxPosAngle;
+    [SerializeField] private float minNegAngle;
+    [SerializeField] private float maxNegAngle;
 
+    [Header("Boost Related")]
     [SerializeField] private float speed;
     [SerializeField] private float speedBoost;
     [SerializeField] private float speedBoostMax;
     [SerializeField] private float boostDuration;
     [SerializeField] private float boostCooldown;
     [SerializeField] private bool isBoosting;
+    [SerializeField] private Button boostButton;
 
-    [SerializeField] private Rigidbody rb;
 
     private void Start()
     {
         // General
-        speed = 10f;
+        speed = 5f;
         speedBoost = 1f;
         speedBoostMax = 2f;
         boostDuration = 5f;
         boostCooldown = 10f;
 
         // Phone
+        if (boostButton != null) boostButton.onClick.AddListener(Boost);
+
         oldAcceleration = Input.acceleration;
         oldGyroscope = Input.gyro.rotationRate;
         initialOffset = new(0, Mathf.Sin(-60f * Mathf.Deg2Rad), 0);
@@ -46,15 +53,14 @@ public class MovementController : MonoBehaviourPunCallbacks
         minNegAngle = -20f;
         maxNegAngle = -90f;
 
-        // Old
-        rb = GetComponent<Rigidbody>();
-
 #if PC
         //Nothing yet
 #elif PHONE
         Input.gyro.enabled = true;
 #endif
     }
+
+
 
     private void FixedUpdate()
     {
@@ -67,15 +73,15 @@ public class MovementController : MonoBehaviourPunCallbacks
         {
             Debug.LogError(e.Message);
         }
-
+#if PC
         if (Input.GetKeyDown(KeyCode.Space) && !isBoosting)
         {
-            StartCoroutine(BoostCoroutine());
+            Boost();
         }
-
+#endif
         //if (photonView.IsMine)
         //{
-            Debug.Log($"VIEW IS MINE!");
+        Debug.Log($"VIEW IS MINE!");
             Vector3 move;
             //move = UpdateKeyboard();
 
@@ -108,7 +114,6 @@ public class MovementController : MonoBehaviourPunCallbacks
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         return new(x, 0, z);
-        //transform.Translate(x, 0, z);
     }
 
     private Vector3 UpdateSensors()
@@ -128,8 +133,6 @@ public class MovementController : MonoBehaviourPunCallbacks
         Vector3 move = new(acceleration.x, 0, acceleration.y);
 
         return move;
-
-        //transform.Translate(move);
     }
 
     private float CalculateMagnitude(float angle)
@@ -144,6 +147,10 @@ public class MovementController : MonoBehaviourPunCallbacks
             magnitude = Mathf.Clamp(angle, minPosAngle, maxPosAngle) / maxPosAngle;
         }
         return magnitude;
+    }
+    private void Boost()
+    {
+        StartCoroutine(BoostCoroutine());
     }
     IEnumerator BoostCoroutine()
     {
