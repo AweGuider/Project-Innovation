@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviourPunCallbacks
 {
-    private static int globalId;
-    [SerializeField] private GameObject playerPrefab;
-    private Dictionary<int, PlayerData> _players;
+    [SerializeField]
+    private GameObject _playerPrefab;
+    private Dictionary<int, GameObject> _players;
 
     [SerializeField]
     private GameObject _team1SpawnPoint;
@@ -151,10 +151,11 @@ public class MapManager : MonoBehaviourPunCallbacks
     {
         Debug.LogError($"Updating position of Local Player's ActorNumber: {player.ActorNumber}");
 
-        PlayerData p = _players[player.ActorNumber];
+        GameObject p = _players[player.ActorNumber];
         p.GetComponent<Rigidbody>().AddForce(move, ForceMode.Impulse);
+
         Debug.Log($"Move X: {move.x}, Z: {move.z}");
-        // TODO: Need to test
+
         p.transform.rotation = rotate;
 
         // Don't send if dont want to update player on player side
@@ -177,8 +178,8 @@ public class MapManager : MonoBehaviourPunCallbacks
                 pos = _team2SpawnPoint.transform.position;
             }
             //GameObject playerObject = Instantiate(playerPrefab, pos, Quaternion.identity);
-            GameObject playerObject = PhotonNetwork.Instantiate(playerPrefab.name, pos, Quaternion.identity);
-            PlayerData pPlayer = playerObject.GetComponent<PlayerData>();
+            GameObject playerObject = PhotonNetwork.Instantiate(_playerPrefab == null ? "Player" : _playerPrefab.name, pos, Quaternion.identity);
+            GameObject pPlayer = playerObject.transform.GetChild(0).gameObject;
             PhotonView playerView = playerObject.GetPhotonView();
             _players.Add(player.ActorNumber, pPlayer);
             //_players.Add(globalId, pPlayer);
@@ -190,9 +191,8 @@ public class MapManager : MonoBehaviourPunCallbacks
                 Debug.LogError($"Actor's {i} number: {_players.Keys.ToList()[i]}");
             }
 
-            //photonView.RPC("SpawnPlayer", player, pPlayer, globalId);
-            //globalId++;
             playerView.TransferOwnership(player);
+            photonView.RPC("SetPlayer", player);
             //photonView.RPC("AssignOwnership", player, playerView.ViewID);
         }
 

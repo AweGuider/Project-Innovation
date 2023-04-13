@@ -20,16 +20,17 @@ public class RoleButton : MonoBehaviourPunCallbacks
     [SerializeField]
     private string _buttonID;
 
-    [SerializeField] RoomManager manager;
+    [SerializeField]
+    private RoomManager _manager;
 
-    ExitGames.Client.Photon.Hashtable buttonProperties;
+    ExitGames.Client.Photon.Hashtable _buttonProperties;
 
     // Start is called before the first frame update
     void Start()
     {
         try
         {
-            if (manager == null) manager = GameObject.Find("RoomManager").GetComponent<RoomManager>();
+            if (_manager == null) _manager = GameObject.Find("RoomManager").GetComponent<RoomManager>();
         }
         catch (Exception e)
         {
@@ -42,7 +43,7 @@ public class RoleButton : MonoBehaviourPunCallbacks
         _team = int.Parse(transform.parent.name);
         _buttonID = _team + _role;
 
-        buttonProperties = new();
+        _buttonProperties = new();
 
         //_text.text = _role;
 
@@ -61,7 +62,7 @@ public class RoleButton : MonoBehaviourPunCallbacks
                 {
                     SetText(_role);
                     SetUsed(_used);
-                    PhotonNetwork.SetPlayerCustomProperties(buttonProperties);
+                    PhotonNetwork.SetPlayerCustomProperties(_buttonProperties);
                 }
 
             }
@@ -72,27 +73,27 @@ public class RoleButton : MonoBehaviourPunCallbacks
     {
         if (!IsUsed())
         {
-            if (manager.chosenButton != null)
+            if (_manager.chosenButton != null)
             {
-                manager.chosenButton.GetComponent<RoleButton>().ResetButton();
+                _manager.chosenButton.GetComponent<RoleButton>().ResetButton();
             }
-            manager.chosenButton = gameObject;
+            _manager.chosenButton = gameObject;
 
             PlayerPrefs.SetInt("Team", GetTeam());
             PlayerPrefs.SetString("Role", GetRole());
             SetText(PhotonNetwork.NickName);
             SetUsed(true);
-            PhotonNetwork.SetPlayerCustomProperties(buttonProperties);
+            PhotonNetwork.SetPlayerCustomProperties(_buttonProperties);
 
-            manager.SetPlayerReady(PhotonNetwork.LocalPlayer, true);
+            _manager.SetPlayerReady(PhotonNetwork.LocalPlayer, true);
         }
         else
         {
             if (PhotonNetwork.NickName.ToLowerInvariant() == GetText().ToLowerInvariant())
             {
-                manager.chosenButton = null;
+                _manager.chosenButton = null;
                 ResetButton();
-                manager.SetPlayerReady(PhotonNetwork.LocalPlayer, false);
+                _manager.SetPlayerReady(PhotonNetwork.LocalPlayer, false);
 
             }
         }
@@ -103,7 +104,7 @@ public class RoleButton : MonoBehaviourPunCallbacks
         SetText(GetRole());
         SetUsed(false);
         PlayerPrefs.DeleteAll();
-        PhotonNetwork.SetPlayerCustomProperties(buttonProperties);
+        PhotonNetwork.SetPlayerCustomProperties(_buttonProperties);
     }
 
     public bool IsUsed()
@@ -129,17 +130,17 @@ public class RoleButton : MonoBehaviourPunCallbacks
     {
         if (u)
         {
-            buttonProperties[_buttonID + "Used"] = 1;
+            _buttonProperties[_buttonID + "Used"] = 1;
         }
         else
         {
-            buttonProperties[_buttonID + "Used"] = 0;
+            _buttonProperties[_buttonID + "Used"] = 0;
         }
     }
 
     public void SetText(string t)
     {
-        buttonProperties[_buttonID + "Name"] = t;
+        _buttonProperties[_buttonID + "Name"] = t;
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
