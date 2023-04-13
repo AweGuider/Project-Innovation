@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9042942377960147037}
   - component: {fileID: 6528543149130054807}
   - component: {fileID: 4869719630451403194}
-  - component: {fileID: 8655190058647959899}
+  - component: {fileID: 2069080018732693116}
   m_Layer: 0
   m_Name: cart1
   m_TagString: Untagged
@@ -94,21 +94,22 @@ BoxCollider:
   m_GameObject: {fileID: 4727362440224529730}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2.2303917, y: 1.8061656, z: 1.3868804}
   m_Center: {x: -2.6087692, y: 0.9893947, z: -0.006320266}
---- !u!114 &8655190058647959899
+--- !u!114 &2069080018732693116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4727362440224529730}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53922b0e37524a047973e8b7c71f311f, type: 3}
+  m_Script: {fileID: 11500000, guid: ffe7373f89df8d64d9b6fc99de4a4251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   speed: -5
+  distanceBetween: 0
