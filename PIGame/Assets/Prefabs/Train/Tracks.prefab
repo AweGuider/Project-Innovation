@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124433034477992009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.964729, y: -7.72, z: -45.11342}
+  m_LocalPosition: {x: -11.964729, y: -0.5, z: -45.11342}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -128,10 +128,11 @@ GameObject:
   m_Component:
   - component: {fileID: 124433035162600048}
   - component: {fileID: 124433035162600049}
-  - component: {fileID: 124433035162600047}
+  - component: {fileID: 4182383301786123989}
+  - component: {fileID: 5171799055962631731}
   m_Layer: 0
   m_Name: TrainTracks
-  m_TagString: Untagged
+  m_TagString: Tracks
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124433035162600050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.538143, y: 0, z: -1.0145645}
+  m_LocalPosition: {x: -9.022183, y: -2.5650587, z: 0.8634674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -166,53 +167,113 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: 17.538143, y: -0.00000084603187, z: 1.0145645}
-      - {x: 17.159237, y: -0.00000084603187, z: 2.066435}
-      - {x: 14.71154, y: -0.00000084603187, z: 9.829041}
-      - {x: -4.9928703, y: -0.00000084603187, z: 12.204613}
-      - {x: -15.752159, y: -0.00000084603187, z: 13.501757}
-      - {x: -17.395657, y: -0.00000084603187, z: 4.599682}
-      - {x: -19.039158, y: -0.00000084603187, z: -4.302393}
-      - {x: -20.066437, y: -0.00000084603187, z: -9.866688}
-      - {x: -15.013866, y: 0.00000010764245, z: -10.463117}
-      - {x: -9.961292, y: 0.0000010613168, z: -11.059544}
-      - {x: -7.0849247, y: 0.0000016042317, z: -11.399082}
-      - {x: -6.437748, y: 0.000001836855, z: -11.486443}
-      - {x: -4.196394, y: 0.0000019073486, z: -11.670701}
-      - {x: 2.3203924, y: 0.000002112311, z: -12.206436}
-      - {x: 8.412019, y: 0.00000065285, z: -12.345277}
-      - {x: 12.63855, y: -0.00000084603187, z: -12.320972}
-      - {x: 19.741997, y: -0.0000033651731, z: -12.280125}
-      - {x: 19.945568, y: -0.00000084603187, z: -5.668619}
+      - {x: 25.344803, y: 2.715918, z: 5.48032}
+      - {x: 22.405396, y: 2.7823906, z: 13.764991}
+      - {x: 32.159054, y: -3.3402278, z: 23.714693}
+      - {x: 22.218338, y: -3.5128226, z: 27.238678}
+      - {x: 11.729073, y: -3.6949415, z: 30.957125}
+      - {x: 6.758526, y: -3.6068583, z: 21.528078}
+      - {x: -4.491151, y: -3.6664228, z: 21.938696}
+      - {x: -9.877344, y: -3.6949415, z: 22.135294}
+      - {x: -33.244625, y: -3.7432318, z: 33.93479}
+      - {x: -32.039345, y: -3.5898705, z: 25.88242}
+      - {x: -31.280014, y: -3.4932523, z: 20.809399}
+      - {x: -20.624588, y: 0.3876357, z: 18.28536}
+      - {x: -22.051315, y: 2.4357681, z: 8.625755}
+      - {x: -22.724545, y: 3.4022198, z: 4.0676813}
+      - {x: -26.185318, y: 1.7990727, z: -5.5055513}
+      - {x: -36.309616, y: 1.6489806, z: -2.3000898}
+      - {x: -42.745235, y: 1.5535729, z: -0.26250362}
+      - {x: -47.210876, y: -3.6949415, z: 0.609335}
+      - {x: -48.952065, y: -3.6857948, z: -7.541279}
+      - {x: -50.58071, y: -3.6772394, z: -15.165083}
+      - {x: -51.4657, y: -3.6747856, z: -19.676846}
+      - {x: -49.373146, y: -3.6949415, z: -23.56377}
+      - {x: -47.956734, y: -3.7085848, z: -26.194765}
+      - {x: -34.10723, y: -3.6802077, z: -25.397865}
+      - {x: -29.20668, y: -3.6802077, z: -24.901249}
+      - {x: -27.66655, y: -3.6802077, z: -24.745174}
+      - {x: -22.2834, y: -3.6743248, z: -24.548735}
+      - {x: -21.458984, y: -3.6722631, z: -21.115494}
+      - {x: -20.537613, y: -3.669959, z: -17.27848}
+      - {x: -21.051857, y: -3.6580229, z: -14.188326}
+      - {x: -19.85939, y: -3.6556492, z: -11.810665}
+      - {x: -19.29863, y: -3.654533, z: -10.692564}
+      - {x: -17.855097, y: -3.6492257, z: -9.150194}
+      - {x: -16.43457, y: -3.6554446, z: -8.415064}
+      - {x: -15.048705, y: -3.661512, z: -7.6978703}
+      - {x: -12.994552, y: -3.665501, z: -6.8245506}
+      - {x: -10.462203, y: -3.6718478, z: -6.873045}
+      - {x: -3.539495, y: -3.6891978, z: -7.0056143}
+      - {x: 12.741138, y: -3.6949408, z: -4.6534986}
+      - {x: 14.548355, y: -3.6216025, z: -12.790573}
+      - {x: 14.85874, y: -3.609007, z: -14.188094}
+      - {x: 14.125174, y: -3.5796554, z: -16.48951}
+      - {x: 15.897888, y: -3.580418, z: -18.198748}
+      - {x: 17.016924, y: -3.5808997, z: -19.277714}
+      - {x: 18.729628, y: -3.591567, z: -18.965189}
+      - {x: 19.948654, y: -3.6317596, z: -20.69844}
+      - {x: 21.41623, y: -3.6801472, z: -22.785088}
+      - {x: 20.791138, y: -3.6854, z: -24.795944}
+      - {x: 24.662186, y: -3.6949415, z: -25.270016}
+      - {x: 26.91808, y: -3.700502, z: -25.546286}
+      - {x: 29.77517, y: -3.7028558, z: -25.17709}
+      - {x: 31.879868, y: -3.6118736, z: -25.261993}
+      - {x: 34.423958, y: -3.5018976, z: -25.364622}
+      - {x: 36.805084, y: -3.2718267, z: -25.445004}
+      - {x: 39.634705, y: -2.7075787, z: -25.320248}
+      - {x: 43.62007, y: -1.9128656, z: -25.144535}
+      - {x: 48.167587, y: -0.5067122, z: -26.560772}
+      - {x: 49.591766, y: 0.7595844, z: -22.422924}
+      - {x: 50.533916, y: 1.59729, z: -19.685574}
+      - {x: 50.266003, y: 2.3550906, z: -12.546371}
+      - {x: 48.53415, y: 2.399848, z: -9.773003}
+      - {x: 46.619186, y: 2.4493375, z: -6.7064047}
+      - {x: 31.208748, y: 2.5833092, z: -11.047106}
       isClosed: 1
       space: 0
       controlMode: 0
       autoControlLength: 0.3
       boundsUpToDate: 0
       bounds:
-        m_Center: {x: -9.2076235, y: 5.5228553, z: -0.13965607}
-        m_Extent: {x: 15.32339, y: 5.667193, z: 0.13965607}
+        m_Center: {x: -0.0000009536743, y: 0, z: -0.0000042915344}
+        m_Extent: {x: 19.048153, y: 0, z: 12.327349}
       perAnchorNormalsAngle:
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      - 0
-      globalNormalsAngle: 0
-      flipNormals: 0
+      - 329.76843
+      - 356.16113
+      - 336.67365
+      - 339.7143
+      - 352.14172
+      - 336.7659
+      - 34.551315
+      - 29.574585
+      - 24.130661
+      - 20.374578
+      - 17.189447
+      - 15.753218
+      - 13.997574
+      - 16.770416
+      - 14.267654
+      - 12.687762
+      - 9.466766
+      - 5.9402533
+      - 1.6775155
+      - -4.657226
+      - 350.6314
+      globalNormalsAngle: 120
+      flipNormals: 1
     vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
-    showPathBounds: 0
-    showPerSegmentBounds: 0
+    showPathBounds: 1
+    showPerSegmentBounds: 1
     displayAnchorPoints: 1
     displayControlPoints: 1
     bezierHandleScale: 1
-    globalDisplaySettingsFoldout: 0
-    keepConstantHandleSize: 0
-    showNormalsInVertexMode: 0
+    globalDisplaySettingsFoldout: 1
+    keepConstantHandleSize: 1
+    showNormalsInVertexMode: 1
     showBezierPathInVertexMode: 0
     showDisplayOptions: 1
     showPathOptions: 1
@@ -222,7 +283,7 @@ MonoBehaviour:
     showNormalsHelpInfo: 0
     tabIndex: 0
   initialized: 1
---- !u!114 &124433035162600047
+--- !u!114 &4182383301786123989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,10 +297,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 124433035162600049}
   autoUpdate: 1
-  roadWidth: 1
-  thickness: 0.15
-  flattenSurface: 0
+  roadWidth: 1.5
+  thickness: 0.5
+  flattenSurface: 1
   roadMaterial: {fileID: 2100000, guid: b5df4735192845740bd11076dc9cdc99, type: 2}
   undersideMaterial: {fileID: 2100000, guid: c1d8d882244c5344fa86a8fd23246f81, type: 2}
   textureTiling: 1
-  meshHolder: {fileID: 124433034477992009}
+  meshHolder: {fileID: 0}
+--- !u!114 &5171799055962631731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124433035162600050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f417e74782fffcd40b77b0fdbe82af04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closedLoop: 1
+  waypoints: []

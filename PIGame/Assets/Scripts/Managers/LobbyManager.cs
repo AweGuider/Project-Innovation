@@ -9,12 +9,19 @@ using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private TMP_InputField inputField;
-    [SerializeField] private Button inputButton;
+    [SerializeField]
+    private TMP_InputField _inputField;
+    [SerializeField]
+    private Button _inputButton;
+
+    [SerializeField]
+    private Toggle _serverToggle;
+    [SerializeField]
+    private Toggle _playerToggle;
 
     public void Start()
     {
-        inputButton.onClick.AddListener(OnButtonClick);
+        _inputButton.onClick.AddListener(OnButtonClick);
         PhotonNetwork.JoinLobby();
     }
 
@@ -36,26 +43,38 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnButtonClick()
     {
-#if PC
-        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5 });
-#elif PHONE
-        PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
-#endif
+        PhotonNetwork.JoinOrCreateRoom(_inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5, BroadcastPropsChangeToAll = true}, null);
+        //#if PC
+        //        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5, BroadcastPropsChangeToAll = true});
+        //#elif PHONE
+        //        PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
+        //#endif
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room: " + PhotonNetwork.CurrentRoom.Name);
+
+        if (_serverToggle.isOn)
+        {
+            SceneManager.LoadScene("Server Team Select");
+        }
+        else if (_playerToggle.isOn)
+        {
+            PhotonNetwork.LoadLevel("Player Team Select");
+        }
+        else
+        {
 #if PC
-        SceneManager.LoadScene("Server Team Select");
+            SceneManager.LoadScene("Server Team Select");
 #elif PHONE
         PhotonNetwork.LoadLevel("Player Team Select");
 #endif
+        }
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         Debug.LogError("Failed to join room: " + message);
     }
-
 }

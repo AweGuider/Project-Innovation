@@ -1,0 +1,185 @@
+using Photon.Pun;
+using Photon.Realtime;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MovementController : MonoBehaviourPunCallbacks
+{
+    [Header("Player Related")]
+    [SerializeField]
+    private GameObject _player;
+    [SerializeField]
+    private Rigidbody _playerRb;
+
+    [Header("Sensors related")]
+    private Vector3 oldAcceleration;
+    private Vector3 oldGyroscope;
+    private Vector3 initialOffset;
+    [SerializeField]
+    private float _minPosAngle;
+    [SerializeField]
+    private float _maxPosAngle;
+    [SerializeField]
+    private float _minNegAngle;
+    [SerializeField]
+    private float _maxNegAngle;
+
+    [Header("Boost Related")]
+    [SerializeField]
+    private float _speed;
+    [SerializeField]
+    private float _speedBoost;
+    [SerializeField]
+    private float _speedBoostMax;
+    [SerializeField]
+    private float _boostDuration;
+    [SerializeField]
+    private float _boostCooldown;
+    [SerializeField]
+    private bool _isBoosting;
+    [SerializeField]
+    private Button _boostButton;
+
+
+    private void Start()
+    {
+        // General
+        _speed = 5f;
+        _speedBoost = 1f;
+        _speedBoostMax = 2f;
+        _boostDuration = 5f;
+        _boostCooldown = 10f;
+
+        // Phone
+        if (_boostButton != null) _boostButton.onClick.AddListener(Boost);
+
+        oldAcceleration = Input.acceleration;
+        oldGyroscope = Input.gyro.rotationRate;
+        initialOffset = new(0, Mathf.Sin(-60f * Mathf.Deg2Rad), 0);
+        //initialOffset = initialOffset.normalized;
+        _minPosAngle = 10f;
+        _maxPosAngle = 40f;
+        _minNegAngle = -10f;
+        _maxNegAngle = -40f;
+
+#if PC
+        //Nothing yet
+#elif PHONE
+        Input.gyro.enabled = true;
+#endif
+    }
+
+
+    private void FixedUpdate()
+    {
+
+#if PC
+        if (Input.GetKeyDown(KeyCode.Space) && !_isBoosting)
+        {
+            Boost();
+        }
+#endif
+
+        if (_player == null || _playerRb == null)
+        {
+            Debug.LogError($"Either player or rigidbody aren't set!");
+            return;
+        }
+
+        Vector3 move;
+#if PC
+        move = UpdateKeyboard();
+#elif PHONE
+        move = UpdateSensors();
+#endif
+        Vector3 moveDirection = move.normalized;
+        Quaternion rotationChange;
+        if (moveDirection.magnitude > 0f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            rotationChange = Quaternion.Slerp(_player.transform.rotation, targetRotation, 5f * Time.deltaTime);
+            _player.transform.rotation = rotationChange;
+        }
+        else
+        {
+            rotationChange = _player.transform.rotation;
+        }
+        moveDirection *= _speed * _speedBoost * Time.deltaTime;
+
+        photonView.RPC("UpdatePosition", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, moveDirection, rotationChange);
+    }
+
+    private Vector3 UpdateKeyboard()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        return new(x, 0, z);
+    }
+
+    private Vector3 UpdateSensors()
+    {
+        // Receive input
+        Vector3 acceleration = Input.acceleration;
+        Vector3 gyroscope = Input.gyro.rotationRate;
+
+
+        float xDeg = Mathf.Asin(acceleration.x) * Mathf.Rad2Deg;
+        float yDeg = Mathf.Asin(acceleration.y) * Mathf.Rad2Deg;
+
+        float xMag = CalculateMagnitude(xDeg);
+        float zMag = CalculateMagnitude(yDeg);
+
+        //Vector3 move = new(xMag, 0, zMag);
+        Vector3 move = new(acceleration.x, 0, acceleration.y);
+
+        return move;
+    }
+
+    private float CalculateMagnitude(float angle)
+    {
+        float magnitude = 0;
+        if (angle < _minNegAngle)
+        {
+            magnitude = Mathf.Clamp(angle, _maxNegAngle, _minNegAngle) / _maxPosAngle;
+        }
+        else if (angle > _minPosAngle)
+        {
+            magnitude = Mathf.Clamp(angle, _minPosAngle, _maxPosAngle) / _maxPosAngle;
+        }
+        return magnitude;
+    }
+    private void Boost()
+    {
+        StartCoroutine(BoostCoroutine());
+    }
+    IEnumerator BoostCoroutine()
+    {
+        _isBoosting = true;
+        _speedBoost = _speedBoostMax;
+        yield return new WaitForSeconds(_boostDuration);
+        _speedBoost = 1f;
+        _isBoosting = false;
+        yield return new WaitForSeconds(_boostCooldown);
+    }
+
+    [PunRPC]
+    public void SetPlayer()
+    {
+        Debug.Log($"GOT HERE!");
+        _player = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
+        _playerRb = _player.GetComponent<Rigidbody>();
+    }
+
+    [PunRPC]
+    public void UpdatePosition(Vector3 pos)
+    {
+        //rb.AddForce(pos, ForceMode.Impulse);
+
+        _player.transform.position = pos;
+    }
+
+}

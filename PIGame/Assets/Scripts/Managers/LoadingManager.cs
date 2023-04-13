@@ -23,11 +23,12 @@ public class LoadingManager : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         Debug.Log("Connected To Master");
 
-#if PC
-        SceneManager.LoadScene("Server Lobby");
-#elif PHONE
-        SceneManager.LoadScene("Player Lobby");
-#endif
+        SceneManager.LoadScene("TestScene");
 
+//#if PC
+//        SceneManager.LoadScene("Server Lobby");
+//#elif PHONE
+//        SceneManager.LoadScene("Player Lobby");
+//#endif
     }
 }
