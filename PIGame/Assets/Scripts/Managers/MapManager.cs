@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviourPunCallbacks
 {
-    private static int globalId;
-    [SerializeField] private GameObject playerPrefab;
-    private Dictionary<int, PlayerData> _players;
+    [SerializeField]
+    private GameObject _playerPrefab;
+    private Dictionary<int, GameObject> _players;
 
     [SerializeField]
     private GameObject _team1SpawnPoint;
@@ -21,8 +21,63 @@ public class MapManager : MonoBehaviourPunCallbacks
     void Start()
     {
         _players = new();
+        //Vector3 move = new(0, 0, 0);
+        //Vector3 outcome = UpdateSensors(move);
+        //Debug.Log($"Values tested: ({move.x}, {move.y}, {move.z}). X: {outcome.x}, Y: {outcome.y}\n");
 
+        //move = new(1, 0, 0);
+        //outcome = UpdateSensors(move);
+        //Debug.Log($"Values tested: ({move.x}, {move.y}, {move.z}). X: {outcome.x}, Y: {outcome.y}\n");
+
+        //move = new(0, 1, 0);
+        //outcome = UpdateSensors(move);
+        //Debug.Log($"Values tested: ({move.x}, {move.y}, {move.z}). X: {outcome.x}, Y: {outcome.y}\n");
+
+        //move = new(-1, 0, 0);
+        //outcome = UpdateSensors(move);
+        //Debug.Log($"Values tested: ({move.x}, {move.y}, {move.z}). X: {outcome.x}, Y: {outcome.y}\n");
+
+        //move = new(0, -1, 0);
+        //outcome = UpdateSensors(move);
+        //Debug.Log($"Values tested: ({move.x}, {move.y}, {move.z}). X: {outcome.x}, Y: {outcome.y}\n");
         //TestAngle();
+    }
+
+    private Vector3 UpdateSensors(Vector3 acc)
+    {
+        // Receive input
+        Vector3 acceleration = acc;
+        Vector3 gyroscope = Input.gyro.rotationRate;
+
+
+        float xDeg = Mathf.Asin(acceleration.x) * Mathf.Rad2Deg;
+        float yDeg = Mathf.Asin(acceleration.y) * Mathf.Rad2Deg;
+
+        Debug.LogError($"Degrees X: {xDeg}, Y: {yDeg}");
+
+        float xMag = CalculateMagnitude(xDeg);
+        float zMag = CalculateMagnitude(yDeg);
+
+        Debug.LogError($"Magnitude X: {xMag}, Y: {zMag}");
+
+        //Vector3 move = new(xMag, 0, zMag);
+        Vector3 move = new(acceleration.x, 0, acceleration.y);
+
+        return move;
+    }
+
+    private float CalculateMagnitude(float angle)
+    {
+        float magnitude = 0;
+        if (angle < -20)
+        {
+            magnitude = Mathf.Clamp(angle, -90, -20) / 90;
+        }
+        else if (angle > 20)
+        {
+            magnitude = Mathf.Clamp(angle, 20, 90) / 90;
+        }
+        return magnitude;
     }
 
     private void TestAngle()
@@ -96,11 +151,12 @@ public class MapManager : MonoBehaviourPunCallbacks
     {
         Debug.LogError($"Updating position of Local Player's ActorNumber: {player.ActorNumber}");
 
-        PlayerData p = _players[player.ActorNumber];
+        GameObject p = _players[player.ActorNumber];
         p.GetComponent<Rigidbody>().AddForce(move, ForceMode.Impulse);
 
-        // TODO: Need to test
-        //p.transform.rotation = rotate;
+        Debug.Log($"Move X: {move.x}, Z: {move.z}");
+
+        p.transform.rotation = rotate;
 
         // Don't send if dont want to update player on player side
         //photonView.RPC("UpdatePosition", player, p.transform.position);
@@ -122,8 +178,8 @@ public class MapManager : MonoBehaviourPunCallbacks
                 pos = _team2SpawnPoint.transform.position;
             }
             //GameObject playerObject = Instantiate(playerPrefab, pos, Quaternion.identity);
-            GameObject playerObject = PhotonNetwork.Instantiate(playerPrefab.name, pos, Quaternion.identity);
-            PlayerData pPlayer = playerObject.GetComponent<PlayerData>();
+            GameObject playerObject = PhotonNetwork.Instantiate(_playerPrefab == null ? "Player" : _playerPrefab.name, pos, Quaternion.identity);
+            GameObject pPlayer = playerObject.transform.GetChild(0).gameObject;
             PhotonView playerView = playerObject.GetPhotonView();
             _players.Add(player.ActorNumber, pPlayer);
             //_players.Add(globalId, pPlayer);
@@ -135,9 +191,8 @@ public class MapManager : MonoBehaviourPunCallbacks
                 Debug.LogError($"Actor's {i} number: {_players.Keys.ToList()[i]}");
             }
 
-            //photonView.RPC("SpawnPlayer", player, pPlayer, globalId);
-            //globalId++;
             playerView.TransferOwnership(player);
+            photonView.RPC("SetPlayer", player);
             //photonView.RPC("AssignOwnership", player, playerView.ViewID);
         }
 

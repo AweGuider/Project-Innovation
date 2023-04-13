@@ -10,48 +10,61 @@ using UnityEngine.UI;
 public class MovementController : MonoBehaviourPunCallbacks
 {
     [Header("Player Related")]
-    [SerializeField] private GameObject player;
-    [SerializeField] private Rigidbody rb;
+    [SerializeField]
+    private GameObject _player;
+    [SerializeField]
+    private Rigidbody _playerRb;
 
     [Header("Sensors related")]
     private Vector3 oldAcceleration;
     private Vector3 oldGyroscope;
     private Vector3 initialOffset;
-    [SerializeField] private float minPosAngle;
-    [SerializeField] private float maxPosAngle;
-    [SerializeField] private float minNegAngle;
-    [SerializeField] private float maxNegAngle;
+    [SerializeField]
+    private float _minPosAngle;
+    [SerializeField]
+    private float _maxPosAngle;
+    [SerializeField]
+    private float _minNegAngle;
+    [SerializeField]
+    private float _maxNegAngle;
 
     [Header("Boost Related")]
-    [SerializeField] private float speed;
-    [SerializeField] private float speedBoost;
-    [SerializeField] private float speedBoostMax;
-    [SerializeField] private float boostDuration;
-    [SerializeField] private float boostCooldown;
-    [SerializeField] private bool isBoosting;
-    [SerializeField] private Button boostButton;
+    [SerializeField]
+    private float _speed;
+    [SerializeField]
+    private float _speedBoost;
+    [SerializeField]
+    private float _speedBoostMax;
+    [SerializeField]
+    private float _boostDuration;
+    [SerializeField]
+    private float _boostCooldown;
+    [SerializeField]
+    private bool _isBoosting;
+    [SerializeField]
+    private Button _boostButton;
 
 
     private void Start()
     {
         // General
-        speed = 5f;
-        speedBoost = 1f;
-        speedBoostMax = 2f;
-        boostDuration = 5f;
-        boostCooldown = 10f;
+        _speed = 5f;
+        _speedBoost = 1f;
+        _speedBoostMax = 2f;
+        _boostDuration = 5f;
+        _boostCooldown = 10f;
 
         // Phone
-        if (boostButton != null) boostButton.onClick.AddListener(Boost);
+        if (_boostButton != null) _boostButton.onClick.AddListener(Boost);
 
         oldAcceleration = Input.acceleration;
         oldGyroscope = Input.gyro.rotationRate;
         initialOffset = new(0, Mathf.Sin(-60f * Mathf.Deg2Rad), 0);
         //initialOffset = initialOffset.normalized;
-        minPosAngle = 20f;
-        maxPosAngle = 90f;
-        minNegAngle = -20f;
-        maxNegAngle = -90f;
+        _minPosAngle = 10f;
+        _maxPosAngle = 40f;
+        _minNegAngle = -10f;
+        _maxNegAngle = -40f;
 
 #if PC
         //Nothing yet
@@ -61,52 +74,43 @@ public class MovementController : MonoBehaviourPunCallbacks
     }
 
 
-
     private void FixedUpdate()
     {
-        try
-        {
-            if (player == null) player = GameObject.FindGameObjectWithTag("Player");
-            if (rb == null) rb = player.GetComponent<Rigidbody>();
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e.Message);
-        }
+
 #if PC
-        if (Input.GetKeyDown(KeyCode.Space) && !isBoosting)
+        if (Input.GetKeyDown(KeyCode.Space) && !_isBoosting)
         {
             Boost();
         }
 #endif
-        //if (photonView.IsMine)
-        //{
-        Debug.Log($"VIEW IS MINE!");
-            Vector3 move;
-            //move = UpdateKeyboard();
 
+        if (_player == null || _playerRb == null)
+        {
+            Debug.LogError($"Either player or rigidbody aren't set!");
+            return;
+        }
+
+        Vector3 move;
 #if PC
-            move = UpdateKeyboard();
+        move = UpdateKeyboard();
 #elif PHONE
-            move = UpdateSensors();
+        move = UpdateSensors();
 #endif
-            Vector3 moveDirection = move.normalized;
-            Quaternion rotationChange;
-            if (moveDirection.magnitude > 0f)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-                rotationChange = Quaternion.Slerp(player.transform.rotation, targetRotation, 5f * Time.deltaTime);
-                player.transform.rotation = rotationChange;
-            }
-            else
-            {
-                rotationChange = player.transform.rotation;
-            }
-            moveDirection *= speed * speedBoost * Time.deltaTime;
+        Vector3 moveDirection = move.normalized;
+        Quaternion rotationChange;
+        if (moveDirection.magnitude > 0f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            rotationChange = Quaternion.Slerp(_player.transform.rotation, targetRotation, 5f * Time.deltaTime);
+            _player.transform.rotation = rotationChange;
+        }
+        else
+        {
+            rotationChange = _player.transform.rotation;
+        }
+        moveDirection *= _speed * _speedBoost * Time.deltaTime;
 
-            photonView.RPC("UpdatePosition", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, moveDirection, rotationChange);
-
-        //}
+        photonView.RPC("UpdatePosition", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, moveDirection, rotationChange);
     }
 
     private Vector3 UpdateKeyboard()
@@ -138,13 +142,13 @@ public class MovementController : MonoBehaviourPunCallbacks
     private float CalculateMagnitude(float angle)
     {
         float magnitude = 0;
-        if (angle < minNegAngle)
+        if (angle < _minNegAngle)
         {
-            magnitude = Mathf.Clamp(angle, maxNegAngle, minNegAngle) / maxNegAngle;
+            magnitude = Mathf.Clamp(angle, _maxNegAngle, _minNegAngle) / _maxPosAngle;
         }
-        else if (angle > minPosAngle)
+        else if (angle > _minPosAngle)
         {
-            magnitude = Mathf.Clamp(angle, minPosAngle, maxPosAngle) / maxPosAngle;
+            magnitude = Mathf.Clamp(angle, _minPosAngle, _maxPosAngle) / _maxPosAngle;
         }
         return magnitude;
     }
@@ -154,12 +158,20 @@ public class MovementController : MonoBehaviourPunCallbacks
     }
     IEnumerator BoostCoroutine()
     {
-        isBoosting = true;
-        speedBoost = speedBoostMax;
-        yield return new WaitForSeconds(boostDuration);
-        speedBoost = 1f;
-        isBoosting = false;
-        yield return new WaitForSeconds(boostCooldown);
+        _isBoosting = true;
+        _speedBoost = _speedBoostMax;
+        yield return new WaitForSeconds(_boostDuration);
+        _speedBoost = 1f;
+        _isBoosting = false;
+        yield return new WaitForSeconds(_boostCooldown);
+    }
+
+    [PunRPC]
+    public void SetPlayer()
+    {
+        Debug.Log($"GOT HERE!");
+        _player = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
+        _playerRb = _player.GetComponent<Rigidbody>();
     }
 
     [PunRPC]
@@ -167,6 +179,7 @@ public class MovementController : MonoBehaviourPunCallbacks
     {
         //rb.AddForce(pos, ForceMode.Impulse);
 
-        player.transform.position = pos;
+        _player.transform.position = pos;
     }
+
 }

@@ -7,8 +7,6 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    private GameObject _player;
 
     [SerializeField]
     private MovementController _movementController;
@@ -20,7 +18,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     private int _team;
 
     [SerializeField]
-    private TextMeshProUGUI viewIsMine;
+    private TextMeshProUGUI _viewIsMine;
 
     // Start is called before the first frame update
     void Start()
@@ -46,13 +44,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
-        viewIsMine.text = $"{photonView.IsMine}";
-    }
-
-    [PunRPC]
-    public void SpawnPlayer(PlayerData data)
-    {
-        _player = Instantiate(data.gameObject, data.gameObject.transform.position, Quaternion.identity);
+        _viewIsMine.text = $"{photonView.IsMine}";
     }
 
 
@@ -66,5 +58,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             view.RequestOwnership();
         }
+    }
+
+    //[PunRPC]
+    public void SetPlayer(GameObject p)
+    {
+        _movementController.SetPlayer();
+        Debug.Log($"GOT HERE!");
     }
 }

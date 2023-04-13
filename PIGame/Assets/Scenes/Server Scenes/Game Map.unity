@@ -1282,6 +1282,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2391263639480736793, guid: b9474786e5ace9844ab4e2bd886d4715, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 9086352483735746064, guid: c6ea64da4ddb6544fa1c111c46feb77e, type: 3}
+    - target: {fileID: 2391263639480736793, guid: b9474786e5ace9844ab4e2bd886d4715, type: 3}
+      propertyPath: _playerPrefab
+      value: 
+      objectReference: {fileID: 9086352483735746064, guid: c6ea64da4ddb6544fa1c111c46feb77e, type: 3}
+    - target: {fileID: 2391263639480736793, guid: b9474786e5ace9844ab4e2bd886d4715, type: 3}
       propertyPath: _team1SpawnPoint
       value: 
       objectReference: {fileID: 329550042}
