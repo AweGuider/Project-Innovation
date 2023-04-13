@@ -1163,6 +1163,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 573355369882237829}
     m_Modifications:
+    - target: {fileID: 620295455932782658, guid: 956dd44785c438140935e8be46ca4744, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e761cec5e52492d4f826519fd443c770, type: 2}
+    - target: {fileID: 2707995481057515299, guid: 956dd44785c438140935e8be46ca4744, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b3d8c2ca62afb024d8bbf0b0a12e718e, type: 2}
+    - target: {fileID: 3042369357222610191, guid: 956dd44785c438140935e8be46ca4744, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c56d3c8d3b3212d4d984d0ece3cb7017, type: 2}
     - target: {fileID: 3214120411638996371, guid: 956dd44785c438140935e8be46ca4744, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1211,6 +1223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Train
       objectReference: {fileID: 0}
+    - target: {fileID: 6910932388442664923, guid: 956dd44785c438140935e8be46ca4744, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 58d364ef0984ada43a5edf52892f73da, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 956dd44785c438140935e8be46ca4744, type: 3}
 --- !u!4 &3129490295950629599 stripped
@@ -1799,6 +1815,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 573355369882237829}
     m_Modifications:
+    - target: {fileID: 9146051332284416145, guid: bb0f380d3d5371a44bba919305aa7761, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 015ec9009e22bc945a02296e84c29de4, type: 2}
     - target: {fileID: 9146051332284416148, guid: bb0f380d3d5371a44bba919305aa7761, type: 3}
       propertyPath: m_Name
       value: Ground
