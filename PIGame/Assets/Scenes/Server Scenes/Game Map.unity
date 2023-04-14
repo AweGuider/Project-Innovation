@@ -6455,12 +6455,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8572230465462151149, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 4309403925540952109, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.088
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5865086958592539851, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
 --- !u!114 &573355369081724052 stripped
 MonoBehaviour:
