@@ -11,7 +11,9 @@ public class MovementController : MonoBehaviourPunCallbacks
 {
     [Header("Player Related")]
     [SerializeField]
-    private GameObject _player;
+    private PlayerData _player;
+    [SerializeField]
+    private GameObject _playerObject;
     [SerializeField]
     private Rigidbody _playerRb;
 
@@ -44,14 +46,13 @@ public class MovementController : MonoBehaviourPunCallbacks
     [SerializeField]
     private Button _boostButton;
 
-
     private void Start()
     {
         // General
         _speed = 5f;
         _speedBoost = 1f;
-        _speedBoostMax = 2f;
-        _boostDuration = 5f;
+        _speedBoostMax = 1.5f;
+        _boostDuration = 3f;
         _boostCooldown = 10f;
 
         // Phone
@@ -73,10 +74,8 @@ public class MovementController : MonoBehaviourPunCallbacks
 #endif
     }
 
-
     private void FixedUpdate()
     {
-
 #if PC
         if (Input.GetKeyDown(KeyCode.Space) && !_isBoosting)
         {
@@ -84,7 +83,7 @@ public class MovementController : MonoBehaviourPunCallbacks
         }
 #endif
 
-        if (_player == null || _playerRb == null)
+        if (_playerObject == null || _playerRb == null)
         {
             Debug.LogError($"Either player or rigidbody aren't set!");
             return;
@@ -100,17 +99,27 @@ public class MovementController : MonoBehaviourPunCallbacks
         Quaternion rotationChange;
         if (moveDirection.magnitude > 0f)
         {
+            _player.SetWalking(true);
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            rotationChange = Quaternion.Slerp(_player.transform.rotation, targetRotation, 5f * Time.deltaTime);
-            _player.transform.rotation = rotationChange;
+            rotationChange = Quaternion.Slerp(_playerObject.transform.rotation, targetRotation, 5f * Time.deltaTime);
+            _playerObject.transform.rotation = rotationChange;
         }
         else
         {
-            rotationChange = _player.transform.rotation;
+            _player.SetWalking(false);
+
+            rotationChange = _playerObject.transform.rotation;
         }
         moveDirection *= _speed * _speedBoost * Time.deltaTime;
 
-        photonView.RPC("UpdatePosition", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, moveDirection, rotationChange);
+        try
+        {
+            photonView.RPC("UpdatePosition", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, moveDirection, rotationChange);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Couldn't send updated position: {e.Message}");
+        }
     }
 
     private Vector3 UpdateKeyboard()
@@ -126,15 +135,14 @@ public class MovementController : MonoBehaviourPunCallbacks
         Vector3 acceleration = Input.acceleration;
         Vector3 gyroscope = Input.gyro.rotationRate;
 
-
         float xDeg = Mathf.Asin(acceleration.x) * Mathf.Rad2Deg;
         float yDeg = Mathf.Asin(acceleration.y) * Mathf.Rad2Deg;
 
         float xMag = CalculateMagnitude(xDeg);
         float zMag = CalculateMagnitude(yDeg);
 
-        //Vector3 move = new(xMag, 0, zMag);
-        Vector3 move = new(acceleration.x, 0, acceleration.y);
+        Vector3 move = new(xMag, 0, zMag);
+        //Vector3 move = new(acceleration.x, 0, acceleration.y);
 
         return move;
     }
@@ -170,8 +178,9 @@ public class MovementController : MonoBehaviourPunCallbacks
     public void SetPlayer()
     {
         Debug.Log($"GOT HERE!");
-        _player = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
-        _playerRb = _player.GetComponent<Rigidbody>();
+        _playerObject = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
+        _playerRb = _playerObject.GetComponent<Rigidbody>();
+        _player = _playerObject.GetComponent<PlayerData>();
     }
 
     [PunRPC]
@@ -179,7 +188,7 @@ public class MovementController : MonoBehaviourPunCallbacks
     {
         //rb.AddForce(pos, ForceMode.Impulse);
 
-        _player.transform.position = pos;
+        _playerObject.transform.position = pos;
     }
 
 }

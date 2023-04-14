@@ -17,9 +17,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private int _team;
 
-    [SerializeField]
-    private TextMeshProUGUI _viewIsMine;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +32,16 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         _role = PlayerPrefs.GetString("Role");
         _team = PlayerPrefs.GetInt("Team");
 
-        photonView.RequestOwnership();
-        photonView.RPC("SpawnPlayer", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, _role, _team);
+        try
+        {
+            photonView.RequestOwnership();
+
+            photonView.RPC("SpawnPlayer", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, _role, _team);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Couldn't spawn a player: {e.Message}");
+        }
         Debug.LogError($"Player Manager ID: {photonView.ViewID}, Local Player's ActorNumber: {PhotonNetwork.LocalPlayer.ActorNumber}");
     }
 
@@ -44,9 +49,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
-        _viewIsMine.text = $"{photonView.IsMine}";
     }
-
 
     [PunRPC]
     public void AssignOwnership(int viewID)
@@ -60,10 +63,4 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         }
     }
 
-    //[PunRPC]
-    public void SetPlayer(GameObject p)
-    {
-        _movementController.SetPlayer();
-        Debug.Log($"GOT HERE!");
-    }
 }
