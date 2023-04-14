@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BlockStack : MonoBehaviour
+public class FBTrap : Trap
 {
     [SerializeField]
     private GameObject fallingBlock;
@@ -39,7 +39,19 @@ public class BlockStack : MonoBehaviour
         }
     }
 
-    public void OnClickActivate()
+    private void SetState(bool s)
+    {
+        fallingBlockCollider.enabled = s;
+        fallingBlockRb.isKinematic = s;
+        fallingBlockMesh.enabled = s;
+        foreach (GameObject block in blocksToFall)
+        {
+            block.gameObject.GetComponent<Rigidbody>().isKinematic = s;
+        }
+        fell = !s;
+    }
+
+    public override void ActivateTrap()
     {
         if (fell)
         {
@@ -54,17 +66,6 @@ public class BlockStack : MonoBehaviour
         {
             SetState(false);
         }
-    }
-
-    private void SetState(bool s)
-    {
-        fallingBlockCollider.enabled = s;
-        fallingBlockRb.isKinematic = s;
-        fallingBlockMesh.enabled = s;
-        foreach (GameObject block in blocksToFall)
-        {
-            block.gameObject.GetComponent<Rigidbody>().isKinematic = s;
-        }
-        fell = !s;
+        Debug.Log($"Activated falling blocks trap, ID: {_id}");
     }
 }

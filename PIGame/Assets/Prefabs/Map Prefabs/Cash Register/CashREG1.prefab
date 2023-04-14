@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8547344605412937238}
   - component: {fileID: 4879349934611874192}
   - component: {fileID: 1604732847989822481}
-  - component: {fileID: 4537855902202264780}
   - component: {fileID: 1024625099075321491}
   m_Layer: 0
   m_Name: drawer
@@ -99,25 +98,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.1614685, y: 1.9727056, z: 7.820999}
   m_Center: {x: 0, y: 0, z: 0.09494448}
---- !u!114 &4537855902202264780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1185759751346445718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fbdbd90c6e74f545b5de18d7a07edd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  move: {x: 0, y: 0, z: 0}
-  rb: {fileID: 0}
-  left: 0
-  right: 0
-  up: 0
-  down: 1
 --- !u!54 &1024625099075321491
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -143,6 +123,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6577996920693553675}
+  - component: {fileID: 4208805483514729095}
+  - component: {fileID: 1915844648257554935}
   m_Layer: 0
   m_Name: CashREG1
   m_TagString: Untagged
@@ -167,6 +149,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4208805483514729095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5765291369425608881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbdbd90c6e74f545b5de18d7a07edd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  move: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
+  left: 0
+  right: 0
+  up: 0
+  down: 1
+--- !u!114 &1915844648257554935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5765291369425608881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d63bffcc7c1b748a269b92e5414700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0
+  triggered: 0
+  speed: 0
+  move: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
+  left: 0
+  right: 0
+  up: 0
+  down: 1
 --- !u!1 &7726528197016848552
 GameObject:
   m_ObjectHideFlags: 0

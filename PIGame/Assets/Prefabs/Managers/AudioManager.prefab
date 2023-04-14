@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 03f42bca8fe36f74e81e5f598482879e, type: 2}
-  library: {fileID: 0}
+  library: {fileID: 6037189582643741783}
 --- !u!1 &6301953685673991149
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,5 +93,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicClips:
   - {fileID: 8300000, guid: 786fe42a051d8ad4ea192795caa9c6c3, type: 3}
-  soundClips: []
-  voiceClips: []
+  soundClips:
+  - {fileID: 8300000, guid: 597d7e42177a8b64dbda376a1b68feb6, type: 3}
+  - {fileID: 8300000, guid: c7c186b52c1fc284fad198c4a6833c5b, type: 3}
+  - {fileID: 8300000, guid: 27c4db638b1e1d640a4182438d32ceea, type: 3}
+  - {fileID: 8300000, guid: 266994f91bb5c854290f086b28cb3cdc, type: 3}
+  voiceClips:
+  - {fileID: 8300000, guid: 08c3e542a33e09d41939506bbd0c28dc, type: 3}
+  - {fileID: 8300000, guid: 4d5dc6a2c1f20274293dd8a123a5630d, type: 3}
+  - {fileID: 8300000, guid: 0062653e439e9894fafa4bdb4097a788, type: 3}
+  - {fileID: 8300000, guid: fcc0f4ff253ef5643b4e7914ba9c43d1, type: 3}

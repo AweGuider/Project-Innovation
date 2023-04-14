@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Tracks
   - Walls
+  - CashRegister
+  - FallingBlocks
+  - Doors
   layers:
   - Default
   - TransparentFX

@@ -3,25 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : MonoBehaviourPunCallbacks
+public abstract class Trap : MonoBehaviourPunCallbacks
 {
-    public int id;
+    [SerializeField]
+    protected int _id;
     public bool triggered = false;
-
-    public int GetID()
-    {
-        return id;
-    }
-
-    public bool GetTriggered()
-    {
-        return triggered;
-    }
-
-    public void SetTriggered(bool isTriggered)
-    {
-        triggered = isTriggered;
-    }
 
     private void Update()
     {
@@ -35,10 +21,24 @@ public class Trap : MonoBehaviourPunCallbacks
         //}
     }
 
-    //[PunRPC]
-    //private void ActivateTrap()
-    //{
-    //    // TODO: activate trap
-    //}
-    //// other methods...
+    public int GetID()
+    {
+        return _id;
+    }
+
+    public bool GetTriggered()
+    {
+        return triggered;
+    }
+    public void SetID(int id)
+    {
+        _id = id;
+    }
+
+    public void SetTriggered(bool isTriggered)
+    {
+        triggered = isTriggered;
+    }
+
+    public abstract void ActivateTrap();
 }

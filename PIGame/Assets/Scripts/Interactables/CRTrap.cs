@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class CashRegister : MonoBehaviour
+public class CRTrap : Trap
 {
-    public float speed;
-    public Vector3 move;
-    public Rigidbody rb;
-    private bool isPressed = false;
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private Vector3 move;
+    [SerializeField]
+    private Rigidbody rb;
+    private bool isOpen = false;
 
     [SerializeField]
     private bool left;
@@ -23,7 +23,7 @@ public class CashRegister : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetChild(0).GetComponent<Rigidbody>();
         speed = 10f;
         move = new();
         if (left)
@@ -45,18 +45,22 @@ public class CashRegister : MonoBehaviour
         move *= speed;
     }
 
-    public void PushOut()
+    public override void ActivateTrap()
     {
-        if (isPressed == false)
+        if (isOpen == false)
         {
+            AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 1);
+
             rb.velocity = move;
         }
 
-        else if (isPressed == true)
+        else if (isOpen == true)
         {
+            AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 0);
+
             rb.velocity = move * -1;
         }
 
-        isPressed = !isPressed;
+        isOpen = !isOpen;
     }
 }

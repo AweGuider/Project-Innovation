@@ -46,6 +46,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3470475369596754197}
   - component: {fileID: 8632129332027492901}
+  - component: {fileID: 739457461024069885}
   m_Layer: 0
   m_Name: Falling_Blocks_5
   m_TagString: Untagged
@@ -85,6 +86,20 @@ MonoBehaviour:
   fallingBlock: {fileID: 0}
   blocksToFall: []
   fell: 0
+--- !u!114 &739457461024069885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8516264006126888878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe361d9f092f944a9523579659aef4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0
+  triggered: 0
 --- !u!1001 &578533368605540572
 PrefabInstance:
   m_ObjectHideFlags: 0

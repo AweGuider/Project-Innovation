@@ -10,6 +10,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private MovementController _movementController;
+    [SerializeField]
+    private TrapController _trapController;
 
     //private 
     [SerializeField]
@@ -20,29 +22,44 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        try
-        {
-            if (_movementController == null) _movementController = GetComponent<MovementController>();
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"Couldn't find Movement Controller: {e.Message}");
-        }
-
-        _role = PlayerPrefs.GetString("Role");
+        //_role = PlayerPrefs.GetString("Role");
         _team = PlayerPrefs.GetInt("Team");
 
-        try
+        _role = "Kid";
+        if (_role == "Toy")
         {
-            photonView.RequestOwnership();
+            try
+            {
+                if (_movementController == null) _movementController = GetComponent<MovementController>();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Couldn't find Movement Controller: {e.Message}");
+            }
+            try
+            {
+                photonView.RequestOwnership();
 
-            photonView.RPC("SpawnPlayer", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, _role, _team);
+                photonView.RPC("SpawnPlayer", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, _role, _team);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Couldn't spawn a player: {e.Message}");
+            }
+            Debug.LogError($"Player Manager ID: {photonView.ViewID}, Local Player's ActorNumber: {PhotonNetwork.LocalPlayer.ActorNumber}");
         }
-        catch (Exception e)
+        else if (_role == "Kid")
         {
-            Debug.LogError($"Couldn't spawn a player: {e.Message}");
+            try
+            {
+                if (_trapController == null) _trapController = GetComponent<TrapController>();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Couldn't find Trap Controller: {e.Message}");
+            }
         }
-        Debug.LogError($"Player Manager ID: {photonView.ViewID}, Local Player's ActorNumber: {PhotonNetwork.LocalPlayer.ActorNumber}");
+
     }
 
     // Update is called once per frame
