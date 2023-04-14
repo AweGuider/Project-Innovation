@@ -130,7 +130,7 @@ MonoBehaviour:
   Thumbnail: 
   HasThumbnail: 0
   CurrentStatePreset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n 
-    <presetinput identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"10,10\"
+    <presetinput identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"11,11\"
     />\n  <presetinput identifier=\"Amount_X\" uid=\"2402282134\" type=\"4\" value=\"50\"
     />\n  <presetinput identifier=\"Amount_Y\" uid=\"2402282116\" type=\"4\" value=\"33\"
     />\n  <presetinput identifier=\"amount_X_normals_\" uid=\"2402282184\" type=\"4\"
@@ -141,11 +141,10 @@ MonoBehaviour:
   GenerateAllMipmaps: 1
   OutputMaterial: {fileID: 2100000, guid: 167d4cb4e27cbdb42a572c597d6f8475, type: 2}
   DefaultPreset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n  <presetinput
-    identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"10,10\" />\n
-    </sbspreset>\n"
+    identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"10,10\" />\n</sbspreset>\n"
   MaterialShader: Universal Render Pipeline/Lit
-  RenderTextures: 0
-  OutputRemaped: 0
+  RenderTextures: 1
+  OutputRemaped: 1
   references:
     version: 2
     RefIds:
@@ -160,7 +159,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 5
           WidgetType: 0
-        Data: {x: 10, y: 10}
+        Data: {x: 11, y: 11}
         NumericalDescription:
           DefaultValue: {x: 8, y: 8}
           MinValue: {x: 0, y: 0}
