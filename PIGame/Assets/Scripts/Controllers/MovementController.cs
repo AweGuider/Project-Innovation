@@ -51,8 +51,8 @@ public class MovementController : MonoBehaviourPunCallbacks
         // General
         _speed = 5f;
         _speedBoost = 1f;
-        _speedBoostMax = 2f;
-        _boostDuration = 5f;
+        _speedBoostMax = 1.5f;
+        _boostDuration = 3f;
         _boostCooldown = 10f;
 
         // Phone
