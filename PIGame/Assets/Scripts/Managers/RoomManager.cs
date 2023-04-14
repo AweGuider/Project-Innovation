@@ -41,23 +41,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             Debug.LogError(e.Message);
         }
 
-        //if (teamController == null) teamController = GameObject.Find("")
         _players = new();
-    }
-
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        _players.Add(newPlayer, false);
-        Debug.Log("Player entered room: " + newPlayer.NickName);
-        //base.OnPlayerEnteredRoom(newPlayer);
-    }
-
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        _players.Remove(otherPlayer);
-        Debug.Log("Player left room: " + otherPlayer.NickName);
-        //base.OnPlayerLeftRoom(otherPlayer);
-        // TODO: handle the player leaving the room
     }
 
     public void SetPlayerReady(Player p, bool r)

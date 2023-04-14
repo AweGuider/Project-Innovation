@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: graph_0
   m_EditorClassIdentifier: 
   AssetPath: Assets/Materials/Designer Materials/Train_track.sbsar
-  OutputPath: Assets/Materials/Designer Materials/Train_track_graph_0
+  OutputPath: Assets\Materials\Designer Materials\Train_track_graph_0
   RawData: {fileID: -244192453324840774, guid: a2d98428108f6e345b3b26694b70631a, type: 3}
   Name: graph_0
   IsRoot: 1
   FlagedForDelete: 0
-  GUID: c640827f-deb3-4cc7-b855-683ac43aa62d
+  GUID: 0c6c13d0-bd97-4ce3-8520-fb23c13ef173
   Index: 0
   Input:
-  - rid: 7671531526343360512
-  - rid: 7671531526343360513
-  - rid: 7671531526343360514
-  - rid: 7671531526343360515
-  - rid: 7671531526343360516
+  - rid: 6321944776382873600
+  - rid: 6321944776382873601
+  - rid: 6321944776382873602
+  - rid: 6321944776382873603
+  - rid: 6321944776382873604
   Output:
   - Index: 0
     VirtualOutputIndex: 6
@@ -35,7 +35,7 @@ MonoBehaviour:
       Index: 0
       Type: 8
       Channel: baseColor
-    OutputTexture: {fileID: 2800000, guid: cd61e1bed880e534d99b4ba63f767ecf, type: 3}
+    OutputTexture: {fileID: 0}
     sRGB: 1
     IsVirtual: 0
     IsAlphaAssignable: 1
@@ -51,7 +51,7 @@ MonoBehaviour:
       Index: 1
       Type: 8
       Channel: normal
-    OutputTexture: {fileID: 2800000, guid: c60d0697ec6ba5a4298f31626e3e3ad8, type: 3}
+    OutputTexture: {fileID: 0}
     sRGB: 0
     IsVirtual: 0
     IsAlphaAssignable: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
       Index: 3
       Type: 8
       Channel: metallic
-    OutputTexture: {fileID: 2800000, guid: db2673a636a008049b92b5e11a9c832d, type: 3}
+    OutputTexture: {fileID: 0}
     sRGB: 0
     IsVirtual: 0
     IsAlphaAssignable: 1
@@ -99,7 +99,7 @@ MonoBehaviour:
       Index: 4
       Type: 8
       Channel: height
-    OutputTexture: {fileID: 2800000, guid: 5e5badaaed174b34dae0300fc10d9f48, type: 3}
+    OutputTexture: {fileID: 0}
     sRGB: 1
     IsVirtual: 0
     IsAlphaAssignable: 1
@@ -115,7 +115,7 @@ MonoBehaviour:
       Index: 5
       Type: 8
       Channel: ambientOcclusion
-    OutputTexture: {fileID: 2800000, guid: 81ea5c8b639b48040a2de91b0dc1d32f, type: 3}
+    OutputTexture: {fileID: 0}
     sRGB: 0
     IsVirtual: 0
     IsAlphaAssignable: 1
@@ -128,26 +128,20 @@ MonoBehaviour:
   EnablePhysicalSize: 0
   Thumbnail: 
   HasThumbnail: 0
-  CurrentStatePreset: " <sbspreset pkgurl=\"pkg://Train_track\" label=\"\" >\n  <presetinput
-    identifier=\"$outputsize\" uid=\"580155903\" type=\"8\" value=\"11,11\" />\n 
-    <presetinput identifier=\"$randomseed\" uid=\"1978036141\" type=\"4\" value=\"5984\"
-    />\n  <presetinput identifier=\"outputcolor\" uid=\"1334931975\" type=\"3\" value=\"0.971698,0.785859,0.562852,1\"
-    />\n  <presetinput identifier=\"outputcolor_2\" uid=\"1334932140\" type=\"3\"
-    value=\"0.292453,0.216508,0.0783553,1\" />\n </sbspreset>\n"
+  CurrentStatePreset: 
   IsRuntimeOnly: 0
   GenerateAllOutputs: 0
   GenerateAllMipmaps: 1
-  OutputMaterial: {fileID: 2100000, guid: 78d30e005f024284886227d544ced686, type: 2}
+  OutputMaterial: {fileID: 0}
   DefaultPreset: " <sbspreset pkgurl=\"pkg://Train_track\" label=\"\" >\n  <presetinput
-    identifier=\"$outputsize\" uid=\"580155903\" type=\"8\" value=\"10,10\" />\n
-    </sbspreset>\n"
-  MaterialShader: Universal Render Pipeline/Lit
+    identifier=\"$outputsize\" uid=\"580155903\" type=\"8\" value=\"10,10\" />\n</sbspreset>\n"
+  MaterialShader: 
   RenderTextures: 0
   OutputRemaped: 0
   references:
     version: 2
     RefIds:
-    - rid: 7671531526343360512
+    - rid: 6321944776382873600
       type: {class: SubstanceInputInt2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         Index: 0
@@ -158,7 +152,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 5
           WidgetType: 0
-        Data: {x: 11, y: 11}
+        Data: {x: 10, y: 10}
         NumericalDescription:
           DefaultValue: {x: 8, y: 8}
           MinValue: {x: 0, y: 0}
@@ -166,7 +160,7 @@ MonoBehaviour:
           SliderClamp: 0
           EnumValueCount: 0
           EnumValues: []
-    - rid: 7671531526343360513
+    - rid: 6321944776382873601
       type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         Index: 1
@@ -177,7 +171,7 @@ MonoBehaviour:
           GuiDescription: 
           Type: 4
           WidgetType: 0
-        Data: 5984
+        Data: 0
         NumericalDescription:
           DefaultValue: 0
           MinValue: 0
@@ -188,7 +182,7 @@ MonoBehaviour:
           LabelTrue: 
           EnumValueCount: 0
           EnumValues: []
-    - rid: 7671531526343360514
+    - rid: 6321944776382873602
       type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         Index: 2
@@ -200,7 +194,7 @@ MonoBehaviour:
             output image
           Type: 3
           WidgetType: 3
-        Data: {x: 0.9716981, y: 0.78585875, z: 0.56285155, w: 1}
+        Data: {x: 0.92549, y: 0.788235, z: 0.623529, w: 1}
         NumericalDescription:
           DefaultValue: {x: 0.92549, y: 0.788235, z: 0.623529, w: 1}
           MinValue: {x: 0, y: 0, z: 0, w: 0}
@@ -209,7 +203,7 @@ MonoBehaviour:
           SliderClamp: 0
           EnumValueCount: 0
           EnumValues: []
-    - rid: 7671531526343360515
+    - rid: 6321944776382873603
       type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         Index: 3
@@ -230,7 +224,7 @@ MonoBehaviour:
           SliderClamp: 0
           EnumValueCount: 0
           EnumValues: []
-    - rid: 7671531526343360516
+    - rid: 6321944776382873604
       type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         Index: 4
@@ -242,7 +236,7 @@ MonoBehaviour:
             output image
           Type: 3
           WidgetType: 3
-        Data: {x: 0.2924528, y: 0.21650787, z: 0.07835527, w: 1}
+        Data: {x: 0.333333, y: 0.0422961, z: 0, w: 1}
         NumericalDescription:
           DefaultValue: {x: 0.333333, y: 0.0422961, z: 0, w: 1}
           MinValue: {x: 0, y: 0, z: 0, w: 0}

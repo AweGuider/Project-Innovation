@@ -177,6 +177,7 @@ public class MapManager : MonoBehaviourPunCallbacks
             {
                 pos = _team2SpawnPoint.transform.position;
             }
+
             //GameObject playerObject = Instantiate(playerPrefab, pos, Quaternion.identity);
             GameObject playerObject = PhotonNetwork.Instantiate(_playerPrefab == null ? "Player" : _playerPrefab.name, pos, Quaternion.identity);
             GameObject pPlayer = playerObject.transform.GetChild(0).gameObject;

@@ -28,8 +28,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("Joined lobby");
-        //PhotonNetwork.JoinOrCreateRoom("TestRoom", new RoomOptions { MaxPlayers = 4 }, null);
-        //rm = GetComponent<RoomManager>();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -37,7 +35,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Debug.Log("Room list updated");
         foreach (RoomInfo room in roomList)
         {
-            Debug.Log(room.Name + " " + room.PlayerCount + "/" + room.MaxPlayers);
+            Debug.Log("Room name: " + room.Name + ". " + room.PlayerCount + "/" + room.MaxPlayers);
         }
     }
 
@@ -68,9 +66,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 #if PC
             SceneManager.LoadScene("Server Team Select");
 #elif PHONE
-        PhotonNetwork.LoadLevel("Player Team Select");
+            PhotonNetwork.LoadLevel("Player Team Select");
 #endif
         }
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        //base.OnCreateRoomFailed(returnCode, message);
+        Debug.LogError("Failed to create room: " + message);
+
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)

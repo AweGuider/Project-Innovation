@@ -8,6 +8,10 @@ public class PlayerData : MonoBehaviour
     private string _role;
     private int _team;
 
+    [Header("Animation Related")]
+    [SerializeField]
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,5 +49,10 @@ public class PlayerData : MonoBehaviour
     public void SetTeam(int t)
     {
         _team = t;
+    }
+
+    public void SetWalking(bool b)
+    {
+        animator.SetBool("isWalking", b);
     }
 }

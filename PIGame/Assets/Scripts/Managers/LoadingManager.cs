@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,15 @@ public class LoadingManager : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         Debug.Log("Connected To Master");
 
+        // Check if the room is full before joining
+        if (PhotonNetwork.CountOfPlayers >= 20)
+        {
+            Debug.Log("The server is full, try again later.");
+            PhotonNetwork.Disconnect();
+            SceneManager.LoadScene("FullServerScene");
+            return;
+        }
+
         SceneManager.LoadScene("TestScene");
 
 //#if PC
@@ -30,5 +40,11 @@ public class LoadingManager : MonoBehaviourPunCallbacks
 //#elif PHONE
 //        SceneManager.LoadScene("Player Lobby");
 //#endif
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("Disconnected from the server: " + cause.ToString());
+        SceneManager.LoadScene("DisconnectScene");
     }
 }
