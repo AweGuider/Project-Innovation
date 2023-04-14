@@ -45,8 +45,6 @@ public class RoleButton : MonoBehaviourPunCallbacks
 
         _buttonProperties = new();
 
-        //_text.text = _role;
-
         // Update UI for all players in the room
         foreach (Player player in PhotonNetwork.PlayerList)
         {
@@ -58,13 +56,12 @@ public class RoleButton : MonoBehaviourPunCallbacks
             }
             else
             {
-                if (!IsUsed())
-                {
-                    SetText(_role);
-                    SetUsed(_used);
-                    PhotonNetwork.SetPlayerCustomProperties(_buttonProperties);
-                }
-
+                //if (!IsUsed())
+                //{
+                //    SetText(_role);
+                //    SetUsed(_used);
+                //    PhotonNetwork.SetPlayerCustomProperties(_buttonProperties);
+                //}
             }
         }
     }

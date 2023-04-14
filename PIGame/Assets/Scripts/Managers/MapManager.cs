@@ -21,25 +21,6 @@ public class MapManager : MonoBehaviourPunCallbacks
     void Start()
     {
         _players = new();
-        //Vector3 move = new(0, 0, 0);
-        //Vector3 outcome = UpdateSensors(move);
-        //Debug.Log($"Values tested: ({move.x}, {move.y}, {move.z}). X: {outcome.x}, Y: {outcome.y}\n");
-
-        //move = new(1, 0, 0);
-        //outcome = UpdateSensors(move);
-        //Debug.Log($"Values tested: ({move.x}, {move.y}, {move.z}). X: {outcome.x}, Y: {outcome.y}\n");
-
-        //move = new(0, 1, 0);
-        //outcome = UpdateSensors(move);
-        //Debug.Log($"Values tested: ({move.x}, {move.y}, {move.z}). X: {outcome.x}, Y: {outcome.y}\n");
-
-        //move = new(-1, 0, 0);
-        //outcome = UpdateSensors(move);
-        //Debug.Log($"Values tested: ({move.x}, {move.y}, {move.z}). X: {outcome.x}, Y: {outcome.y}\n");
-
-        //move = new(0, -1, 0);
-        //outcome = UpdateSensors(move);
-        //Debug.Log($"Values tested: ({move.x}, {move.y}, {move.z}). X: {outcome.x}, Y: {outcome.y}\n");
         //TestAngle();
     }
 
@@ -157,9 +138,6 @@ public class MapManager : MonoBehaviourPunCallbacks
         Debug.Log($"Move X: {move.x}, Z: {move.z}");
 
         p.transform.rotation = rotate;
-
-        // Don't send if dont want to update player on player side
-        //photonView.RPC("UpdatePosition", player, p.transform.position);
     }
 
     [PunRPC]
@@ -168,22 +146,25 @@ public class MapManager : MonoBehaviourPunCallbacks
         if (role == "Toy")
         {
             Vector3 pos = new(0, 1, 0);
+            string playerName = "";
 
             if (team == 1)
             {
                 pos = _team1SpawnPoint.transform.position;
+                playerName = "BunnyPlayer";
             }
-            else if (team == 2)
+            else
             {
                 pos = _team2SpawnPoint.transform.position;
+                playerName = "ChickenPlayer";
+
             }
 
-            //GameObject playerObject = Instantiate(playerPrefab, pos, Quaternion.identity);
-            GameObject playerObject = PhotonNetwork.Instantiate(_playerPrefab == null ? "Player" : _playerPrefab.name, pos, Quaternion.identity);
+            //GameObject playerObject = PhotonNetwork.Instantiate(_playerPrefab == null ? "Player" : _playerPrefab.name, pos, Quaternion.identity);
+            GameObject playerObject = PhotonNetwork.Instantiate(playerName, pos, Quaternion.identity);
             GameObject pPlayer = playerObject.transform.GetChild(0).gameObject;
             PhotonView playerView = playerObject.GetPhotonView();
             _players.Add(player.ActorNumber, pPlayer);
-            //_players.Add(globalId, pPlayer);
 
             Debug.LogError($"Spawned player ID: {playerView.ViewID}, Player's ActorNumber: {player.ActorNumber}");
             Debug.LogError($"Number of player's total: {_players.Count}");
@@ -196,29 +177,5 @@ public class MapManager : MonoBehaviourPunCallbacks
             photonView.RPC("SetPlayer", player);
             //photonView.RPC("AssignOwnership", player, playerView.ViewID);
         }
-
-
-
     }
-
-    //public override void OnJoinedRoom()
-    //{
-    //    base.OnJoinedRoom();
-    //    Debug.Log($"Joined the room: {PhotonNetwork.CurrentRoom.Name}");
-    //    PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(0, spawnRadius), 0, Random.Range(0, spawnRadius)), Quaternion.identity);
-    //}
-
-    //public void JoinTeam(int teamIndex)
-    //{
-    //    ExitGames.Client.Photon.Hashtable teamProp = new ExitGames.Client.Photon.Hashtable();
-    //    teamProp.Add("team", teamIndex);
-    //    PhotonNetwork.LocalPlayer.SetCustomProperties(teamProp);
-    //    int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-    //    teamIndices[actorNumber - 1] = teamIndex;
-    //    if (PhotonNetwork.CurrentRoom.PlayerCount == 4 && !isGameStarted)
-    //    {
-    //        isGameStarted = true;
-    //        photonView.RPC("StartGame", RpcTarget.All);
-    //    }
-    //}
 }

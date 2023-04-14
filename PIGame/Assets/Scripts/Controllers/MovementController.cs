@@ -46,7 +46,6 @@ public class MovementController : MonoBehaviourPunCallbacks
     [SerializeField]
     private Button _boostButton;
 
-
     private void Start()
     {
         // General
@@ -75,10 +74,8 @@ public class MovementController : MonoBehaviourPunCallbacks
 #endif
     }
 
-
     private void FixedUpdate()
     {
-
 #if PC
         if (Input.GetKeyDown(KeyCode.Space) && !_isBoosting)
         {
@@ -115,7 +112,14 @@ public class MovementController : MonoBehaviourPunCallbacks
         }
         moveDirection *= _speed * _speedBoost * Time.deltaTime;
 
-        photonView.RPC("UpdatePosition", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, moveDirection, rotationChange);
+        try
+        {
+            photonView.RPC("UpdatePosition", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, moveDirection, rotationChange);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Couldn't send updated position: {e.Message}");
+        }
     }
 
     private Vector3 UpdateKeyboard()
@@ -131,15 +135,14 @@ public class MovementController : MonoBehaviourPunCallbacks
         Vector3 acceleration = Input.acceleration;
         Vector3 gyroscope = Input.gyro.rotationRate;
 
-
         float xDeg = Mathf.Asin(acceleration.x) * Mathf.Rad2Deg;
         float yDeg = Mathf.Asin(acceleration.y) * Mathf.Rad2Deg;
 
         float xMag = CalculateMagnitude(xDeg);
         float zMag = CalculateMagnitude(yDeg);
 
-        //Vector3 move = new(xMag, 0, zMag);
-        Vector3 move = new(acceleration.x, 0, acceleration.y);
+        Vector3 move = new(xMag, 0, zMag);
+        //Vector3 move = new(acceleration.x, 0, acceleration.y);
 
         return move;
     }

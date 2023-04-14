@@ -62,7 +62,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     //#if PHONE
     public void SetNickname()
     {
-        if (nicknameInput.text.Length > 1)
+        if (nicknameInput.text.Length > 2)
         {
             PhotonNetwork.NickName = nicknameInput.text;
             Debug.Log($"Nickname is set to: {PhotonNetwork.NickName}");
@@ -75,7 +75,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.LogWarning($"Testing? {Testing()}");
         if (Testing() || AllPlayersReady())
         {
-            photonView.RPC("LoadGame", RpcTarget.MasterClient);
+            try
+            {
+                photonView.RPC("LoadGame", RpcTarget.MasterClient);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Couldn't load game map screen: {e.Message}");
+            }
         }
         Debug.LogWarning($"Global ready: {GetReadyPlayers()}");
         Debug.LogWarning($"Global - server: {PhotonNetwork.CurrentRoom.MaxPlayers - 1}");
@@ -109,7 +116,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         SceneManager.LoadScene("Game Map");
 
-        photonView.RPC("LoadPlayerGame", RpcTarget.Others);
+        try
+        {
+            photonView.RPC("LoadPlayerGame", RpcTarget.Others);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Couldn't load player screens: {e.Message}");
+        }
     }
 
     [PunRPC]
