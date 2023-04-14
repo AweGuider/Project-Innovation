@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviourPunCallbacks
 {
-    private static int globalId;
-    [SerializeField] private GameObject playerPrefab;
-    private Dictionary<int, PlayerData> _players;
+    [SerializeField]
+    private GameObject _playerPrefab;
+    private Dictionary<int, GameObject> _players;
 
     [SerializeField]
     private GameObject _team1SpawnPoint;
@@ -21,8 +21,44 @@ public class MapManager : MonoBehaviourPunCallbacks
     void Start()
     {
         _players = new();
-
         //TestAngle();
+    }
+
+    private Vector3 UpdateSensors(Vector3 acc)
+    {
+        // Receive input
+        Vector3 acceleration = acc;
+        Vector3 gyroscope = Input.gyro.rotationRate;
+
+
+        float xDeg = Mathf.Asin(acceleration.x) * Mathf.Rad2Deg;
+        float yDeg = Mathf.Asin(acceleration.y) * Mathf.Rad2Deg;
+
+        Debug.LogError($"Degrees X: {xDeg}, Y: {yDeg}");
+
+        float xMag = CalculateMagnitude(xDeg);
+        float zMag = CalculateMagnitude(yDeg);
+
+        Debug.LogError($"Magnitude X: {xMag}, Y: {zMag}");
+
+        //Vector3 move = new(xMag, 0, zMag);
+        Vector3 move = new(acceleration.x, 0, acceleration.y);
+
+        return move;
+    }
+
+    private float CalculateMagnitude(float angle)
+    {
+        float magnitude = 0;
+        if (angle < -20)
+        {
+            magnitude = Mathf.Clamp(angle, -90, -20) / 90;
+        }
+        else if (angle > 20)
+        {
+            magnitude = Mathf.Clamp(angle, 20, 90) / 90;
+        }
+        return magnitude;
     }
 
     private void TestAngle()
@@ -96,14 +132,12 @@ public class MapManager : MonoBehaviourPunCallbacks
     {
         Debug.LogError($"Updating position of Local Player's ActorNumber: {player.ActorNumber}");
 
-        PlayerData p = _players[player.ActorNumber];
+        GameObject p = _players[player.ActorNumber];
         p.GetComponent<Rigidbody>().AddForce(move, ForceMode.Impulse);
 
-        // TODO: Need to test
-        //p.transform.rotation = rotate;
+        Debug.Log($"Move X: {move.x}, Z: {move.z}");
 
-        // Don't send if dont want to update player on player side
-        //photonView.RPC("UpdatePosition", player, p.transform.position);
+        p.transform.rotation = rotate;
     }
 
     [PunRPC]
@@ -112,21 +146,25 @@ public class MapManager : MonoBehaviourPunCallbacks
         if (role == "Toy")
         {
             Vector3 pos = new(0, 1, 0);
+            string playerName = "";
 
             if (team == 1)
             {
                 pos = _team1SpawnPoint.transform.position;
+                playerName = "BunnyPlayer";
             }
-            else if (team == 2)
+            else
             {
                 pos = _team2SpawnPoint.transform.position;
+                playerName = "ChickenPlayer";
+
             }
-            //GameObject playerObject = Instantiate(playerPrefab, pos, Quaternion.identity);
-            GameObject playerObject = PhotonNetwork.Instantiate(playerPrefab.name, pos, Quaternion.identity);
-            PlayerData pPlayer = playerObject.GetComponent<PlayerData>();
+
+            //GameObject playerObject = PhotonNetwork.Instantiate(_playerPrefab == null ? "Player" : _playerPrefab.name, pos, Quaternion.identity);
+            GameObject playerObject = PhotonNetwork.Instantiate(playerName, pos, Quaternion.identity);
+            GameObject pPlayer = playerObject.transform.GetChild(0).gameObject;
             PhotonView playerView = playerObject.GetPhotonView();
             _players.Add(player.ActorNumber, pPlayer);
-            //_players.Add(globalId, pPlayer);
 
             Debug.LogError($"Spawned player ID: {playerView.ViewID}, Player's ActorNumber: {player.ActorNumber}");
             Debug.LogError($"Number of player's total: {_players.Count}");
@@ -135,34 +173,9 @@ public class MapManager : MonoBehaviourPunCallbacks
                 Debug.LogError($"Actor's {i} number: {_players.Keys.ToList()[i]}");
             }
 
-            //photonView.RPC("SpawnPlayer", player, pPlayer, globalId);
-            //globalId++;
             playerView.TransferOwnership(player);
+            photonView.RPC("SetPlayer", player);
             //photonView.RPC("AssignOwnership", player, playerView.ViewID);
         }
-
-
-
     }
-
-    //public override void OnJoinedRoom()
-    //{
-    //    base.OnJoinedRoom();
-    //    Debug.Log($"Joined the room: {PhotonNetwork.CurrentRoom.Name}");
-    //    PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(0, spawnRadius), 0, Random.Range(0, spawnRadius)), Quaternion.identity);
-    //}
-
-    //public void JoinTeam(int teamIndex)
-    //{
-    //    ExitGames.Client.Photon.Hashtable teamProp = new ExitGames.Client.Photon.Hashtable();
-    //    teamProp.Add("team", teamIndex);
-    //    PhotonNetwork.LocalPlayer.SetCustomProperties(teamProp);
-    //    int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-    //    teamIndices[actorNumber - 1] = teamIndex;
-    //    if (PhotonNetwork.CurrentRoom.PlayerCount == 4 && !isGameStarted)
-    //    {
-    //        isGameStarted = true;
-    //        photonView.RPC("StartGame", RpcTarget.All);
-    //    }
-    //}
 }

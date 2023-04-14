@@ -9,23 +9,25 @@ using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private TMP_InputField inputField;
-    [SerializeField] private Button inputButton;
+    [SerializeField]
+    private TMP_InputField _inputField;
+    [SerializeField]
+    private Button _inputButton;
 
-    [SerializeField] private Toggle serverToggle;
-    [SerializeField] private Toggle playerToggle;
+    [SerializeField]
+    private Toggle _serverToggle;
+    [SerializeField]
+    private Toggle _playerToggle;
 
     public void Start()
     {
-        inputButton.onClick.AddListener(OnButtonClick);
+        _inputButton.onClick.AddListener(OnButtonClick);
         PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
     {
         Debug.Log("Joined lobby");
-        //PhotonNetwork.JoinOrCreateRoom("TestRoom", new RoomOptions { MaxPlayers = 4 }, null);
-        //rm = GetComponent<RoomManager>();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -33,29 +35,29 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Debug.Log("Room list updated");
         foreach (RoomInfo room in roomList)
         {
-            Debug.Log(room.Name + " " + room.PlayerCount + "/" + room.MaxPlayers);
+            Debug.Log("Room name: " + room.Name + ". " + room.PlayerCount + "/" + room.MaxPlayers);
         }
     }
 
     public void OnButtonClick()
     {
-        PhotonNetwork.JoinOrCreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5 }, null);
-//#if PC
-//        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5 });
-//#elif PHONE
-//        PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
-//#endif
+        PhotonNetwork.JoinOrCreateRoom(_inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5, BroadcastPropsChangeToAll = true}, null);
+        //#if PC
+        //        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5, BroadcastPropsChangeToAll = true});
+        //#elif PHONE
+        //        PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
+        //#endif
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room: " + PhotonNetwork.CurrentRoom.Name);
 
-        if (serverToggle.isOn)
+        if (_serverToggle.isOn)
         {
             SceneManager.LoadScene("Server Team Select");
         }
-        else if (playerToggle.isOn)
+        else if (_playerToggle.isOn)
         {
             PhotonNetwork.LoadLevel("Player Team Select");
         }
@@ -64,9 +66,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 #if PC
             SceneManager.LoadScene("Server Team Select");
 #elif PHONE
-        PhotonNetwork.LoadLevel("Player Team Select");
+            PhotonNetwork.LoadLevel("Player Team Select");
 #endif
         }
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        //base.OnCreateRoomFailed(returnCode, message);
+        Debug.LogError("Failed to create room: " + message);
+
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
