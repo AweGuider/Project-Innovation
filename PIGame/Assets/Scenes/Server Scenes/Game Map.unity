@@ -3318,6 +3318,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813368963}
   m_CullTransparentMesh: 1
+--- !u!114 &1850420444 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 454551868466498171, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+  m_PrefabInstance: {fileID: 573355369081724050}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5ac92bc18f545cc84cd886ece82b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1855970722
 GameObject:
   m_ObjectHideFlags: 0
@@ -3876,6 +3887,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 112832950108176316, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+      propertyPath: speed
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 573355369882237828, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
       propertyPath: m_Name
       value: Maze_Map
@@ -3924,6 +3939,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5481952732680388492, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+      propertyPath: pathCreator
+      value: 
+      objectReference: {fileID: 1850420444}
+    - target: {fileID: 7021634737334514845, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+      propertyPath: pathCreator
+      value: 
+      objectReference: {fileID: 1850420444}
+    - target: {fileID: 8579440345670694067, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+      propertyPath: pathCreator
+      value: 
+      objectReference: {fileID: 1850420444}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
 --- !u!114 &573355369081724051 stripped
