@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &24772313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3132806850178964239, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+  m_PrefabInstance: {fileID: 573355369081724050}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbdbd90c6e74f545b5de18d7a07edd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &34246563
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +338,7 @@ GameObject:
   - component: {fileID: 40269586}
   - component: {fileID: 40269585}
   m_Layer: 5
-  m_Name: ButtonBlocks (16)
+  m_Name: CashRegister 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -398,8 +409,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 313946840}
-        m_TargetAssemblyTypeName: CashRegister2, Assembly-CSharp
+      - m_Target: {fileID: 699694427}
+        m_TargetAssemblyTypeName: CashRegister, Assembly-CSharp
         m_MethodName: PushOut
         m_Mode: 1
         m_Arguments:
@@ -461,7 +472,7 @@ GameObject:
   - component: {fileID: 46221431}
   - component: {fileID: 46221430}
   m_Layer: 5
-  m_Name: ButtonBlocks (18)
+  m_Name: CashRegister 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,7 +543,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1686361689}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CashRegister3, Assembly-CSharp
         m_MethodName: PushOut
         m_Mode: 1
@@ -1755,17 +1766,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281306421}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &313946840 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8572230465462151149, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-  m_PrefabInstance: {fileID: 573355369081724050}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4828c7bb8b9c97a4ba75b9ae003075f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &329550040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2658,7 +2658,7 @@ GameObject:
   - component: {fileID: 691430539}
   - component: {fileID: 691430538}
   m_Layer: 5
-  m_Name: ButtonBlocks (14)
+  m_Name: CashRegister 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2729,7 +2729,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 573355369081724051}
+      - m_Target: {fileID: 1931938011}
         m_TargetAssemblyTypeName: CashRegister, Assembly-CSharp
         m_MethodName: PushOut
         m_Mode: 1
@@ -2973,6 +2973,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699140071}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &699694427 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2436226991822191312, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+  m_PrefabInstance: {fileID: 573355369081724050}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbdbd90c6e74f545b5de18d7a07edd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -4046,7 +4057,7 @@ GameObject:
   - component: {fileID: 1212107909}
   - component: {fileID: 1212107908}
   m_Layer: 5
-  m_Name: ButtonBlocks (17)
+  m_Name: CashRegister 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4117,7 +4128,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 573355369081724055}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CashRegister3, Assembly-CSharp
         m_MethodName: PushOut
         m_Mode: 1
@@ -5061,17 +5072,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596773997}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1686361689 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4233840326185821580, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-  m_PrefabInstance: {fileID: 573355369081724050}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b368f4fd3d7147b458cff3c30c955f39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1792342733 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8919448674812432679, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
@@ -5828,7 +5828,7 @@ GameObject:
   - component: {fileID: 1916362361}
   - component: {fileID: 1916362360}
   m_Layer: 5
-  m_Name: ButtonBlocks (15)
+  m_Name: CashRegister 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5899,8 +5899,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1942863694}
-        m_TargetAssemblyTypeName: CashRegister2, Assembly-CSharp
+      - m_Target: {fileID: 24772313}
+        m_TargetAssemblyTypeName: CashRegister, Assembly-CSharp
         m_MethodName: PushOut
         m_Mode: 1
         m_Arguments:
@@ -5949,15 +5949,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916362358}
   m_CullTransparentMesh: 1
---- !u!114 &1942863694 stripped
+--- !u!114 &1931938011 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8904170468377794993, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8759351428076841125, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
   m_PrefabInstance: {fileID: 573355369081724050}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4828c7bb8b9c97a4ba75b9ae003075f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fbdbd90c6e74f545b5de18d7a07edd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1977036929
@@ -6455,19 +6455,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8572230465462151149, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5865086958592539851, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
---- !u!114 &573355369081724051 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5865086958592539851, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-  m_PrefabInstance: {fileID: 573355369081724050}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fbdbd90c6e74f545b5de18d7a07edd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &573355369081724052 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6895545588359674629, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
@@ -6499,16 +6493,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa5562ef319da34408180e3f8adc18b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &573355369081724055 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9197619177497817421, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-  m_PrefabInstance: {fileID: 573355369081724050}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b368f4fd3d7147b458cff3c30c955f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -2004,10 +2004,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Traps
       objectReference: {fileID: 0}
-    - target: {fileID: 4750152450876285524, guid: e4e7652c10247874bb3b0d2895ee66a0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -49.098
-      objectReference: {fileID: 0}
     - target: {fileID: 4820128632171146309, guid: e4e7652c10247874bb3b0d2895ee66a0, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -2052,7 +2048,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 255778131876672838, guid: e4e7652c10247874bb3b0d2895ee66a0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e4e7652c10247874bb3b0d2895ee66a0, type: 3}
 --- !u!4 &4249650330024591538 stripped
 Transform:

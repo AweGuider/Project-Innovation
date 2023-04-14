@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6827495173315957678}
   - component: {fileID: 807239737859982895}
   - component: {fileID: 1391330118629698733}
-  - component: {fileID: 30783634015262683}
+  - component: {fileID: 6775362100814699590}
   m_Layer: 0
   m_Name: drawer
   m_TagString: Untagged
@@ -115,7 +115,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &30783634015262683
+--- !u!114 &6775362100814699590
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,11 +124,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 937424304802959272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b368f4fd3d7147b458cff3c30c955f39, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fbdbd90c6e74f545b5de18d7a07edd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0
+  move: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
+  left: 0
+  right: 1
+  up: 0
+  down: 0
 --- !u!1 &5581263625056809615
 GameObject:
   m_ObjectHideFlags: 0
