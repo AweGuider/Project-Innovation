@@ -2204,6 +2204,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 573355369882237829}
     m_Modifications:
     - target: {fileID: 646586110427126765, guid: 73eed151f66e2664e86398c5f4ae54f4, type: 3}
+      propertyPath: padding
+      value: 166.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 646586110427126765, guid: 73eed151f66e2664e86398c5f4ae54f4, type: 3}
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 454551868466498171}
@@ -2211,6 +2215,10 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 454551868466498171}
+    - target: {fileID: 2204708533804669891, guid: 73eed151f66e2664e86398c5f4ae54f4, type: 3}
+      propertyPath: padding
+      value: 163.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2204708533804669891, guid: 73eed151f66e2664e86398c5f4ae54f4, type: 3}
       propertyPath: pathCreator
       value: 
@@ -2272,6 +2280,10 @@ PrefabInstance:
       value: NewTrain 2.0
       objectReference: {fileID: 0}
     - target: {fileID: 3745490597558587602, guid: 73eed151f66e2664e86398c5f4ae54f4, type: 3}
+      propertyPath: padding
+      value: 169.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3745490597558587602, guid: 73eed151f66e2664e86398c5f4ae54f4, type: 3}
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 454551868466498171}
@@ -2279,6 +2291,10 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 454551868466498171}
+    - target: {fileID: 9113515251651236066, guid: 73eed151f66e2664e86398c5f4ae54f4, type: 3}
+      propertyPath: padding
+      value: 160
+      objectReference: {fileID: 0}
     - target: {fileID: 9113515251651236066, guid: 73eed151f66e2664e86398c5f4ae54f4, type: 3}
       propertyPath: pathCreator
       value: 
