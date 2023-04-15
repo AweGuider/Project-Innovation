@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Tracks
   - Walls
+  - CashRegister
+  - FallingBlocks
+  - Doors
+  - Train
   layers:
   - Default
   - TransparentFX

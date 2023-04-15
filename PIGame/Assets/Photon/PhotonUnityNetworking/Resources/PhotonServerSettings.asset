@@ -48,6 +48,10 @@ MonoBehaviour:
   - UpdatePosition
   - LoadPlayerGame
   - SetPlayer
+  - ActivateDoor
+  - ActivateCR
+  - ActivateFB
+  - ActivateTT
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
