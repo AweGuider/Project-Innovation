@@ -10,7 +10,9 @@ public class LoadingManager : MonoBehaviourPunCallbacks
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+#if PC
         AudioManager.instance.PlaySound(AudioManager.AudioType.Music, 0);
+#endif
     }
 
     private void Update()
