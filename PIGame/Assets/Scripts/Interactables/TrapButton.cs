@@ -23,7 +23,8 @@ public class TrapButton : MonoBehaviour
     {
         Door = 1,
         FB = 2,
-        CR = 3
+        CR = 3,
+        TT
     }
 
     // Start is called before the first frame update
@@ -45,15 +46,28 @@ public class TrapButton : MonoBehaviour
 
     private void OnClick()
     {
-        if (!_selected)
+        switch (_type)
         {
-            _selected = true;
-            _trapController.ActivateTrap(_type, _id);
+            case TrapType.Door:
+            case TrapType.FB:
+            case TrapType.CR:
+                if (!_selected)
+                {
+                    _selected = true;
+                    _trapController.ActivateTrap(_type, _id);
+                }
+                else if (_selected && !_activated)
+                {
+                    StartCoroutine(TrapCooldown());
+                }
+                break;
+            case TrapType.TT:
+                // TODO: Make a cooldown for train activation/deactivation
+                _activated = !_activated;
+                _trapController.ActivateTrap(_type, _activated);
+                break;
         }
-        else if (_selected && !_activated)
-        {
-            StartCoroutine(TrapCooldown());
-        }
+
     }
 
     IEnumerator TrapCooldown()

@@ -28,6 +28,10 @@ public class TrapController : MonoBehaviourPunCallbacks
     [SerializeField]
     private List<GameObject> _cashRegisterTraps;
 
+    [Header("Train Trap Related")]
+    [SerializeField]
+    private GameObject _trainTrap;
+
     private void Start()
     {
         _doorTraps = new();
@@ -72,6 +76,9 @@ public class TrapController : MonoBehaviourPunCallbacks
                                 return go;
                             })
                             .ToList();
+
+        _trainTrap = GameObject.FindGameObjectWithTag("Train");
+        _trainTrap.GetComponent<TrapButton>().SetTrapController(this);
     }
 
     private void FixedUpdate()
@@ -86,6 +93,19 @@ public class TrapController : MonoBehaviourPunCallbacks
         {
             Debug.Log($"Method to be called: 'Activate{type}', ID: {id}");
             photonView.RPC($"Activate{type}", RpcTarget.MasterClient, id);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Couldn't send activate trap: {e.Message}");
+        }
+    }
+
+    public void ActivateTrap(TrapButton.TrapType type, bool b)
+    {
+        try
+        {
+            Debug.Log($"Method to be called: 'Activate{type}', Bool: {b}");
+            photonView.RPC($"Activate{type}", RpcTarget.MasterClient, b);
         }
         catch (Exception e)
         {

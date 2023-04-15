@@ -18,17 +18,17 @@ public class TrapManager : MonoBehaviour
     [Header("Cash Register Trap Related")]
     [SerializeField]
     private List<GameObject> _cashRegisterTraps;
+
+    [Header("Train Trap Related")]
+    [SerializeField]
+    private List<GameObject> _trainTraps;
     // Start is called before the first frame update
     void Start()
     {
         _doorTraps = new List<GameObject>();
         _fallingBlockTraps = new List<GameObject>();
         _cashRegisterTraps = new List<GameObject>();
-
-        //foreach (Transform cr in GameObject.FindGameObjectWithTag("CashRegister").transform)
-        //{
-        //    _cashRegisterTraps.Add(cr.gameObject);
-        //}
+        _trainTraps = new List<GameObject>();
 
         _doorTraps = GameObject.FindGameObjectWithTag("Doors")
                                     .transform
@@ -53,6 +53,7 @@ public class TrapManager : MonoBehaviour
                                         return go;
                                     })
                                     .ToList();
+
         _cashRegisterTraps = GameObject.FindGameObjectWithTag("CashRegister")
                                     .transform
                                     .Cast<Transform>()
@@ -65,13 +66,19 @@ public class TrapManager : MonoBehaviour
                                     })
                                     .ToList();
 
+        _trainTraps = GameObject.FindGameObjectsWithTag("Train")
+                                    .Select((transform, index) =>
+                                    {
+                                        GameObject go = transform.gameObject;
+                                        //Trap t = go.GetComponent<Trap>();
+                                        //t.SetID(index);
+                                        return go;
+                                    })
+                                    .ToList();
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     [PunRPC]
     public void ActivateDoor(int id)
@@ -83,13 +90,20 @@ public class TrapManager : MonoBehaviour
     public void ActivateFB(int id)
     {
         _fallingBlockTraps[id].GetComponent<FBTrap>().ActivateTrap();
-
     }
 
     [PunRPC]
     public void ActivateCR(int id)
     {
         _cashRegisterTraps[id].GetComponent<CRTrap>().ActivateTrap();
+    }
 
+    [PunRPC]
+    public void ActivateTT(bool b)
+    {
+        foreach (GameObject t in _trainTraps)
+        {
+            t.GetComponent<Train>().SetStopped(b);
+        }
     }
 }

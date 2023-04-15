@@ -9,6 +9,7 @@ TagManager:
   - CashRegister
   - FallingBlocks
   - Doors
+  - Train
   layers:
   - Default
   - TransparentFX

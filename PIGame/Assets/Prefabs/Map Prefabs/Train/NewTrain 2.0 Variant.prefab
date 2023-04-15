@@ -88,7 +88,6 @@ PrefabInstance:
       value: NewTrain 2.0 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 3859059739728210111, guid: cfbb851832bb7964c8d8b0ba39f6779d, type: 3}
     - {fileID: 4203027786419034415, guid: cfbb851832bb7964c8d8b0ba39f6779d, type: 3}
     - {fileID: 3232693027605854101, guid: cfbb851832bb7964c8d8b0ba39f6779d, type: 3}
     - {fileID: 987220959311591728, guid: cfbb851832bb7964c8d8b0ba39f6779d, type: 3}
@@ -156,23 +155,3 @@ MonoBehaviour:
   speed: -10
   padding: 156.5
   height: 1.25
---- !u!1 &4535147269936283380 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3327417658088422167, guid: cfbb851832bb7964c8d8b0ba39f6779d, type: 3}
-  m_PrefabInstance: {fileID: 1215207545083954659}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &9113515251651236066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4535147269936283380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eccee04d6f06a804fb9c37121ae22fb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathCreator: {fileID: 0}
-  speed: -10
-  padding: 150
