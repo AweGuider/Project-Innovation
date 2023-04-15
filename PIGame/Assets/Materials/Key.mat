@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wall Material
+  m_Name: Key
   m_Shader: {fileID: -6465566751694194690, guid: dc8cac5478781a3469c1e5b4770a0470, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -86,9 +86,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Brightness_Rim: 2
-    - Rim_Power: 5
-    - Toon_Ramp_Offset: 0.5
+    - Brightness_Rim: 0.34
+    - Rim_Power: 0.75
+    - Toon_Ramp_Offset: 0.73
     - Toon_Ramp_Smoothness: 0
     - _AlphaClip: 0
     - _Ambient: 0
@@ -102,12 +102,13 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _GlossMapScale: 0
-    - _Glossiness: 0
-    - _GlossyReflections: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
     - _Metallic: 0
+    - _Mode: 0
     - _OcclusionStrength: 1
-    - _Parallax: 0.005
+    - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -117,16 +118,17 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _Toon_Ramp_Offset_Point: 0.5
+    - _UVSec: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - Toon_Ramp_Tint: {r: 0.49056596, g: 0.49056596, b: 0.49056596, a: 1}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.7075472, g: 0.65014243, b: 0.6616234, a: 1}
+    - _BaseColor: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
+    - _Color: {r: 0.754717, g: 0.58125335, b: 0.3944464, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &4455617297591900792
+--- !u!114 &4637524240962996073
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
