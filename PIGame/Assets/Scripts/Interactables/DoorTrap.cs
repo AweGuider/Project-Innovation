@@ -19,18 +19,18 @@ public class DoorTrap : Trap
 
     void Open_Door()
     {
-        if(anim.GetBool("Open") == false)
+   
+    }
+
+    public override void ActivateTrap()
+    {
+        if (anim.GetBool("Open") == false)
         {
             anim.SetBool("Open", true);
         }
         else
         {
             anim.SetBool("Open", false);
-        }      
-    }
-
-    public override void ActivateTrap()
-    {
-        throw new System.NotImplementedException();
+        }
     }
 }

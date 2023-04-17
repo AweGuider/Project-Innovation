@@ -38,7 +38,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             }
             try
             {
-                photonView.RequestOwnership();
+                //photonView.RequestOwnership();
 
                 photonView.RPC("SpawnPlayer", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, _role, _team);
             }
@@ -52,6 +52,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             try
             {
+
                 if (_trapController == null) _trapController = GetComponent<TrapController>();
             }
             catch (Exception e)
@@ -59,7 +60,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
                 Debug.LogError($"Couldn't find Trap Controller: {e.Message}");
             }
         }
-
+        photonView.RequestOwnership();
     }
 
     // Update is called once per frame

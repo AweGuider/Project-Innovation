@@ -178,9 +178,15 @@ public class MovementController : MonoBehaviourPunCallbacks
     public void SetPlayer()
     {
         Debug.Log($"GOT HERE!");
+        // TODO: Because of this line same character on both player screens
         _playerObject = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
         _playerRb = _playerObject.GetComponent<Rigidbody>();
         _player = _playerObject.GetComponent<PlayerData>();
+
+        if (_player.GetRole() == "Kid")
+        {
+            _playerObject.SetActive(false);
+        }
     }
 
     [PunRPC]

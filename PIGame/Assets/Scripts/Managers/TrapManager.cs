@@ -83,24 +83,28 @@ public class TrapManager : MonoBehaviour
     [PunRPC]
     public void ActivateDoor(int id)
     {
+        Debug.LogError($"ACTIVATING Door: ID {id}");
         _doorTraps[id].GetComponent<DoorTrap>().ActivateTrap();
     }
 
     [PunRPC]
     public void ActivateFB(int id)
     {
+        Debug.LogError($"ACTIVATING Falling: ID {id}");
         _fallingBlockTraps[id].GetComponent<FBTrap>().ActivateTrap();
     }
 
     [PunRPC]
     public void ActivateCR(int id)
     {
+        Debug.LogError($"ACTIVATING Cash: ID {id}");
         _cashRegisterTraps[id].GetComponent<CRTrap>().ActivateTrap();
     }
 
     [PunRPC]
     public void ActivateTT(bool b)
     {
+        Debug.LogError($"ACTIVATING Train: Bool {b}");
         foreach (GameObject t in _trainTraps)
         {
             t.GetComponent<Train>().SetStopped(b);
