@@ -233,14 +233,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34246563}
-  m_LocalRotation: {x: 0.42261517, y: 0.0034562903, z: 0.001611696, w: 0.9063012}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
   m_LocalPosition: {x: 159.04, y: 81.1, z: -69.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 49.998, y: 0.68, z: 0.521}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!1 &40269583
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,12 +968,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8458568295297710270, guid: b9474786e5ace9844ab4e2bd886d4715, type: 3}
-      propertyPath: sceneViewId
-      value: 1
+    - target: {fileID: 2725470584948021233, guid: b9474786e5ace9844ab4e2bd886d4715, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556191872081193441, guid: b9474786e5ace9844ab4e2bd886d4715, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.6
       objectReference: {fileID: 0}
     - target: {fileID: 8458568295297710270, guid: b9474786e5ace9844ab4e2bd886d4715, type: 3}
-      propertyPath: OwnershipTransfer
+      propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2836,9 +2840,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b5df4735192845740bd11076dc9cdc99, type: 2}
-  - {fileID: 2100000, guid: c1d8d882244c5344fa86a8fd23246f81, type: 2}
-  - {fileID: 2100000, guid: c1d8d882244c5344fa86a8fd23246f81, type: 2}
+  - {fileID: 2100000, guid: 87d3ffd46b2fa2243aa78609db1bbf02, type: 2}
+  - {fileID: 2100000, guid: 87d3ffd46b2fa2243aa78609db1bbf02, type: 2}
+  - {fileID: 2100000, guid: 87d3ffd46b2fa2243aa78609db1bbf02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4011,10 +4015,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 279767912588655312, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 573355369882237828, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
       propertyPath: m_Name
       value: Maze_Map

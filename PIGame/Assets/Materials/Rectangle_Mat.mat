@@ -99,10 +99,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Brightness_Rim: 0.23
-    - Rim_Power: 1.39
-    - Toon_Ramp_Offset: 0.5
-    - Toon_Ramp_Smoothness: 0.305
+    - Brightness_Rim: 0.4
+    - Rim_Power: 0.6
+    - Toon_Ramp_Offset: 0.3
+    - Toon_Ramp_Smoothness: 0.5
     - _AlphaClip: 0
     - _Ambient: 0
     - _Blend: 0
