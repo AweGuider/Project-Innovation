@@ -10,11 +10,11 @@ public class DoorTrap : Trap
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        /*if (Input.GetKeyDown(KeyCode.F))
         {
             Open_Door();
             Debug.Log("F");
-        }
+        }*/
     }
 
     void Open_Door()
