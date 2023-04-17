@@ -4433,6 +4433,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 279767912588655312, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 573355369882237828, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
       propertyPath: m_Name
       value: Maze_Map

@@ -25,7 +25,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         _role = PlayerPrefs.GetString("Role");
         _team = PlayerPrefs.GetInt("Team");
 
-        //_role = "Kid";
         if (_role == "Toy")
         {
             try
@@ -38,7 +37,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             }
             try
             {
-                //photonView.RequestOwnership();
+                photonView.RequestOwnership();
 
                 photonView.RPC("SpawnPlayer", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, _role, _team);
             }
@@ -60,7 +59,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
                 Debug.LogError($"Couldn't find Trap Controller: {e.Message}");
             }
         }
-        photonView.RequestOwnership();
     }
 
     // Update is called once per frame
