@@ -49,7 +49,7 @@ public class MovementController : MonoBehaviourPunCallbacks
     private void Start()
     {
         // General
-        _speed = 5f;
+        _speed = 10f;
         _speedBoost = 1f;
         _speedBoostMax = 1.5f;
         _boostDuration = 3f;
