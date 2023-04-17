@@ -510,17 +510,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 88380870717682818, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
-      propertyPath: m_Maskable
-      value: 0
+    - target: {fileID: 89798005199216216, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 5034896037370578898, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -733
+    - target: {fileID: 89798005199216216, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 5034896037370578898, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -437
+    - target: {fileID: 89798005199216216, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5335805903832048603, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
       propertyPath: m_Pivot.x
@@ -610,21 +610,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kid Screen
       objectReference: {fileID: 0}
-    - target: {fileID: 5335805903832048607, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5335805904070117749, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
-      propertyPath: m_Texture
+    - target: {fileID: 7749902926135065528, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2800000, guid: 59426d539349ad644bfb71365e9c5cbe, type: 3}
-    - target: {fileID: 5335805904070117751, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5438555664600466824, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
-      propertyPath: m_Maskable
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 61831e30c0e76c74b897d87bcf63407a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
