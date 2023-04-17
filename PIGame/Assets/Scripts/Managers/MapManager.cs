@@ -21,7 +21,7 @@ public class MapManager : MonoBehaviourPunCallbacks
     void Start()
     {
         _players = new();
-        AudioManager.instance.PlaySound(AudioManager.AudioType.Music, 0);
+        //AudioManager.instance.PlaySound(AudioManager.AudioType.Music, 0);
         //TestAngle();
     }
 

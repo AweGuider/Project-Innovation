@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicClips:
-  - {fileID: 8300000, guid: cb996ce4f7dafde46be3b91240d9aa86, type: 3}
+  - {fileID: 8300000, guid: 28c5c7e1051166641bc0f209ff918eb0, type: 3}
   soundClips:
   - {fileID: 8300000, guid: 597d7e42177a8b64dbda376a1b68feb6, type: 3}
   - {fileID: 8300000, guid: c7c186b52c1fc284fad198c4a6833c5b, type: 3}

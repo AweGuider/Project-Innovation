@@ -8,15 +8,21 @@ using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private Button serverButton;
-    [SerializeField] private Button playerButton;
+    [SerializeField] private Button _serverButton;
+    [SerializeField] private Button _playerButton;
+
+    [SerializeField] private Button _playButton;
+    [SerializeField] private Button _quitButton;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        serverButton.onClick.AddListener(StartMainGame);
-        playerButton.onClick.AddListener(StartPlayerGame);
+        _serverButton.onClick.AddListener(StartMainGame);
+        _playerButton.onClick.AddListener(StartPlayerGame);
+
+        _playButton.onClick.AddListener(OnPlayClicked);
+        _quitButton.onClick.AddListener(OnQuitClicked);
     }
 
     // Update is called once per frame
@@ -27,14 +33,28 @@ public class SelectManager : MonoBehaviourPunCallbacks
 
     private void StartMainGame()
     {
-        PhotonNetwork.LoadLevel("Server Lobby");
-        //SceneManager.LoadScene("Server Lobby");
+        SceneManager.LoadScene("Server Lobby");
     }
 
     private void StartPlayerGame()
     {
-        PhotonNetwork.LoadLevel("Player Lobby");
+        SceneManager.LoadScene("Player Lobby");
+    }
 
-        //SceneManager.LoadScene("Player Lobby");
+    private void OnPlayClicked()
+    {
+#if PC
+        SceneManager.LoadScene("Server Lobby");
+
+#elif PHONE
+        SceneManager.LoadScene("Player Lobby");
+
+#endif
+    }
+
+    private void OnQuitClicked()
+    {
+        PhotonNetwork.Disconnect();
+        Application.Quit();
     }
 }

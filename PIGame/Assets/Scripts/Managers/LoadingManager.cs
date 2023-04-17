@@ -11,7 +11,7 @@ public class LoadingManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.ConnectUsingSettings();
 #if PC
-        AudioManager.instance.PlaySound(AudioManager.AudioType.Music, 0);
+        AudioManager.instance.PlaySound(AudioManager.AudioType.Music, 0, true);
 #endif
     }
 
@@ -35,13 +35,7 @@ public class LoadingManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        SceneManager.LoadScene("TestScene");
-
-//#if PC
-//        SceneManager.LoadScene("Server Lobby");
-//#elif PHONE
-//        SceneManager.LoadScene("Player Lobby");
-//#endif
+        SceneManager.LoadScene("StartScene");
     }
 
     public override void OnDisconnected(DisconnectCause cause)
