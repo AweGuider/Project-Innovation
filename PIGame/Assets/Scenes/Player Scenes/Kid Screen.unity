@@ -606,6 +606,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5335805903832048605, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5335805903832048605, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5335805903832048605, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 5335805903832048605, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 5335805903832048607, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
       propertyPath: m_Name
       value: Kid Screen
