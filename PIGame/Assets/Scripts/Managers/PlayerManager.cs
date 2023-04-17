@@ -22,10 +22,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        //_role = PlayerPrefs.GetString("Role");
+        _role = PlayerPrefs.GetString("Role");
         _team = PlayerPrefs.GetInt("Team");
 
-        _role = "Kid";
+        //_role = "Kid";
         if (_role == "Toy")
         {
             try

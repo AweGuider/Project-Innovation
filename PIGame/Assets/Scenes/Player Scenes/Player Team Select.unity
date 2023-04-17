@@ -545,6 +545,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a05d8a8c96346047adff1cc453de835, type: 3}
+--- !u!114 &1982681566 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5375309709594715560, guid: 9a05d8a8c96346047adff1cc453de835, type: 3}
+  m_PrefabInstance: {fileID: 1982681565}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f5980da9f4565f4e8680931c57d5e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2113470457433534878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -639,6 +650,22 @@ PrefabInstance:
     - target: {fileID: 2113470456222859234, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2113470456832087947, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1982681566}
+    - target: {fileID: 2113470456832087947, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetNickname
+      objectReference: {fileID: 0}
+    - target: {fileID: 2113470456832087947, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: RoomManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2113470456832087947, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2113470457094194252, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
       propertyPath: m_IsActive

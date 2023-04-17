@@ -114,7 +114,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void LoadGame()
     {
-        SceneManager.LoadScene("Game Map");
 
         try
         {
@@ -124,6 +123,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             Debug.LogError($"Couldn't load player screens: {e.Message}");
         }
+
+        SceneManager.LoadScene("Game Map");
+
     }
 
     [PunRPC]

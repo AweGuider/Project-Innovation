@@ -488,6 +488,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3195592042597576900, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 254.0436
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195592042597576900, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 81.2342
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195592042597576900, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -44.0981
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195592042597576900, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -286.9505
+      objectReference: {fileID: 0}
+    - target: {fileID: 7443402716532309808, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 252.3436
+      objectReference: {fileID: 0}
+    - target: {fileID: 7443402716532309808, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 86.3343
+      objectReference: {fileID: 0}
+    - target: {fileID: 7443402716532309808, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -40.75859
+      objectReference: {fileID: 0}
+    - target: {fileID: 7443402716532309808, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -96.03434
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199311246631097153, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -494
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199311246631097153, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -134
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199311246653596004, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -494
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199311246653596004, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -34
+      objectReference: {fileID: 0}
     - target: {fileID: 8199311248159154755, guid: 31ecdb411e2818a4e85230767c337df0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
