@@ -34,8 +34,8 @@ public class FBTrap : Trap
             block.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             blocksToFall.Add(block.gameObject);
             blocksTransforms.Add(new Vector3(block.position.x, block.position.y, block.position.z), new Quaternion(block.rotation.x, block.rotation.y, block.rotation.z, block.rotation.w));
-            Debug.Log($"Starting position of a block: ({block.position.x}, {block.position.y}, {block.position.z})");
-            Debug.Log($"Starting rotation of a block: ({block.rotation.x}, {block.rotation.y}, {block.rotation.z})");
+            //Debug.Log($"Starting position of a block: ({block.position.x}, {block.position.y}, {block.position.z})");
+            //Debug.Log($"Starting rotation of a block: ({block.rotation.x}, {block.rotation.y}, {block.rotation.z})");
         }
     }
 

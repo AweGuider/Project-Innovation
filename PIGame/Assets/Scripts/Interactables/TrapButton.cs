@@ -12,8 +12,11 @@ public class TrapButton : MonoBehaviour
     private bool _selected;
     [SerializeField]
     private bool _activated;
+
     [SerializeField]
     private float _cooldown;
+    [SerializeField]
+    protected static bool _isCooldown;
 
     [SerializeField]
     private TrapType _type;
@@ -46,6 +49,7 @@ public class TrapButton : MonoBehaviour
 
     private void OnClick()
     {
+        if (_isCooldown) return;
         switch (_type)
         {
             case TrapType.Door:
@@ -67,15 +71,16 @@ public class TrapButton : MonoBehaviour
                 _trapController.ActivateTrap(_type, _activated);
                 break;
         }
-
     }
 
     IEnumerator TrapCooldown()
     {
         _activated = true;
         _trapController.ActivateTrap(_type, _id);
+        _isCooldown = true;
         yield return new WaitForSeconds(_cooldown);
         _selected = false;
         _activated = false;
+        _isCooldown = false;
     }
 }

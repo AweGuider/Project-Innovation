@@ -49,7 +49,7 @@ public class MovementController : MonoBehaviourPunCallbacks
     private void Start()
     {
         // General
-        _speed = 5f;
+        _speed = 10f;
         _speedBoost = 1f;
         _speedBoostMax = 1.5f;
         _boostDuration = 3f;
@@ -178,9 +178,15 @@ public class MovementController : MonoBehaviourPunCallbacks
     public void SetPlayer()
     {
         Debug.Log($"GOT HERE!");
+        // TODO: Because of this line same character on both player screens
         _playerObject = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
         _playerRb = _playerObject.GetComponent<Rigidbody>();
         _player = _playerObject.GetComponent<PlayerData>();
+
+        if (_player.GetRole() == "Kid")
+        {
+            _playerObject.SetActive(false);
+        }
     }
 
     [PunRPC]

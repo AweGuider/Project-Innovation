@@ -22,10 +22,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        //_role = PlayerPrefs.GetString("Role");
+        _role = PlayerPrefs.GetString("Role");
         _team = PlayerPrefs.GetInt("Team");
 
-        _role = "Kid";
         if (_role == "Toy")
         {
             try
@@ -52,6 +51,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             try
             {
+
                 if (_trapController == null) _trapController = GetComponent<TrapController>();
             }
             catch (Exception e)
@@ -59,7 +59,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
                 Debug.LogError($"Couldn't find Trap Controller: {e.Message}");
             }
         }
-
     }
 
     // Update is called once per frame

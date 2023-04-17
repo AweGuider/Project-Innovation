@@ -45,7 +45,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2911822611299061106}
-  - component: {fileID: 9026489066536141646}
   - component: {fileID: 8292423760423961151}
   m_Layer: 0
   m_Name: Falling_Blocks_4
@@ -71,21 +70,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9026489066536141646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7335850634703547168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa5562ef319da34408180e3f8adc18b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallingBlock: {fileID: 0}
-  blocksToFall: []
-  fell: 0
 --- !u!114 &8292423760423961151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +84,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 0
   triggered: 0
+  fallingBlock: {fileID: 0}
+  blocksToFall: []
+  fell: 0
 --- !u!1001 &1879752312980329704
 PrefabInstance:
   m_ObjectHideFlags: 0

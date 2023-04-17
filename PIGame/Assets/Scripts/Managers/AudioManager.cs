@@ -50,7 +50,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void PlaySound(AudioType type, int index)
+    public void PlaySound(AudioType type, int index, bool loop = false)
     {
         AudioClip[] clips = null;
 
@@ -102,6 +102,7 @@ public class AudioManager : MonoBehaviour
         }
 
         // Play the audio clip
+        audioSource.loop = loop;
         audioSource.Play();
     }
 

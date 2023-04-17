@@ -67,7 +67,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 0
@@ -88,6 +88,7 @@ MonoBehaviour:
   _doorTraps: []
   _fallingBlockTraps: []
   _cashRegisterTraps: []
+  _trainTraps: []
 --- !u!1001 &2431746449569818342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,15 +110,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7828597087752343303, guid: c9bbc23fe71d94743aa5180d995cf946, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100
+      value: 106.88
       objectReference: {fileID: 0}
     - target: {fileID: 7828597087752343303, guid: c9bbc23fe71d94743aa5180d995cf946, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12
+      value: 13.5
       objectReference: {fileID: 0}
     - target: {fileID: 7828597087752343303, guid: c9bbc23fe71d94743aa5180d995cf946, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13
+      value: 7.35
       objectReference: {fileID: 0}
     - target: {fileID: 7828597087752343303, guid: c9bbc23fe71d94743aa5180d995cf946, type: 3}
       propertyPath: m_LocalRotation.w
@@ -180,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1766597569118973452, guid: 0cd112a6a45a046419781c1f01975c27, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 215
+      value: 212.37
       objectReference: {fileID: 0}
     - target: {fileID: 1766597569118973452, guid: 0cd112a6a45a046419781c1f01975c27, type: 3}
       propertyPath: m_LocalPosition.y
@@ -188,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1766597569118973452, guid: 0cd112a6a45a046419781c1f01975c27, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13
+      value: 9.81
       objectReference: {fileID: 0}
     - target: {fileID: 1766597569118973452, guid: 0cd112a6a45a046419781c1f01975c27, type: 3}
       propertyPath: m_LocalRotation.w

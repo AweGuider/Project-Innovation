@@ -9,6 +9,7 @@ public abstract class Trap : MonoBehaviourPunCallbacks
     protected int _id;
     public bool triggered = false;
 
+
     private void Update()
     {
         //if (photonView.IsMine)
