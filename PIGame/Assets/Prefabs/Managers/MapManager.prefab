@@ -67,7 +67,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 0
@@ -114,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7828597087752343303, guid: c9bbc23fe71d94743aa5180d995cf946, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14
+      value: 13.5
       objectReference: {fileID: 0}
     - target: {fileID: 7828597087752343303, guid: c9bbc23fe71d94743aa5180d995cf946, type: 3}
       propertyPath: m_LocalPosition.z
@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1766597569118973452, guid: 0cd112a6a45a046419781c1f01975c27, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1766597569118973452, guid: 0cd112a6a45a046419781c1f01975c27, type: 3}
       propertyPath: m_LocalPosition.z
