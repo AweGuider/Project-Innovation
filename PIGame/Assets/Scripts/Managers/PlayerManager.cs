@@ -25,7 +25,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         _role = PlayerPrefs.GetString("Role");
         _team = PlayerPrefs.GetInt("Team");
 
-        //_role = "Kid";
         if (_role == "Toy")
         {
             try

@@ -514,6 +514,14 @@ PrefabInstance:
       propertyPath: m_Maskable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5034896037370578898, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -733
+      objectReference: {fileID: 0}
+    - target: {fileID: 5034896037370578898, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -437
+      objectReference: {fileID: 0}
     - target: {fileID: 5335805903832048603, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -609,7 +617,7 @@ PrefabInstance:
     - target: {fileID: 5335805904070117749, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
       propertyPath: m_Texture
       value: 
-      objectReference: {fileID: 2800000, guid: 8c78b3c4f87ba8648858cc4e5824d88d, type: 3}
+      objectReference: {fileID: 2800000, guid: 59426d539349ad644bfb71365e9c5cbe, type: 3}
     - target: {fileID: 5335805904070117751, guid: 1f78e4e2546b6d2499ea5582121a99af, type: 3}
       propertyPath: m_IsActive
       value: 1
