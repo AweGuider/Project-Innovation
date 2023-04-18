@@ -4015,30 +4015,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 72116574, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 708417542, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 980145868, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 999867316, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1787243325, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2041884813, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 573355369882237828, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
       propertyPath: m_Name
       value: Maze_Map
@@ -4086,62 +4062,6 @@ PrefabInstance:
     - target: {fileID: 573355369882237829, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1161295511892619554, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 2120158583749164267, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2578660416915461791, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: _team
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2578660417526305596, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: _team
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2578660417678464365, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: _team
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2578660418396753192, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: _team
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2787970939491671360, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3401740756164629066, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_Name
-      value: Team 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3663676386633177680, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: _team
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4098966394762454543, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4888761712085219436, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 5418047723444925852, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_Name
-      value: Team 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6707288171770089546, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6785134687927147108, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
-      propertyPath: m_RootOrder
-      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45c43cc182bfc4c4f990634c804a7f5d, type: 3}
