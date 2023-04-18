@@ -10,6 +10,15 @@ using UnityEngine.SceneManagement;
 public class MapManager : MonoBehaviourPunCallbacks
 {
     [SerializeField]
+    private GameObject boyKid;
+    [SerializeField]
+    private GameObject girlKid;
+    [SerializeField]
+    public Animator boyKidAnimator;
+    [SerializeField]
+    public Animator girlKidAnimator;
+
+    [SerializeField]
     private GameObject _playerPrefab;
     private Dictionary<int, GameObject> _players;
 
@@ -18,10 +27,14 @@ public class MapManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject _team2SpawnPoint;
 
+    [SerializeField]
+    private List<GameObject> winDoors;
+
     void Start()
     {
         _players = new();
-        //AudioManager.instance.PlaySound(AudioManager.AudioType.Music, 0);
+        boyKidAnimator = boyKid.transform.GetComponentInChildren<Animator>();
+        girlKidAnimator = girlKid.transform.GetComponentInChildren<Animator>();
         //TestAngle();
     }
 
@@ -128,6 +141,14 @@ public class MapManager : MonoBehaviourPunCallbacks
         Debug.Log("Disconnected from Photon server: " + cause.ToString());
     }
 
+    public void OpenDoors()
+    {
+        foreach (GameObject go in winDoors)
+        {
+            go.GetComponent<DoorTrap>().ActivateFinal();
+        }
+    }
+
     [PunRPC]
     void UpdatePosition(Player player, Vector3 move, Quaternion rotate)
     {
@@ -161,22 +182,16 @@ public class MapManager : MonoBehaviourPunCallbacks
 
             }
 
-            //GameObject playerObject = PhotonNetwork.Instantiate(_playerPrefab == null ? "Player" : _playerPrefab.name, pos, Quaternion.identity);
             GameObject playerObject = PhotonNetwork.Instantiate(playerName, pos, Quaternion.identity);
             GameObject pPlayer = playerObject.transform.GetChild(0).gameObject;
+            PlayerData pData = pPlayer.GetComponent<PlayerData>();
+            pData.SetRole(role);
+            pData.SetTeam(team);
             PhotonView playerView = playerObject.GetPhotonView();
             _players.Add(player.ActorNumber, pPlayer);
 
-            Debug.LogError($"Spawned player ID: {playerView.ViewID}, Player's ActorNumber: {player.ActorNumber}");
-            Debug.LogError($"Number of player's total: {_players.Count}");
-            for (int i = 0; i < _players.Count; i++)
-            {
-                Debug.LogError($"Actor's {i} number: {_players.Keys.ToList()[i]}");
-            }
-
             playerView.TransferOwnership(player);
-            photonView.RPC("SetPlayer", player);
-            //photonView.RPC("AssignOwnership", player, playerView.ViewID);
+            photonView.RPC("SetPlayer", player, playerName + "(Clone)");
         }
     }
 }

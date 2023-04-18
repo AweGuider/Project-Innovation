@@ -18,8 +18,8 @@ public class SelectManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        _serverButton.onClick.AddListener(StartMainGame);
-        _playerButton.onClick.AddListener(StartPlayerGame);
+        //_serverButton.onClick.AddListener(StartMainGame);
+        //_playerButton.onClick.AddListener(StartPlayerGame);
 
         _playButton.onClick.AddListener(OnPlayClicked);
         _quitButton.onClick.AddListener(OnQuitClicked);

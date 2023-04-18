@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-4762372945811665144
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 36f51c4901fd8d24c9275784d78f3914
+  m_EffectName: Attenuation
+  m_MixLevel: 214b03942316b4f489b240e3c99db72a
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &-4735443094834234924
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Train
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 84b9d2034747cf74fae7aca19fa4ff80
+  m_Children: []
+  m_Volume: 825cbb8916a0941498d28c5d958d96d9
+  m_Pitch: 130c10fbb7ced3b46aa48a79e1017575
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -4762372945811665144}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &-4324784641825428737
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -69,6 +102,7 @@ AudioMixerController:
     - e4a7301fc979b10419d66a44df0e7d8d
     - befc909f04986d14784e810ec422b834
     - c019a456b222a3142985b4a73fe966fa
+    - 84b9d2034747cf74fae7aca19fa4ff80
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -85,6 +119,7 @@ AudioMixerGroupController:
   - {fileID: 2156695836690936471}
   - {fileID: 5336827560605009508}
   - {fileID: -4324784641825428737}
+  - {fileID: -4735443094834234924}
   m_Volume: 34add9066c9828640a0d15d65edf6e1b
   m_Pitch: e953523b8495abf4897d393989e2a9d5
   m_Send: 00000000000000000000000000000000
@@ -119,6 +154,8 @@ AudioMixerSnapshotController:
   m_SnapshotID: 7c4b2c5a36ded7e478fd0b22f8bf65d0
   m_FloatValues:
     a89a9dc569ffc404eb0d03d762ce0a12: 0
+    825cbb8916a0941498d28c5d958d96d9: -8
+    cec465de565b07849a5d725a97e94f7e: -2
   m_TransitionOverrides: {}
 --- !u!243 &2156695836690936471
 AudioMixerGroupController:

@@ -6,31 +6,36 @@ public class DoorTrap : Trap
 {
     //private bool open = false;
     [SerializeField]
-    private Animator anim;
+    private Animator _animator;
 
-    void Update()
+    private void Start()
     {
-        /*if (Input.GetKeyDown(KeyCode.F))
-        {
-            Open_Door();
-            Debug.Log("F");
-        }*/
+        if (_animator == null) _animator = GetComponent<Animator>();
     }
 
-    void Open_Door()
+
+    public override void SelectTrap()
     {
-   
+        // TODO: Some selection action
+    }
+
+    public void ActivateFinal()
+    {
+        if (_animator.GetBool("Open") == false)
+        {
+            _animator.SetBool("Open", true);
+        }
     }
 
     public override void ActivateTrap()
     {
-        if (anim.GetBool("Open") == false)
+        if (_animator.GetBool("Open") == false)
         {
-            anim.SetBool("Open", true);
+            _animator.SetBool("Open", true);
         }
         else
         {
-            anim.SetBool("Open", false);
+            _animator.SetBool("Open", false);
         }
     }
 }

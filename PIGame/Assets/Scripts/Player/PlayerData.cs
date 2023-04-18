@@ -5,23 +5,27 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
+    private MapManager mm;
+
+    [SerializeField]
     private string _role;
+    [SerializeField]
     private int _team;
 
     [Header("Animation Related")]
     [SerializeField]
     private Animator animator;
 
+
+    [SerializeField]
+    private int _plateCount;
+
     // Start is called before the first frame update
     void Start()
     {
         if (animator == null) animator = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _plateCount = 0;
+        mm = GameObject.Find("MapManager").GetComponent<MapManager>();
     }
 
     public string GetRole()
@@ -54,5 +58,19 @@ public class PlayerData : MonoBehaviour
     public void SetWalking(bool b)
     {
         animator.SetBool("isWalking", b);
+    }
+
+    public int GetPlatesPressed()
+    {
+        return _plateCount;
+    }
+
+    public void IncrementAmountOfPlatesPressed(int n)
+    {
+        _plateCount += n;
+        if (_plateCount == 5)
+        {
+            mm.OpenDoors();
+        }
     }
 }

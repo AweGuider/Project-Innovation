@@ -38,6 +38,10 @@ public class Train : MonoBehaviour
     private float _targetSpeed;
 
 
+    [SerializeField]
+    private GameObject _light;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +67,10 @@ public class Train : MonoBehaviour
 
         _accelerationRate = 5f;
         _decelerationRate = 10f;
+
+        if (_light == null) _light = transform.GetChild(0).transform.GetChild(1).gameObject;
+        AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 4);
+        AudioManager.instance.PlaySound(AudioManager.AudioType.Train, 0, true);
     }
 
     // Update is called once per frame
@@ -108,8 +116,14 @@ public class Train : MonoBehaviour
         _cart3.transform.rotation *= Quaternion.AngleAxis(90, Vector3.up);
     }
 
+    public void SelectTrain()
+    {
+        _light.SetActive(true);
+    }
+
     public void SetStopped(bool s)
     {
+        _light.SetActive(false);
         if (s)
         {
             _targetSpeed = 0f; // Set the target speed to zero to decelerate smoothly
@@ -120,14 +134,22 @@ public class Train : MonoBehaviour
             StopAllCoroutines();
             _targetSpeed = _maxSpeed; // Set the target speed back to the max speed to accelerate smoothly
             _isStopped = false;
+            AudioManager.instance.MuteTrain(false);
+            AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 4);
+
+
         }
     }
 
     IEnumerator TrainCooldown()
     {
         _isStopped = true;
+        AudioManager.instance.MuteTrain(true);
         yield return new WaitForSeconds(_cooldown);
         _targetSpeed = _maxSpeed; // Set the target speed back to the max speed to accelerate smoothly
         _isStopped = false;
+        AudioManager.instance.MuteTrain(false);
+        AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 4);
+
     }
 }

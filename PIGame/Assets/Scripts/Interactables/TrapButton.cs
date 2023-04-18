@@ -33,7 +33,7 @@ public class TrapButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _cooldown = 10f;
+        _cooldown = 7.5f;
         GetComponent<Button>().onClick.AddListener(OnClick);
     }
 
@@ -58,7 +58,7 @@ public class TrapButton : MonoBehaviour
                 if (!_selected)
                 {
                     _selected = true;
-                    _trapController.ActivateTrap(_type, _id);
+                    _trapController.SelectTrap(_type, _id);
                 }
                 else if (_selected && !_activated)
                 {
@@ -67,6 +67,7 @@ public class TrapButton : MonoBehaviour
                 break;
             case TrapType.TT:
                 // TODO: Make a cooldown for train activation/deactivation
+
                 _activated = !_activated;
                 _trapController.ActivateTrap(_type, _activated);
                 break;

@@ -68,6 +68,7 @@ public class RoleButton : MonoBehaviourPunCallbacks
 
     private void OnClick()
     {
+        if (PhotonNetwork.IsMasterClient) return;
         if (!IsUsed())
         {
             if (_manager.chosenButton != null)

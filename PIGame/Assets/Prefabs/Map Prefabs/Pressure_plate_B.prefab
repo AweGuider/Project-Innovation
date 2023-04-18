@@ -175,6 +175,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8832163686831168228}
+  - component: {fileID: 1449122247382664542}
+  - component: {fileID: 1886732114008879472}
   m_Layer: 0
   m_Name: Pressure_plate_B
   m_TagString: Untagged
@@ -200,6 +202,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1449122247382664542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203859468868206686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca047abc2aa41347abf177c9a55f3e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _team: 1
+  _isPressed: 0
+  _material: {fileID: 2100000, guid: 79159fb9571aa2a4c813418fa19d865f, type: 2}
+  _cylinder: {fileID: 5290821347524546924}
+--- !u!65 &1886732114008879472
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203859468868206686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.439144, y: 1.6275339, z: 2.5022514}
+  m_Center: {x: 0, y: 0.31376657, z: 0}
 --- !u!1 &8556262843459381411
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +310,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295

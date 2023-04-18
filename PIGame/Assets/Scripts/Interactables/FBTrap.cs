@@ -16,6 +16,9 @@ public class FBTrap : Trap
     [SerializeField]
     private bool fell;
 
+    [SerializeField]
+    private GameObject _light;
+
     private void Start()
     {
         blocksToFall = new List<GameObject>();
@@ -37,6 +40,8 @@ public class FBTrap : Trap
             //Debug.Log($"Starting position of a block: ({block.position.x}, {block.position.y}, {block.position.z})");
             //Debug.Log($"Starting rotation of a block: ({block.rotation.x}, {block.rotation.y}, {block.rotation.z})");
         }
+
+        if (_light == null) _light = transform.GetChild(2).gameObject;
     }
 
     private void SetState(bool s)
@@ -50,9 +55,15 @@ public class FBTrap : Trap
         }
         fell = !s;
     }
+    public override void SelectTrap()
+    {
+        _light.SetActive(true);
+    }
 
     public override void ActivateTrap()
     {
+        _light.SetActive(false);
+
         if (fell)
         {
             SetState(true);

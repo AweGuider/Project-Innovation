@@ -20,6 +20,9 @@ public class CRTrap : Trap
     private bool up;
     [SerializeField]
     private bool down;
+
+    [SerializeField]
+    private GameObject _light;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,10 +46,19 @@ public class CRTrap : Trap
             move.z = 1;
         }
         move *= speed;
+
+        if (_light == null) _light = transform.GetChild(2).gameObject;
+
+    }
+    public override void SelectTrap()
+    {
+        _light.SetActive(true);
     }
 
     public override void ActivateTrap()
     {
+        _light.SetActive(false);
+
         if (isOpen == false)
         {
             AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 1);

@@ -32,5 +32,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Player Scenes/Toy Screen.unity
     guid: 1ef98805b0a5385459635d9b8f2a8e03
+  - enabled: 1
+    path: Assets/Scenes/FinalScene.unity
+    guid: 8d72609f23dac91458125aa1909bf534
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 10f5988dd2478554a920d8e9c38ad395, type: 2}

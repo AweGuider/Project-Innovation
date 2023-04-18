@@ -175,11 +175,12 @@ public class MovementController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void SetPlayer()
+    public void SetPlayer(string name)
     {
         Debug.Log($"GOT HERE!");
         // TODO: Because of this line same character on both player screens
-        _playerObject = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
+        //if (_playerObject != null) return;
+        _playerObject = GameObject.Find(name).transform.GetChild(0).gameObject;
         _playerRb = _playerObject.GetComponent<Rigidbody>();
         _player = _playerObject.GetComponent<PlayerData>();
 

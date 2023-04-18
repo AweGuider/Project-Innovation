@@ -81,18 +81,38 @@ public class TrapController : MonoBehaviourPunCallbacks
         _trainTrap.GetComponent<TrapButton>().SetTrapController(this);
     }
 
-    private void FixedUpdate()
+    public void SelectTrap(TrapButton.TrapType type, int id)
     {
-
+        try
+        {
+            Debug.Log($"Method to be called: 'Select{type}', ID: {id}");
+            photonView.RPC($"Select{type}", RpcTarget.MasterClient, id, PlayerPrefs.GetInt("Team"));
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Couldn't send select trap: {e.Message}");
+        }
     }
 
+    public void SelectTrap(TrapButton.TrapType type, bool b)
+    {
+        try
+        {
+            Debug.Log($"Method to be called: 'Select{type}', Bool: {b}");
+            photonView.RPC($"Select{type}", RpcTarget.MasterClient, b, PlayerPrefs.GetInt("Team"));
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Couldn't send select trap: {e.Message}");
+        }
+    }
 
     public void ActivateTrap(TrapButton.TrapType type, int id)
     {
         try
         {
             Debug.Log($"Method to be called: 'Activate{type}', ID: {id}");
-            photonView.RPC($"Activate{type}", RpcTarget.MasterClient, id);
+            photonView.RPC($"Activate{type}", RpcTarget.MasterClient, id, PlayerPrefs.GetInt("Team"));
         }
         catch (Exception e)
         {
@@ -105,26 +125,11 @@ public class TrapController : MonoBehaviourPunCallbacks
         try
         {
             Debug.Log($"Method to be called: 'Activate{type}', Bool: {b}");
-            photonView.RPC($"Activate{type}", RpcTarget.MasterClient, b);
+            photonView.RPC($"Activate{type}", RpcTarget.MasterClient, b, PlayerPrefs.GetInt("Team"));
         }
         catch (Exception e)
         {
             Debug.LogError($"Couldn't send activate trap: {e.Message}");
         }
     }
-
-    private void DoorOnClick()
-    {
-
-    }
-    private void FallingBlockOnClick()
-    {
-        Debug.Log($"Falling Block Clicked");
-    }
-    private void CashRegisterOnClick()
-    {
-        Debug.Log($"Cash Register Clicked");
-
-    }
-
 }

@@ -11,30 +11,40 @@ using UnityEngine.UI;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private TMP_InputField nicknameInput;
+    private TMP_InputField _nicknameInput;
     [SerializeField]
-    private GameObject nameSelectCanvas;
+    private Button _nicknameButton;
     [SerializeField]
-    private GameObject teamSelectCanvas;
+    private GameObject _nameSelectCanvas;
     [SerializeField]
-    private Button startButton;
+    private GameObject _teamSelectCanvas;
+    [SerializeField]
+    private Button _startButton;
     [SerializeField]
     public GameObject chosenButton;
     private Dictionary<Player, bool> _players;
 
     [SerializeField]
+    private TextMeshProUGUI _roomName;
+    [SerializeField]
     private Toggle _testingToggle;
 
     private void Start()
     {
-        //PhotonNetwork.AutomaticallySyncScene = true;
-        //PhotonNetwork.CurrentRoom.IsOpen = true;
-        //PhotonNetwork.CurrentRoom.IsVisible = true;
         try
         {
-            startButton.onClick.AddListener(StartGame);
-            nameSelectCanvas.SetActive(true);
-            teamSelectCanvas.SetActive(false);
+#if PC
+            PhotonNetwork.AutomaticallySyncScene = true;
+            PhotonNetwork.CurrentRoom.IsOpen = true;
+            PhotonNetwork.CurrentRoom.IsVisible = true;
+            _nameSelectCanvas.SetActive(false);
+            _teamSelectCanvas.SetActive(true);
+            _startButton.onClick.AddListener(StartGame);
+#elif PHONE
+            _nameSelectCanvas.SetActive(true);
+            _teamSelectCanvas.SetActive(false);
+#endif
+
         }
         catch (Exception e)
         {
@@ -42,6 +52,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
 
         _players = new();
+        _roomName.text = $"Room: {PhotonNetwork.CurrentRoom.Name}";
+
     }
 
     public void SetPlayerReady(Player p, bool r)
@@ -62,9 +74,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
     //#if PHONE
     public void SetNickname()
     {
-        if (nicknameInput.text.Length > 2)
+        if (_nicknameInput.text.Length > 2 && _nicknameInput.text.Length < 9)
         {
-            PhotonNetwork.NickName = nicknameInput.text;
+            PhotonNetwork.NickName = _nicknameInput.text;
+            _nameSelectCanvas.SetActive(false);
+            _teamSelectCanvas.SetActive(true);
             Debug.Log($"Nickname is set to: {PhotonNetwork.NickName}");
         }
     }
@@ -98,9 +112,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (tempPlayers.Count != PhotonNetwork.CurrentRoom.MaxPlayers) return false;
         Debug.LogWarning($"Amount of max players: {PhotonNetwork.CurrentRoom.MaxPlayers}");
 
-        // TODO: This check doesn't work yet for all READY players
-        if (PhotonNetwork.CurrentRoom.MaxPlayers - 1 != GetReadyPlayers()) return false;
-        Debug.LogWarning($"Global ready: {GetReadyPlayers()}");
+        //// TODO: This check doesn't work yet for all READY players
+        //if (PhotonNetwork.CurrentRoom.MaxPlayers - 1 != GetReadyPlayers()) return false;
+        //Debug.LogWarning($"Global ready: {GetReadyPlayers()}");
 
         return true;
     }

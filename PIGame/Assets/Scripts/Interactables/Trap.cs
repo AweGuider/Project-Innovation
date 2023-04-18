@@ -5,41 +5,36 @@ using UnityEngine;
 
 public abstract class Trap : MonoBehaviourPunCallbacks
 {
+    //[SerializeField]
+    //protected
+
     [SerializeField]
     protected int _id;
-    public bool triggered = false;
 
+    [SerializeField]
+    protected bool _selected;
 
-    private void Update()
+    private void Start()
     {
-        //if (photonView.IsMine)
-        //{
-        //    // TODO: check for trap activation input
-        //    if (true) /* trap activated */
-        //    {
-        //        photonView.RPC("ActivateTrap", RpcTarget.All);
-        //    }
-        //}
+        
     }
+
 
     public int GetID()
     {
         return _id;
     }
 
-    public bool GetTriggered()
-    {
-        return triggered;
-    }
     public void SetID(int id)
     {
         _id = id;
     }
 
-    public void SetTriggered(bool isTriggered)
+    public void SetSelected(bool s)
     {
-        triggered = isTriggered;
+        _selected = s;
     }
 
+    public abstract void SelectTrap();
     public abstract void ActivateTrap();
 }
