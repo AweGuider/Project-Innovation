@@ -199,7 +199,7 @@ public class MapManager : MonoBehaviourPunCallbacks
             }
 
             playerView.TransferOwnership(player);
-            photonView.RPC("SetPlayer", player, playerName);
+            photonView.RPC("SetPlayer", player, playerName + "(Clone)");
             //photonView.RPC("AssignOwnership", player, playerView.ViewID);
         }
     }
