@@ -21,7 +21,8 @@ public class MapManager : MonoBehaviourPunCallbacks
     void Start()
     {
         _players = new();
-        //AudioManager.instance.PlaySound(AudioManager.AudioType.Music, 0);
+        AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 4);
+        AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 5, true);
         //TestAngle();
     }
 
@@ -164,6 +165,9 @@ public class MapManager : MonoBehaviourPunCallbacks
             //GameObject playerObject = PhotonNetwork.Instantiate(_playerPrefab == null ? "Player" : _playerPrefab.name, pos, Quaternion.identity);
             GameObject playerObject = PhotonNetwork.Instantiate(playerName, pos, Quaternion.identity);
             GameObject pPlayer = playerObject.transform.GetChild(0).gameObject;
+            PlayerData pData = pPlayer.GetComponent<PlayerData>();
+            pData.SetRole(role);
+            pData.SetTeam(team);
             PhotonView playerView = playerObject.GetPhotonView();
             _players.Add(player.ActorNumber, pPlayer);
 

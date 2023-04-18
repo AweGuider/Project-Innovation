@@ -41,34 +41,37 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnButtonClick()
     {
-        PhotonNetwork.JoinOrCreateRoom(_inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5, BroadcastPropsChangeToAll = true}, null);
-        //#if PC
-        //        PhotonNetwork.CreateRoom(inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5, BroadcastPropsChangeToAll = true});
-        //#elif PHONE
-        //        PhotonNetwork.JoinRoom(inputField.text.ToLowerInvariant());
-        //#endif
+        //PhotonNetwork.JoinOrCreateRoom(_inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5, BroadcastPropsChangeToAll = true}, null);
+#if PC
+        PhotonNetwork.CreateRoom(_inputField.text.ToLowerInvariant(), new RoomOptions { MaxPlayers = 5, BroadcastPropsChangeToAll = true});
+#elif PHONE
+        PhotonNetwork.JoinRoom(_inputField.text.ToLowerInvariant());
+#endif
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room: " + PhotonNetwork.CurrentRoom.Name);
 
-        if (_serverToggle.isOn)
-        {
-            SceneManager.LoadScene("Server Team Select");
-        }
-        else if (_playerToggle.isOn)
-        {
-            PhotonNetwork.LoadLevel("Player Team Select");
-        }
-        else
-        {
-#if PC
-            SceneManager.LoadScene("Server Team Select");
-#elif PHONE
-            PhotonNetwork.LoadLevel("Player Team Select");
-#endif
-        }
+        PhotonNetwork.LoadLevel("Player Team Select");
+
+
+//        if (_serverToggle.isOn)
+//        {
+//            SceneManager.LoadScene("Server Team Select");
+//        }
+//        else if (_playerToggle.isOn)
+//        {
+//            PhotonNetwork.LoadLevel("Player Team Select");
+//        }
+//        else
+//        {
+//#if PC
+//            SceneManager.LoadScene("Server Team Select");
+//#elif PHONE
+//            PhotonNetwork.LoadLevel("Player Team Select");
+//#endif
+//        }
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
