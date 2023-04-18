@@ -37,6 +37,9 @@ public class Train : MonoBehaviour
 
     private float _targetSpeed;
 
+    [SerializeField]
+    protected bool _selected;
+
 
     // Start is called before the first frame update
     void Start()
@@ -106,6 +109,11 @@ public class Train : MonoBehaviour
         _cart3.transform.position += new Vector3(0, 1.25f, 0);
         _cart3.transform.rotation = _pathCreator.path.GetRotationAtDistance(_distanceTravelled + _padding + 9.75f);
         _cart3.transform.rotation *= Quaternion.AngleAxis(90, Vector3.up);
+    }
+
+    public void SelectTrain()
+    {
+        // TODO: Implement something here
     }
 
     public void SetStopped(bool s)

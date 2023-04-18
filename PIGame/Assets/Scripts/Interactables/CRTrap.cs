@@ -44,6 +44,10 @@ public class CRTrap : Trap
         }
         move *= speed;
     }
+    public override void SelectTrap()
+    {
+        // TODO: Some selection action
+    }
 
     public override void ActivateTrap()
     {

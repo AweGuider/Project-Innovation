@@ -87,6 +87,32 @@ public class TrapController : MonoBehaviourPunCallbacks
     }
 
 
+    public void SelectTrap(TrapButton.TrapType type, int id)
+    {
+        try
+        {
+            Debug.Log($"Method to be called: 'Select{type}', ID: {id}");
+            photonView.RPC($"Select{type}", RpcTarget.MasterClient, id);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Couldn't send select trap: {e.Message}");
+        }
+    }
+
+    public void SelectTrap(TrapButton.TrapType type, bool b)
+    {
+        try
+        {
+            Debug.Log($"Method to be called: 'Select{type}', Bool: {b}");
+            photonView.RPC($"Select{type}", RpcTarget.MasterClient, b);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Couldn't send select trap: {e.Message}");
+        }
+    }
+
     public void ActivateTrap(TrapButton.TrapType type, int id)
     {
         try

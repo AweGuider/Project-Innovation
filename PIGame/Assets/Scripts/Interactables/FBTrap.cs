@@ -50,6 +50,10 @@ public class FBTrap : Trap
         }
         fell = !s;
     }
+    public override void SelectTrap()
+    {
+        // TODO: Some selection action
+    }
 
     public override void ActivateTrap()
     {

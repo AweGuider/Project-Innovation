@@ -81,33 +81,73 @@ public class TrapManager : MonoBehaviour
 
 
     [PunRPC]
+    public void SelectDoor(int id)
+    {
+        Debug.LogError($"ACTIVATING Door: ID {id}");
+        DoorTrap trap = _doorTraps[id].GetComponent<DoorTrap>();
+        trap.SelectTrap();
+    }
+
+    [PunRPC]
+    public void SelectFB(int id)
+    {
+        Debug.LogError($"ACTIVATING Falling: ID {id}");
+        FBTrap trap = _fallingBlockTraps[id].GetComponent<FBTrap>();
+        trap.SelectTrap();
+    }
+
+    [PunRPC]
+    public void SelectCR(int id)
+    {
+        Debug.LogError($"ACTIVATING Cash: ID {id}");
+        CRTrap trap = _cashRegisterTraps[id].GetComponent<CRTrap>();
+        trap.SelectTrap();
+    }
+
+    [PunRPC]
+    public void SelectTT(bool stopping)
+    {
+        Debug.LogError($"ACTIVATING Train: Bool {stopping}");
+        foreach (GameObject t in _trainTraps)
+        {
+            Train train = t.GetComponent<Train>();
+            train.SelectTrain();
+        }
+    }
+
+
+    [PunRPC]
     public void ActivateDoor(int id)
     {
         Debug.LogError($"ACTIVATING Door: ID {id}");
-        _doorTraps[id].GetComponent<DoorTrap>().ActivateTrap();
+        DoorTrap trap = _doorTraps[id].GetComponent<DoorTrap>();
+        trap.ActivateTrap();
     }
 
     [PunRPC]
     public void ActivateFB(int id)
     {
         Debug.LogError($"ACTIVATING Falling: ID {id}");
-        _fallingBlockTraps[id].GetComponent<FBTrap>().ActivateTrap();
+        FBTrap trap = _fallingBlockTraps[id].GetComponent<FBTrap>();
+        trap.ActivateTrap();
     }
 
     [PunRPC]
     public void ActivateCR(int id)
     {
         Debug.LogError($"ACTIVATING Cash: ID {id}");
-        _cashRegisterTraps[id].GetComponent<CRTrap>().ActivateTrap();
+        CRTrap trap = _cashRegisterTraps[id].GetComponent<CRTrap>();
+        trap.ActivateTrap();
     }
 
     [PunRPC]
-    public void ActivateTT(bool b)
+    public void ActivateTT(bool stopping)
     {
-        Debug.LogError($"ACTIVATING Train: Bool {b}");
+        Debug.LogError($"ACTIVATING Train: Bool {stopping}");
         foreach (GameObject t in _trainTraps)
         {
-            t.GetComponent<Train>().SetStopped(b);
+            Train train = t.GetComponent<Train>();
+            train.SetStopped(stopping);
         }
     }
 }
