@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0
-  triggered: 0
+  _selected: 0
   speed: 0
   move: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
@@ -285,6 +285,7 @@ MonoBehaviour:
   right: 0
   up: 0
   down: 1
+  _light: {fileID: 1078178600729101994}
 --- !u!1 &7726528197016848552
 GameObject:
   m_ObjectHideFlags: 0

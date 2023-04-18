@@ -37,8 +37,9 @@ public class Train : MonoBehaviour
 
     private float _targetSpeed;
 
+
     [SerializeField]
-    protected bool _selected;
+    private GameObject _light;
 
 
     // Start is called before the first frame update
@@ -66,6 +67,9 @@ public class Train : MonoBehaviour
 
         _accelerationRate = 5f;
         _decelerationRate = 10f;
+
+        if (_light == null) _light = transform.GetChild(0).transform.GetChild(0).gameObject;
+
     }
 
     // Update is called once per frame
@@ -113,11 +117,14 @@ public class Train : MonoBehaviour
 
     public void SelectTrain()
     {
-        // TODO: Implement something here
+        _light.SetActive(true);
+
     }
 
     public void SetStopped(bool s)
     {
+        _light.SetActive(false);
+
         if (s)
         {
             _targetSpeed = 0f; // Set the target speed to zero to decelerate smoothly

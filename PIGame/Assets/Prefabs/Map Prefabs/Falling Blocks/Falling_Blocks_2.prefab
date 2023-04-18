@@ -84,10 +84,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0
-  triggered: 0
+  _selected: 0
   fallingBlock: {fileID: 0}
   blocksToFall: []
   fell: 0
+  _light: {fileID: 8925143109609208948}
 --- !u!1 &8925143109609208948
 GameObject:
   m_ObjectHideFlags: 0

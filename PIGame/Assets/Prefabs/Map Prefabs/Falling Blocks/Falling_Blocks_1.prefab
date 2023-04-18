@@ -198,10 +198,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0
-  triggered: 0
+  _selected: 0
   fallingBlock: {fileID: 0}
   blocksToFall: []
   fell: 0
+  _light: {fileID: 3819669041586599715}
 --- !u!1001 &1872576550807675963
 PrefabInstance:
   m_ObjectHideFlags: 0
