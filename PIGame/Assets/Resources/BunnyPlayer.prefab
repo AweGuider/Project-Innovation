@@ -700,7 +700,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b89598d73506143a00021a89aff175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _role: 
+  _team: 0
   animator: {fileID: 8842633474397078572}
+  _plateCount: 0
 --- !u!54 &7703179399047047994
 Rigidbody:
   m_ObjectHideFlags: 0

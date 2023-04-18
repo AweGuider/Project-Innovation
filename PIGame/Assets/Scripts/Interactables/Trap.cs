@@ -5,11 +5,19 @@ using UnityEngine;
 
 public abstract class Trap : MonoBehaviourPunCallbacks
 {
+    //[SerializeField]
+    //protected
+
     [SerializeField]
     protected int _id;
 
     [SerializeField]
     protected bool _selected;
+
+    private void Start()
+    {
+        
+    }
 
 
     public int GetID()

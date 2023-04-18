@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca047abc2aa41347abf177c9a55f3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _team: 1
+  _team: 2
   _isPressed: 0
   _material: {fileID: 2100000, guid: 79159fb9571aa2a4c813418fa19d865f, type: 2}
   _cylinder: {fileID: 1506599426136008839}

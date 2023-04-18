@@ -33,7 +33,7 @@ public class TrapButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _cooldown = 10f;
+        _cooldown = 7.5f;
         GetComponent<Button>().onClick.AddListener(OnClick);
     }
 

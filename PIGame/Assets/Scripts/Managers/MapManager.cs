@@ -10,6 +10,15 @@ using UnityEngine.SceneManagement;
 public class MapManager : MonoBehaviourPunCallbacks
 {
     [SerializeField]
+    private GameObject boyKid;
+    [SerializeField]
+    private GameObject girlKid;
+    [SerializeField]
+    public Animator boyKidAnimator;
+    [SerializeField]
+    public Animator girlKidAnimator;
+
+    [SerializeField]
     private GameObject _playerPrefab;
     private Dictionary<int, GameObject> _players;
 
@@ -18,11 +27,14 @@ public class MapManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject _team2SpawnPoint;
 
+    [SerializeField]
+    private List<GameObject> winDoors;
+
     void Start()
     {
         _players = new();
-        AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 4);
-        AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 5, true);
+        boyKidAnimator = boyKid.transform.GetComponentInChildren<Animator>();
+        girlKidAnimator = girlKid.transform.GetComponentInChildren<Animator>();
         //TestAngle();
     }
 
@@ -129,6 +141,14 @@ public class MapManager : MonoBehaviourPunCallbacks
         Debug.Log("Disconnected from Photon server: " + cause.ToString());
     }
 
+    public void OpenDoors()
+    {
+        foreach (GameObject go in winDoors)
+        {
+            go.GetComponent<DoorTrap>().ActivateTrap();
+        }
+    }
+
     [PunRPC]
     void UpdatePosition(Player player, Vector3 move, Quaternion rotate)
     {
@@ -179,7 +199,7 @@ public class MapManager : MonoBehaviourPunCallbacks
             }
 
             playerView.TransferOwnership(player);
-            photonView.RPC("SetPlayer", player);
+            photonView.RPC("SetPlayer", player, playerName);
             //photonView.RPC("AssignOwnership", player, playerView.ViewID);
         }
     }

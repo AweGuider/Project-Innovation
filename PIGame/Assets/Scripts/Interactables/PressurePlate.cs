@@ -23,7 +23,6 @@ public class PressurePlate : MonoBehaviour
         {
             _cylinder = transform.GetChild(0).gameObject;
         }
-        //if (_team == 0) _team = int.Parse(transform.parent.name);
     }
 
     void OnTriggerEnter(Collider other)

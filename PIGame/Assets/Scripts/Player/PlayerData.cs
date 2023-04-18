@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
+    private MapManager mm;
+
     [SerializeField]
     private string _role;
     [SerializeField]
@@ -23,6 +25,7 @@ public class PlayerData : MonoBehaviour
     {
         if (animator == null) animator = GetComponent<Animator>();
         _plateCount = 0;
+        mm = GameObject.Find("MapManager").GetComponent<MapManager>();
     }
 
     public string GetRole()
@@ -65,5 +68,9 @@ public class PlayerData : MonoBehaviour
     public void IncrementAmountOfPlatesPressed(int n)
     {
         _plateCount += n;
+        if (_plateCount == 5)
+        {
+            mm.OpenDoors();
+        }
     }
 }

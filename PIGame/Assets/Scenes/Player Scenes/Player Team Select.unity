@@ -953,6 +953,10 @@ PrefabInstance:
       propertyPath: _manager
       value: 
       objectReference: {fileID: 1982681566}
+    - target: {fileID: 5110921497265013557, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
+      propertyPath: m_Colors.m_NormalColor.a
+      value: 0.078431375
+      objectReference: {fileID: 0}
     - target: {fileID: 6342015928437066849, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
       propertyPath: sceneViewId
       value: 5
@@ -962,6 +966,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7079413714170333939, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149822821126882765, guid: f0398b8381c24ab47957e1ac70be1ae2, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

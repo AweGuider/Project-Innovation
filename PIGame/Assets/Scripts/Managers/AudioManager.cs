@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -19,8 +20,11 @@ public class AudioManager : MonoBehaviour
         Music,
         Sound,
         Voice,
+        Train,
         // Add additional categories as needed
     }
+
+    private AudioSource trainSound;
 
     private void Awake()
     {
@@ -66,6 +70,9 @@ public class AudioManager : MonoBehaviour
             case AudioType.Voice:
                 clips = library.voiceClips;
                 break;
+            case AudioType.Train:
+                clips = library.trainClips;
+                break;
                 // Add additional cases for each category of sound in your game
         }
 
@@ -82,6 +89,11 @@ public class AudioManager : MonoBehaviour
 
         // Add an audio source component to the game object
         AudioSource audioSource = audioSourceObj.AddComponent<AudioSource>();
+        
+        if (type == AudioType.Train)
+        {
+            trainSound = audioSource;
+        }
 
         // Set the audio source to play the specified clip
         audioSource.clip = clips[index];
@@ -98,6 +110,9 @@ public class AudioManager : MonoBehaviour
             case AudioType.Voice:
                 audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Voice")[0];
                 break;
+            case AudioType.Train:
+                audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Train")[0];
+                break;
                 // Add additional cases for each category of sound in your game
         }
 
@@ -106,5 +121,17 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
     }
 
-    // TODO: Add code for managing audio sources and playing sounds
+    public void MuteTrain(bool b)
+    {
+        if (b)
+        {
+            trainSound.volume = 0f;
+        }
+        else
+        {
+            trainSound.volume = 1f;
+
+        }
+        //trainSound.mute = b;
+    }
 }
