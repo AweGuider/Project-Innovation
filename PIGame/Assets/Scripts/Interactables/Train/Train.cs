@@ -135,6 +135,8 @@ public class Train : MonoBehaviour
             _targetSpeed = _maxSpeed; // Set the target speed back to the max speed to accelerate smoothly
             _isStopped = false;
             AudioManager.instance.MuteTrain(false);
+            AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 4);
+
 
         }
     }
@@ -147,5 +149,7 @@ public class Train : MonoBehaviour
         _targetSpeed = _maxSpeed; // Set the target speed back to the max speed to accelerate smoothly
         _isStopped = false;
         AudioManager.instance.MuteTrain(false);
+        AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 4);
+
     }
 }

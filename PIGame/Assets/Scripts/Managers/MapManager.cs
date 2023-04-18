@@ -182,7 +182,6 @@ public class MapManager : MonoBehaviourPunCallbacks
 
             }
 
-            //GameObject playerObject = PhotonNetwork.Instantiate(_playerPrefab == null ? "Player" : _playerPrefab.name, pos, Quaternion.identity);
             GameObject playerObject = PhotonNetwork.Instantiate(playerName, pos, Quaternion.identity);
             GameObject pPlayer = playerObject.transform.GetChild(0).gameObject;
             PlayerData pData = pPlayer.GetComponent<PlayerData>();
@@ -191,16 +190,8 @@ public class MapManager : MonoBehaviourPunCallbacks
             PhotonView playerView = playerObject.GetPhotonView();
             _players.Add(player.ActorNumber, pPlayer);
 
-            Debug.LogError($"Spawned player ID: {playerView.ViewID}, Player's ActorNumber: {player.ActorNumber}");
-            Debug.LogError($"Number of player's total: {_players.Count}");
-            for (int i = 0; i < _players.Count; i++)
-            {
-                Debug.LogError($"Actor's {i} number: {_players.Keys.ToList()[i]}");
-            }
-
             playerView.TransferOwnership(player);
             photonView.RPC("SetPlayer", player, playerName + "(Clone)");
-            //photonView.RPC("AssignOwnership", player, playerView.ViewID);
         }
     }
 }
