@@ -145,7 +145,7 @@ public class MapManager : MonoBehaviourPunCallbacks
     {
         foreach (GameObject go in winDoors)
         {
-            go.GetComponent<DoorTrap>().ActivateTrap();
+            go.GetComponent<DoorTrap>().ActivateFinal();
         }
     }
 

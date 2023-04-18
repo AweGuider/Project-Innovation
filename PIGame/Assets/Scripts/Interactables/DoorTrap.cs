@@ -19,6 +19,14 @@ public class DoorTrap : Trap
         // TODO: Some selection action
     }
 
+    public void ActivateFinal()
+    {
+        if (_animator.GetBool("Open") == false)
+        {
+            _animator.SetBool("Open", true);
+        }
+    }
+
     public override void ActivateTrap()
     {
         if (_animator.GetBool("Open") == false)
