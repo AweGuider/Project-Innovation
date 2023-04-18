@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -49,7 +48,7 @@ public class AudioManager : MonoBehaviour
         }
         catch
         {
-            Debug.LogError("Library script not found in children of AudioManager!");
+            //Debug.LogError("Library script not found in children of AudioManager!");
         }
     }
 
@@ -79,7 +78,7 @@ public class AudioManager : MonoBehaviour
         // Check if the specified index is within the bounds of the array
         if (index < 0 || index >= clips.Length)
         {
-            Debug.LogWarningFormat("Invalid index {0} for sound category {1}", index, type.ToString());
+            //Debug.LogWarningFormat("Invalid index {0} for sound category {1}", index, type.ToString());
             return;
         }
 
@@ -132,6 +131,5 @@ public class AudioManager : MonoBehaviour
             trainSound.volume = 1f;
 
         }
-        //trainSound.mute = b;
     }
 }

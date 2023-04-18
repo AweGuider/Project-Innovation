@@ -1,7 +1,6 @@
 using PathCreation;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Train : MonoBehaviour
@@ -41,8 +40,6 @@ public class Train : MonoBehaviour
     [SerializeField]
     private GameObject _light;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         try
@@ -56,7 +53,7 @@ public class Train : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError($"Couldn't access a gameobject: {e.Message}");
+            //Debug.LogError($"Couldn't access a gameobject: {e.Message}");
         }
 
         _speed = -10f;
@@ -72,8 +69,6 @@ public class Train : MonoBehaviour
         AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 4);
         AudioManager.instance.PlaySound(AudioManager.AudioType.Train, 0, true);
     }
-
-    // Update is called once per frame
     void Update()
     {
         float currentSpeed = _speed;
@@ -115,12 +110,10 @@ public class Train : MonoBehaviour
         _cart3.transform.rotation = _pathCreator.path.GetRotationAtDistance(_distanceTravelled + _padding + 9.75f);
         _cart3.transform.rotation *= Quaternion.AngleAxis(90, Vector3.up);
     }
-
     public void SelectTrain()
     {
         _light.SetActive(true);
     }
-
     public void SetStopped(bool s)
     {
         _light.SetActive(false);
@@ -136,11 +129,8 @@ public class Train : MonoBehaviour
             _isStopped = false;
             AudioManager.instance.MuteTrain(false);
             AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 4);
-
-
         }
     }
-
     IEnumerator TrainCooldown()
     {
         _isStopped = true;
@@ -150,6 +140,5 @@ public class Train : MonoBehaviour
         _isStopped = false;
         AudioManager.instance.MuteTrain(false);
         AudioManager.instance.PlaySound(AudioManager.AudioType.Sound, 4);
-
     }
 }

@@ -1,5 +1,4 @@
 using Photon.Pun;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,7 +23,6 @@ public class TrapManager : MonoBehaviour
     [Header("Train Trap Related")]
     [SerializeField]
     private List<GameObject> _trainTraps;
-    // Start is called before the first frame update
     void Start()
     {
         if (mm == null) mm = GetComponent<MapManager>();
@@ -45,7 +43,6 @@ public class TrapManager : MonoBehaviour
                                         return go;
                                     })
                                     .ToList();
-
         _fallingBlockTraps = GameObject.FindGameObjectWithTag("FallingBlocks")
                                     .transform
                                     .Cast<Transform>()
@@ -57,7 +54,6 @@ public class TrapManager : MonoBehaviour
                                         return go;
                                     })
                                     .ToList();
-
         _cashRegisterTraps = GameObject.FindGameObjectWithTag("CashRegister")
                                     .transform
                                     .Cast<Transform>()
@@ -69,7 +65,6 @@ public class TrapManager : MonoBehaviour
                                         return go;
                                     })
                                     .ToList();
-
         _trainTraps = GameObject.FindGameObjectsWithTag("Train")
                                     .Select((transform, index) =>
                                     {
@@ -79,9 +74,7 @@ public class TrapManager : MonoBehaviour
                                         return go;
                                     })
                                     .ToList();
-
     }
-
     private void KidSelected(int team)
     {
         if (team == 1)
@@ -93,11 +86,9 @@ public class TrapManager : MonoBehaviour
             mm.girlKidAnimator.SetBool("Think", true);
         }
     }
-
     private void KidActivated(int team)
     {
         int randomVoice = 0;
-
         if (team == 1)
         {
             mm.boyKidAnimator.SetBool("Activate", true);
@@ -110,91 +101,66 @@ public class TrapManager : MonoBehaviour
         }
         AudioManager.instance.PlaySound(AudioManager.AudioType.Voice, randomVoice);
     }
-
     [PunRPC]
     public void SelectDoor(int id, int team)
     {
-        Debug.LogError($"ACTIVATING Door: ID {id}");
         DoorTrap trap = _doorTraps[id].GetComponent<DoorTrap>();
         trap.SelectTrap();
-
         KidSelected(team);
     }
-
     [PunRPC]
     public void SelectFB(int id, int team)
     {
-        Debug.LogError($"ACTIVATING Falling: ID {id}");
         FBTrap trap = _fallingBlockTraps[id].GetComponent<FBTrap>();
         trap.SelectTrap();
-
         KidSelected(team);
     }
-
     [PunRPC]
     public void SelectCR(int id, int team)
     {
-        Debug.LogError($"ACTIVATING Cash: ID {id}");
         CRTrap trap = _cashRegisterTraps[id].GetComponent<CRTrap>();
         trap.SelectTrap();
-
         KidSelected(team);
     }
-
     [PunRPC]
     public void SelectTT(bool stopping, int team)
     {
-        Debug.LogError($"ACTIVATING Train: Bool {stopping}");
         foreach (GameObject t in _trainTraps)
         {
             Train train = t.GetComponent<Train>();
             train.SelectTrain();
         }
-
         KidSelected(team);
     }
-
-
     [PunRPC]
     public void ActivateDoor(int id, int team)
     {
-        Debug.LogError($"ACTIVATING Door: ID {id}");
         DoorTrap trap = _doorTraps[id].GetComponent<DoorTrap>();
         trap.ActivateTrap();
-
         KidActivated(team);
     }
-
     [PunRPC]
     public void ActivateFB(int id, int team)
     {
-        Debug.LogError($"ACTIVATING Falling: ID {id}");
         FBTrap trap = _fallingBlockTraps[id].GetComponent<FBTrap>();
         trap.ActivateTrap();
-
         KidActivated(team);
     }
-
     [PunRPC]
     public void ActivateCR(int id, int team)
     {
-        Debug.LogError($"ACTIVATING Cash: ID {id}");
         CRTrap trap = _cashRegisterTraps[id].GetComponent<CRTrap>();
         trap.ActivateTrap();
-
         KidActivated(team);
     }
-
     [PunRPC]
     public void ActivateTT(bool stopping, int team)
     {
-        Debug.LogError($"ACTIVATING Train: Bool {stopping}");
         foreach (GameObject t in _trainTraps)
         {
             Train train = t.GetComponent<Train>();
             train.SetStopped(stopping);
         }
-
         KidActivated(team);
     }
 }

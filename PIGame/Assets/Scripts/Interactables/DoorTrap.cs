@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorTrap : Trap
 {
-    //private bool open = false;
     [SerializeField]
     private Animator _animator;
 
@@ -26,7 +23,6 @@ public class DoorTrap : Trap
             _animator.SetBool("Open", true);
         }
     }
-
     public override void ActivateTrap()
     {
         if (_animator.GetBool("Open") == false)

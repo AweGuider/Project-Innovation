@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
@@ -24,14 +21,13 @@ public class PressurePlate : MonoBehaviour
             _cylinder = transform.GetChild(0).gameObject;
         }
     }
-
     void OnTriggerEnter(Collider other)
     {
         if (_isPressed) return;
 
         if (_material == null)
         {
-            Debug.LogError($"You didn't put a new material!");
+            //Debug.LogError($"You didn't put a new material!");
             return;
         }
 

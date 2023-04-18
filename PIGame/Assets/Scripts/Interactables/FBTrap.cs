@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -37,13 +36,10 @@ public class FBTrap : Trap
             block.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             blocksToFall.Add(block.gameObject);
             blocksTransforms.Add(new Vector3(block.position.x, block.position.y, block.position.z), new Quaternion(block.rotation.x, block.rotation.y, block.rotation.z, block.rotation.w));
-            //Debug.Log($"Starting position of a block: ({block.position.x}, {block.position.y}, {block.position.z})");
-            //Debug.Log($"Starting rotation of a block: ({block.rotation.x}, {block.rotation.y}, {block.rotation.z})");
         }
 
         if (_light == null) _light = transform.GetChild(2).gameObject;
     }
-
     private void SetState(bool s)
     {
         fallingBlockCollider.enabled = s;
@@ -59,7 +55,6 @@ public class FBTrap : Trap
     {
         _light.SetActive(true);
     }
-
     public override void ActivateTrap()
     {
         _light.SetActive(false);
@@ -77,6 +72,6 @@ public class FBTrap : Trap
         {
             SetState(false);
         }
-        Debug.Log($"Activated falling blocks trap, ID: {_id}");
+        //Debug.Log($"Activated falling blocks trap, ID: {_id}");
     }
 }

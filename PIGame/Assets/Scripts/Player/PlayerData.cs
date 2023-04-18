@@ -1,6 +1,4 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
@@ -16,18 +14,15 @@ public class PlayerData : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
-
     [SerializeField]
     private int _plateCount;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (animator == null) animator = GetComponent<Animator>();
         _plateCount = 0;
         mm = GameObject.Find("MapManager").GetComponent<MapManager>();
     }
-
     public string GetRole()
     {
         return _role;
@@ -36,16 +31,6 @@ public class PlayerData : MonoBehaviour
     {
         return _team;
     }
-    public PhotonView GetPhotonView()
-    {
-        return GetComponent<PhotonView>();
-    }
-
-    public GameObject GetGameObject()
-    {
-        return gameObject;
-    }
-
     public void SetRole(string r)
     {
         _role = r;
@@ -54,17 +39,14 @@ public class PlayerData : MonoBehaviour
     {
         _team = t;
     }
-
     public void SetWalking(bool b)
     {
         animator.SetBool("isWalking", b);
     }
-
     public int GetPlatesPressed()
     {
         return _plateCount;
     }
-
     public void IncrementAmountOfPlatesPressed(int n)
     {
         _plateCount += n;

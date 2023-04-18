@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,23 +28,19 @@ public class TrapButton : MonoBehaviour
         TT
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         _cooldown = 7.5f;
         GetComponent<Button>().onClick.AddListener(OnClick);
     }
-
     public void SetTrapController(TrapController tc)
     {
         _trapController = tc;
     }
-
     public void SetID(int id)
     {
         _id = id;
     }
-
     private void OnClick()
     {
         if (_isCooldown) return;
@@ -67,13 +61,11 @@ public class TrapButton : MonoBehaviour
                 break;
             case TrapType.TT:
                 // TODO: Make a cooldown for train activation/deactivation
-
                 _activated = !_activated;
                 _trapController.ActivateTrap(_type, _activated);
                 break;
         }
     }
-
     IEnumerator TrapCooldown()
     {
         _activated = true;

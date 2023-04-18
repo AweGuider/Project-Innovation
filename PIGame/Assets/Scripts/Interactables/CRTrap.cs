@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CRTrap : Trap
@@ -23,7 +21,6 @@ public class CRTrap : Trap
 
     [SerializeField]
     private GameObject _light;
-    // Start is called before the first frame update
     void Start()
     {
         rb = transform.GetChild(0).GetComponent<Rigidbody>();
@@ -54,7 +51,6 @@ public class CRTrap : Trap
     {
         _light.SetActive(true);
     }
-
     public override void ActivateTrap()
     {
         _light.SetActive(false);
@@ -72,7 +68,6 @@ public class CRTrap : Trap
 
             rb.velocity = move * -1;
         }
-
         isOpen = !isOpen;
     }
 }

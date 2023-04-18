@@ -1,10 +1,7 @@
 using Photon.Pun;
-using Photon.Realtime;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -80,56 +77,48 @@ public class TrapController : MonoBehaviourPunCallbacks
         _trainTrap = GameObject.FindGameObjectWithTag("Train");
         _trainTrap.GetComponent<TrapButton>().SetTrapController(this);
     }
-
     public void SelectTrap(TrapButton.TrapType type, int id)
     {
         try
         {
-            Debug.Log($"Method to be called: 'Select{type}', ID: {id}");
             photonView.RPC($"Select{type}", RpcTarget.MasterClient, id, PlayerPrefs.GetInt("Team"));
         }
         catch (Exception e)
         {
-            Debug.LogError($"Couldn't send select trap: {e.Message}");
+            //Debug.LogError($"Couldn't send select trap: {e.Message}");
         }
     }
-
     public void SelectTrap(TrapButton.TrapType type, bool b)
     {
         try
         {
-            Debug.Log($"Method to be called: 'Select{type}', Bool: {b}");
             photonView.RPC($"Select{type}", RpcTarget.MasterClient, b, PlayerPrefs.GetInt("Team"));
         }
         catch (Exception e)
         {
-            Debug.LogError($"Couldn't send select trap: {e.Message}");
+            //Debug.LogError($"Couldn't send select trap: {e.Message}");
         }
     }
-
     public void ActivateTrap(TrapButton.TrapType type, int id)
     {
         try
         {
-            Debug.Log($"Method to be called: 'Activate{type}', ID: {id}");
             photonView.RPC($"Activate{type}", RpcTarget.MasterClient, id, PlayerPrefs.GetInt("Team"));
         }
         catch (Exception e)
         {
-            Debug.LogError($"Couldn't send activate trap: {e.Message}");
+            //Debug.LogError($"Couldn't send activate trap: {e.Message}");
         }
     }
-
     public void ActivateTrap(TrapButton.TrapType type, bool b)
     {
         try
         {
-            Debug.Log($"Method to be called: 'Activate{type}', Bool: {b}");
             photonView.RPC($"Activate{type}", RpcTarget.MasterClient, b, PlayerPrefs.GetInt("Team"));
         }
         catch (Exception e)
         {
-            Debug.LogError($"Couldn't send activate trap: {e.Message}");
+            //Debug.LogError($"Couldn't send activate trap: {e.Message}");
         }
     }
 }

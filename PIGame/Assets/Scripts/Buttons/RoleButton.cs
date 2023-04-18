@@ -1,8 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +23,6 @@ public class RoleButton : MonoBehaviourPunCallbacks
 
     ExitGames.Client.Photon.Hashtable _buttonProperties;
 
-    // Start is called before the first frame update
     void Start()
     {
         try
@@ -34,7 +31,7 @@ public class RoleButton : MonoBehaviourPunCallbacks
         }
         catch (Exception e)
         {
-            Debug.LogWarning(e.Message);
+            //Debug.LogWarning(e.Message);
         }
 
         GetComponent<Button>().onClick.AddListener(OnClick);
@@ -45,7 +42,6 @@ public class RoleButton : MonoBehaviourPunCallbacks
 
         _buttonProperties = new();
 
-        // Update UI for all players in the room
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             if (player.CustomProperties.TryGetValue($"{_buttonID}Name", out object name) &&
@@ -54,18 +50,8 @@ public class RoleButton : MonoBehaviourPunCallbacks
                 _text.text = (string)name;
                 _used = (int)used == 1;
             }
-            else
-            {
-                //if (!IsUsed())
-                //{
-                //    SetText(_role);
-                //    SetUsed(_used);
-                //    PhotonNetwork.SetPlayerCustomProperties(_buttonProperties);
-                //}
-            }
         }
     }
-
     private void OnClick()
     {
         if (PhotonNetwork.IsMasterClient) return;
@@ -96,7 +82,6 @@ public class RoleButton : MonoBehaviourPunCallbacks
             }
         }
     }
-
     public void ResetButton()
     {
         SetText(GetRole());
@@ -104,17 +89,14 @@ public class RoleButton : MonoBehaviourPunCallbacks
         PlayerPrefs.DeleteAll();
         PhotonNetwork.SetPlayerCustomProperties(_buttonProperties);
     }
-
     public bool IsUsed()
     {
         return _used;
     }
-
     public string GetRole()
     {
         return _role;
     }
-
     public int GetTeam()
     {
         return _team;
@@ -123,7 +105,6 @@ public class RoleButton : MonoBehaviourPunCallbacks
     {
         return _text.text;
     }
-
     public void SetUsed(bool u)
     {
         if (u)
@@ -135,12 +116,10 @@ public class RoleButton : MonoBehaviourPunCallbacks
             _buttonProperties[_buttonID + "Used"] = 0;
         }
     }
-
     public void SetText(string t)
     {
         _buttonProperties[_buttonID + "Name"] = t;
     }
-
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
         if (changedProps == null) return;
@@ -149,8 +128,7 @@ public class RoleButton : MonoBehaviourPunCallbacks
         {
             _text.text = (string)changedProps[_buttonID + "Name"];
             _used = (int)changedProps[_buttonID + "Used"] == 1;
-            Debug.Log($"'{targetPlayer.NickName}' updated properties of {_buttonID}. Name: {GetText()}, Used: {IsUsed()}");
-
+            //Debug.Log($"'{targetPlayer.NickName}' updated properties of {_buttonID}. Name: {GetText()}, Used: {IsUsed()}");
         }
     }
 }

@@ -1,9 +1,6 @@
 using Photon.Pun;
-using Photon.Realtime;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,10 +63,7 @@ public class MovementController : MonoBehaviourPunCallbacks
         _maxPosAngle = 40f;
         _minNegAngle = -10f;
         _maxNegAngle = -40f;
-
-#if PC
-        //Nothing yet
-#elif PHONE
+#if PHONE
         Input.gyro.enabled = true;
 #endif
     }
@@ -82,10 +76,9 @@ public class MovementController : MonoBehaviourPunCallbacks
             Boost();
         }
 #endif
-
         if (_playerObject == null || _playerRb == null)
         {
-            Debug.LogError($"Either player or rigidbody aren't set!");
+            //Debug.LogError($"Either player or rigidbody aren't set!");
             return;
         }
 
@@ -118,20 +111,17 @@ public class MovementController : MonoBehaviourPunCallbacks
         }
         catch (Exception e)
         {
-            Debug.LogError($"Couldn't send updated position: {e.Message}");
+            //Debug.LogError($"Couldn't send updated position: {e.Message}");
         }
     }
-
     private Vector3 UpdateKeyboard()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         return new(x, 0, z);
     }
-
     private Vector3 UpdateSensors()
     {
-        // Receive input
         Vector3 acceleration = Input.acceleration;
         Vector3 gyroscope = Input.gyro.rotationRate;
 
@@ -146,7 +136,6 @@ public class MovementController : MonoBehaviourPunCallbacks
 
         return move;
     }
-
     private float CalculateMagnitude(float angle)
     {
         float magnitude = 0;
@@ -173,13 +162,11 @@ public class MovementController : MonoBehaviourPunCallbacks
         _isBoosting = false;
         yield return new WaitForSeconds(_boostCooldown);
     }
-
     [PunRPC]
     public void SetPlayer(string name)
     {
         Debug.Log($"GOT HERE!");
         // TODO: Because of this line same character on both player screens
-        //if (_playerObject != null) return;
         _playerObject = GameObject.Find(name).transform.GetChild(0).gameObject;
         _playerRb = _playerObject.GetComponent<Rigidbody>();
         _player = _playerObject.GetComponent<PlayerData>();
@@ -189,13 +176,4 @@ public class MovementController : MonoBehaviourPunCallbacks
             _playerObject.SetActive(false);
         }
     }
-
-    [PunRPC]
-    public void UpdatePosition(Vector3 pos)
-    {
-        //rb.AddForce(pos, ForceMode.Impulse);
-
-        _playerObject.transform.position = pos;
-    }
-
 }
